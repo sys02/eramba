@@ -1,0 +1,6 @@
+asset_id,asset_name,asset_description,asset_media_type, asset_legal_constrains, asset_owner, asset_guardian, asset_user, asset_container, asset_label_id, asset_disabled, Availability,Confidentiality,Integrity
+38,Servers,They hold databases web services etc,Hardware, Data Protection Directive, IT Department, IT Department, IT Department,Servers,Confidential,0,High,High,High
+39,Web Applications,,Information System Asset, PCIDSS, IT Department, IT Department, IT Department,Web Applications,Confidential,0,High,High,High
+40,Databases,,Information System Asset, Data Protection Directive, IT Department, IT Department, IT Department,Databases,Confidential,0,High,High,High
+41,Customer Personal Data,Customers personal data name surname credit card etc,Data Asset, PCIDSS, IT Department, IT Department, Operations,Customer Personal Data,Confidential,0,High,High,High
+42,Employee Laptops,Each employee has a personal laptop,Hardware, , IT Department, IT Department, ,Employee Laptops,Internal,0,Low,High,Medium

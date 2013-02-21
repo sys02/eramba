@@ -1,0 +1,6 @@
+asset_name, asset_description, risk_title, threats, vulnerabilities, risk review, Availability,Confidentiality,Integrity,Likelihood ,risk score, mitigation strategy, compensating controls name, compensating controls id, risk_exceptions, residual_risk
+Databases, , Database Users, Creeping privileges wrong password policies set etc, Lack of user and password policies, 2014-04-16, Low,Medium,High,High, 9, Mitigate, , ,  , 9
+Databases, , Patching, Software is usually out of date with the latest patches which could be exploited., Software vulnerabilities, 2014-02-13, High,Medium,Medium,High, 9, Mitigate, Patching Platform, 362,  , 4
+Servers, They hold databases web services etc, Patching, Software is usually out of date with the latest patches which could be exploited., Software vulnerabilities, 2014-02-13, High,Medium,Medium,High, 9, Mitigate, Patching Platform, 362,  , 4
+Web Applications, , Patching, Software is usually out of date with the latest patches which could be exploited., Software vulnerabilities, 2014-02-13, High,Medium,Medium,High, 9, Mitigate, Patching Platform, 362,  , 4
+Web Applications, , Web Hacks, All sort of web hacking vectors, Lack of proper QA testing and coding application firewalls etc, 2014-01-10, High,High,Medium,High, 9, Accept, Vulnerability Scans, 364,  CLevel Approval, 9

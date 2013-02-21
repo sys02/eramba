@@ -1,0 +1,10 @@
+bu_name,process_id,process_name,process_description,process_mto,process_revenue,process_disabled
+Finance,1,Book Keeping,,7,0,0
+Human Resources,2,Pay Compensations,,20,0,0
+Human Resources,3,Manage Employees Files,,20,0,0
+IT Department,4,Manage Web Infrastructure,Keep the site running,1,2000,0
+IT Department,5,Manage Employees Computers,Service Desk sort of tasks,3,0,0
+IT Department,6,Develop Software,Manage the development of the site,2,0,0
+Operations,7,Process Customer Payments,,1,2000,0
+Operations,8,Process Customer Deliveries,Coordinate all what it takes to deliver the end products to our customers,1,2000,0
+Operations,9,Manage Product Stock,Ensure a healthy stock is available when needed.,1,2000,0

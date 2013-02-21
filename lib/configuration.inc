@@ -1,0 +1,28 @@
+<?php
+
+# cant touch this! (mc-hammer stuff)
+$system_conf['app_version'] = "1.0";
+$system_conf['license_number'] = "GPL v2";
+$system_conf['debug'] = "0";
+
+$system_conf['source_email'] = "";
+$system_conf['mail_server'] = "";
+$system_conf['mail_tag'] = "";
+
+# you must define this 
+$sytem_conf['ad_dn'] = "";
+
+# you must define this
+$db_conf['db_hostname'] = "";
+$db_conf['db_name'] = "";
+$db_conf['db_username'] = "";
+$db_conf['db_password'] = "";
+
+# optional, define your currency.
+$services_conf['system_currency'] = "EUR";
+
+# set this to True or False 
+$risk_conf['use_eramba_formulas'] = "True";
+
+
+?>
