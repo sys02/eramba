@@ -22,7 +22,7 @@ function add_system_records($system_records_section, $system_records_subsection,
 	$sql = "INSERT INTO
 		system_records_tbl
 		VALUES (
-		\"\",
+		\"NULL\",
 		\"$system_records_section\",
 		\"$system_records_subsection\",
 		\"$system_records_item_id\",

@@ -20,15 +20,18 @@ $logged_user_data = runSmallQuery(
 include_once("header.php");
 
 
-
 $section = $_GET["section"];
 $subsection = $_GET["subsection"];
+
 $action = isset($_GET["action"]) ? $_GET['action'] : 'list';
 
 if ( validate_section_subsection($section,NULL) && validate_section_subsection(NULL,$subsection) ) {
 	include_from_db($section, $subsection, $action);
 } else {
-	echo "Warning: i'm getting the wrong parameters to include (validate_section_subsection)";
+	# bu default i send them to the organization tab
+	$section="organization";
+	$subsection="dashboard";
+	include_from_db($section, $subsection, $action);
 }
 
 

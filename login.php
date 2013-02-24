@@ -19,23 +19,7 @@
 
 	if ( isset($_POST['login-submit']) ) {
 		$system_users_login = $_POST['login'];
-		# $system_users_password = sha1( $_POST['password'] );
 		$system_users_password = $_POST['password'];
-
-		#$query = runSmallQuery( 
-		#	"SELECT * FROM `system_users_tbl` WHERE 
-		#	`system_users_login`='" . $system_users_login . "' AND 
-		#	`system_users_password`='" . $system_users_password . "' AND 
-		#	`system_users_disabled`=0" 
-		#);
-
-		#if ($query != null) {
-		#	$_SESSION['logged_user_id'] = $query['system_users_id'];
-		#	header('Location: index.php');
-		#}
-		# i made this function to validate users against the right table (system_conf_pwd_tbl) !!
-		# the idea is not to use the table system_users_tbl for validating passwords
-
 
 		if($user_id = authenticate_user_credentials($system_users_login, $system_users_password)) {
 			# echo "good credentials for $user_id";
