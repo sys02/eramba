@@ -92,48 +92,6 @@ function show_menu_sub($section) {
 		}
 	}
 
-	//var_dump($sub_menu);
-	/*
-	if ($section == "organization") {
-		echo "<li><a href=\"$base_url?section=organization&subsection=bu\">Bussiness Units</a></li>";
-		echo "<li><a href=\"$base_url?section=organization&subsection=legal\">Legal</a></li>";
-		echo "<li><a href=\"$base_url?section=organization&subsection=tp\">Third Parties</a></li>";
-	}
-	
-	if ($section == "asset") {
-		echo "<li><a href=\"$base_url?section=asset&subsection=asset_classification\">Classification Scheme</a></li>";
-		echo "<li><a href=\"$base_url?section=asset&subsection=asset_identification\">Asset Identification</a></li>";
-		echo "<li><a href=\"$base_url?section=asset&subsection=data_asset\">Data Asset Analysis</a></li>";
-	}
-	
-	if ($section == "risk") {
-		echo "<li><a href=\"$base_url?section=risk&subsection=risk_classification\">Risk Classification Scheme</a></li>";
-		echo "<li><a href=\"$base_url?section=risk&subsection=risk_management\">Risk Management</a></li>";
-		echo "<li><a href=\"$base_url?section=risk&subsection=risk_exception\">Risk Exception</a></li>";
-	}
-
-	if ($section == "security_services") {
-		echo "<li><a href=\"$base_url?section=security_services&subsection=security_catalogue\">Security Catalogue</a></li>";
-		echo "<li><a href=\"$base_url?section=security_services&subsection=security_services_audit\">Audits & Reviews</a></li>";
-		echo "<li><a href=\"$base_url?section=security_services&subsection=service_contracts\">Support Contracts</a></li>";
-	}
-	
-	if ($section == "compliance") {
-		echo "<li><a href=\"$base_url?section=compliance&subsection=compliance_package\">Compliance Packages DB</a></li>";
-		echo "<li><a href=\"$base_url?section=compliance&subsection=compliance_management\">Compliance Management</a></li>";
-		echo "<li><a href=\"$base_url?section=compliance&subsection=compliance_exception\">Compliance Exception</a></li>";
-	}
-
-	if ($section == "operations") {
-		echo "<li><a href=\"$base_url?section=operations&subsection=project_improvements\">Improvement Projects</a></li>";
-	}
-
-	if ($section == "system") {
-		echo "<li><a href=\"$base_url?section=system&subsection=system_records\">System Records</a></li>";
-		echo "<li><a href=\"$base_url?section=system&subsection=system_authorization\">Authorization</a></li>";
-		echo "<li><a href=\"$base_url?section=system&subsection=system_roles\">Roles</a></li>";
-	}
-	*/
 }
 
 function is_this_menu_active($section_received, $section) {
@@ -246,6 +204,37 @@ echo "	</div>";
 echo "</div>";
 
 
+}
+
+function validate_section_subsection($section,$subsection) {
+
+	$section_list = array("organization","system","asset","risk","security_services","compliance","operations","home","bcm");	
+
+	$subsection_list = array("system_records_list","system_authorization_list","system_roles_list","system_records_edit","system_authorization_edit","system_roles_edit","bu_list","bu_edit","legal_list","legal_edit","tp_list","tp_edit","asset_classification_list","asset_classification_edit","asset_list","asset_edit","data_asset_list","data_asset_edit","risk_classification_list","risk_classification_edit","risk_management_list","risk_management_edit","risk_exception_list","risk_exception_edit","security_catalogue_list","security_catalogue_edit","security_services_audit_edit","service_contracts_list","service_contracts_edit","compliance_package_list","compliance_package_edit","compliance_package_item_edit","compliance_package_upload","compliance_management_list","compliance_management_step_two","compliance_management_edit","compliance_management","compliance_exception_list","compliance_exception_edit","project_improvements_list","security_incident_edit","security_incident_list","process_edit","dashboard","security_incident_classification_list","security_incident_classification_edit","policy_exceptions_list","policy_exceptions_edit","system_info","risk_tp_list","risk_tp_edit","project_improvements_edit","asset_label_list","asset_label_edit","risk_buss_list","risk_buss_edit","bcm_plans_list","bcm_plans_edit","bcm_plans_audit_edit","bcm_plans_audit_report","security_services_audit_report","bcm_plans_details_edit","project_improvements_expenses_edit","project_improvements_expenses_list","security_services_maintenance_edit","security_services_maintenance_list");
+
+
+	#echo "$section and $subsection";
+
+	if ($section) {
+		if (in_array($section, $section_list)) {
+			#echo "ok sec";
+			return $section;
+		} else {
+			#echo "!ok sec";
+			return NULL;
+		}
+	}
+	
+	if ($subsection) {
+		if (in_array($subsection, $subsection_list)) {
+			#echo "ok sub";
+			return $subsection;
+		} else {
+			#echo "!ok sec";
+			return NULL;
+		}
+	}
+	
 }
 
 ?>
