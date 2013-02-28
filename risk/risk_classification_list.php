@@ -5,26 +5,26 @@
 
 	# general variables - YOU SHOULDNT NEED TO CHANGE THIS
 	$show_id = isset($_GET["show_id"]) ? $_GET["show_id"] : null;
-	$sort = $_GET["sort"];
-	$section = $_GET["section"];
-	$subsection = $_GET["subsection"];
-	$action = $_GET["action"];
+	$sort = filter_input(INPUT_GET,"sort",FILTER_SANITIZE_STRING);
+	$section = filter_input(INPUT_GET,"section",FILTER_SANITIZE_STRING);
+	$subsection = filter_input(INPUT_GET,"subsection",FILTER_SANITIZE_STRING);
+	$action = filter_input(INPUT_GET,"action",FILTER_SANITIZE_STRING);
 	
 	$base_url_list = build_base_url($section,"risk_classification_list");
 	$base_url_edit = build_base_url($section,"risk_classification_edit");
 	
 	# local variables - YOU MUST ADJUST THIS! 
-	$risk_classification_id = $_GET["risk_classification_id"];
-	$risk_classification_name = $_GET["risk_classification_name"];
-	$risk_classification_criteria = $_GET["risk_classification_criteria"];
+	$risk_classification_id = filter_input( INPUT_GET, "risk_classification_id", FILTER_SANITIZE_NUMBER_INT );
+	$risk_classification_name = filter_input( INPUT_GET, "risk_classification_name", FILTER_SANITIZE_STRING );
+	$risk_classification_criteria = filter_input( INPUT_GET, "risk_classification_criteria", FILTER_SANITIZE_STRING );
 	$risk_classification_type = $_GET["risk_classification_type"];
-	$risk_classification_type_new = $_GET["risk_classification_type_new"];
+	$risk_classification_type_new = filter_input( INPUT_GET, "risk_classification_type_new", FILTER_SANITIZE_STRING );
 
 	if ($risk_classification_type_new) {
 		$risk_classification_type = $risk_classification_type_new;
 	}
 
-	$risk_classification_value = $_GET["risk_classification_value"];
+	$risk_classification_value = filter_input( INPUT_GET, "risk_classification_value", FILTER_SANITIZE_NUMBER_INT );
 	if (!is_numeric($risk_classification_value)) {
 		$risk_classification_value = 1;
 	}
@@ -88,7 +88,8 @@ echo "			<a href=\"$base_url_edit&action=edit\" class=\"add-btn\">";
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
-echo "					<li><a href=\"downloads/risk_classification_export.csv\">Dowload</a></li>";
+//echo "					<li><a href=\"downloads/risk_classification_export.csv\">Dowload</a></li>";
+echo '<li><a href="' . $base_url_list . '&download_export=risk_classification_export">Download</a></li>';
 } else { 
 echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 }

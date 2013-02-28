@@ -106,7 +106,7 @@ echo "			<a href=\"$base_url_edit&action=edit\" class=\"add-btn\">";
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
-echo "					<li><a href=\"downloads/system_group_role_export.csv\">Dowload</a></li>";
+	echo '<li><a href="' . $base_url_list . '&download_export=system_group_role_export">Download</a></li>';
 } else { 
 echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 }

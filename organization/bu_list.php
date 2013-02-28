@@ -125,9 +125,9 @@ echo "			<a href=\"$base_url_edit&action=edit_bu\" class=\"add-btn\">";
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
-echo "					<li><a href=\"downloads/bu_export.csv\">Dowload</a></li>";
+	echo '<li><a href="' . $base_url_list . '&download_export=bu_export">Download</a></li>';
 } elseif ($action == "csv_process") { 
-echo "					<li><a href=\"downloads/process_export.csv\">Dowload</a></li>";
+	echo '<li><a href="' . $base_url_list . '&download_export=process_export">Download</a></li>';
 } else {
 echo "					<li><a href=\"$base_url_list&action=csv\">Export All BU</a></li>";
 echo "					<li><a href=\"$base_url_list&action=csv_process\">Export All Process</a></li>";

@@ -5,21 +5,21 @@
 
 	# general variables - YOU SHOULDNT NEED TO CHANGE THIS
 	$show_id = isset($_GET["show_id"]) ? $_GET["show_id"] : null;
-	$sort = $_GET["sort"];
-	$section = $_GET["section"];
-	$subsection = $_GET["subsection"];
-	$action = $_GET["action"];
+	$sort = filter_input(INPUT_GET,"sort",FILTER_SANITIZE_STRING);
+	$section = filter_input(INPUT_GET,"section",FILTER_SANITIZE_STRING);
+	$subsection = filter_input(INPUT_GET,"subsection",FILTER_SANITIZE_STRING);
+	$action = filter_input(INPUT_GET,"action",FILTER_SANITIZE_STRING);
 	
 	$base_url_list = build_base_url($section,"risk_exception_list");
 	$base_url_edit = build_base_url($section,"risk_exception_edit");
 	
-	# local variables - YOU MUST ADJUST THIS! 
-	$risk_exception_id = $_GET["risk_exception_id"];
-	$risk_exception_title = $_GET["risk_exception_title"];
-	$risk_exception_description = $_GET["risk_exception_description"];
-	$risk_exception_author = $_GET["risk_exception_author"];
-	$risk_exception_expiration = $_GET["risk_exception_expiration"];
-	$risk_exception_status = $_GET["risk_exception_status"];
+	# local variables - YOU MUST ADJUST THIS!
+	$risk_exception_id = filter_input( INPUT_GET, "risk_exception_id", FILTER_SANITIZE_NUMBER_INT );
+	$risk_exception_title = filter_input( INPUT_GET, "risk_exception_title", FILTER_SANITIZE_STRING );
+	$risk_exception_description = filter_input( INPUT_GET, "risk_exception_description", FILTER_SANITIZE_STRING );
+	$risk_exception_author = filter_input( INPUT_GET, "risk_exception_author", FILTER_SANITIZE_STRING );
+	$risk_exception_expiration = filter_input( INPUT_GET, "risk_exception_expiration", FILTER_SANITIZE_STRING );
+	$risk_exception_status = filter_input( INPUT_GET, "risk_exception_status", FILTER_SANITIZE_STRING );
 
 	$risk_exception_disabled = $_GET["risk_exception_disabled"];
 	 
@@ -82,7 +82,7 @@ echo "			<a href=\"$base_url_edit&action=edit\" class=\"add-btn\">";
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
-echo "					<li><a href=\"downloads/risk_exception_export.csv\">Dowload</a></li>";
+echo '<li><a href="' . $base_url_list . '&download_export=risk_exception_export">Download</a></li>';
 } else { 
 echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 }

@@ -15,17 +15,17 @@
 	include_once("lib/system_records_lib.php");
 
 	# general variables - YOU SHOULDNT NEED TO CHANGE THIS
-	$sort = $_GET["sort"];
-	$section = $_GET["section"];
-	$subsection = $_GET["subsection"];
-	$action = $_GET["action"];
+	$sort = filter_input(INPUT_GET,"sort",FILTER_SANITIZE_STRING);
+	$section = filter_input(INPUT_GET,"section",FILTER_SANITIZE_STRING);
+	$subsection = filter_input(INPUT_GET,"subsection",FILTER_SANITIZE_STRING);
+	$action = filter_input(INPUT_GET,"action",FILTER_SANITIZE_STRING);
 	
 	$base_url_list = build_base_url($section,"risk_management_list");
 	$base_url_edit = build_base_url($section,"risk_management_edit");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	# i need an asset...if there's no asset i'm not doing anything!
-	$asset_id = $_GET["asset_id"];
+	$asset_id = filter_input( INPUT_GET, "asset_id", FILTER_SANITIZE_NUMBER_INT );
 
 	if ($action == "update") {
 		if (is_array($asset_id)) {
@@ -44,7 +44,7 @@
 		}
 	}
 
-	$risk_id = $_GET["risk_id"];
+	$risk_id = filter_input( INPUT_GET, "risk_id", FILTER_SANITIZE_NUMBER_INT );
 	
 	# if i get a risk_id, i want to make sure it's a really valid one...otherwise void
 	if ($risk_id) {
@@ -54,11 +54,11 @@
 		}
 	} 
 
-	$risk_title = $_GET["risk_title"];
-	$risk_threat = $_GET["risk_threat"];
-	$risk_vulnerabilities = $_GET["risk_vulnerabilities"];
+	$risk_title = filter_input( INPUT_GET, "risk_title", FILTER_SANITIZE_STRING );
+	$risk_threat = filter_input( INPUT_GET, "risk_threat", FILTER_SANITIZE_STRING );
+	$risk_vulnerabilities = filter_input( INPUT_GET, "risk_vulnerabilities", FILTER_SANITIZE_STRING );
 	$risk_classification = $_GET["risk_classification"];
-	$risk_classification_score = $_GET["risk_classification_score"];
+	$risk_classification_score = filter_input( INPUT_GET, "risk_classification_score", FILTER_SANITIZE_NUMBER_INT );
 	if (!is_numeric($risk_classification_score)) {
 		$risk_classification_score = 0;
 	}
@@ -67,12 +67,12 @@
 		$risk_title = "Un-named Risk";
 	}
 
-	$risk_mitigation_strategy_id = $_GET["risk_mitigation_strategy_id"];
+	$risk_mitigation_strategy_id = filter_input( INPUT_GET, "risk_mitigation_strategy_id", FILTER_SANITIZE_NUMBER_INT );
 	$security_services_id = $_GET["security_services_id"];
 	$risk_exception_id = $_GET["risk_exception_id"];
 
-	$risk_periodicity_review = $_GET["risk_periodicity_review"];
-	$risk_residual_score = $_GET["risk_residual_score"];
+	$risk_periodicity_review = filter_var( $_GET["risk_periodicity_review"], FILTER_SANITIZE_STRING );
+	$risk_residual_score = filter_input( INPUT_GET, "risk_residual_score", FILTER_SANITIZE_NUMBER_INT );
 	if (!is_numeric($risk_residual_score)) {
 		$risk_residual_score = $risk_classification_score;
 	}
@@ -114,7 +114,7 @@
 			$count_security_services_id_item = count($security_services_id);
 			for($count = 0 ; $count < $count_security_services_id_item ; $count++) {
 				# now i insert this stuff
-				add_risk_security_services_join($risk_id, $security_services_id[$count]);
+				add_risk_security_services_join($risk_id, filter_var( $security_services_id[$count], FILTER_SANITIZE_NUMBER_INT ) );
 			}
 		}
 		
@@ -136,7 +136,7 @@
 			$count_risk_classification_item = count($risk_classification);
 			for($count = 0 ; $count < $count_risk_classification_item ; $count++) {
 				# now i insert this stuff
-				add_risk_classification_join($risk_id, $risk_classification[$count]);
+				add_risk_classification_join($risk_id, filter_var( $risk_classification[$count], FILTER_SANITIZE_NUMBER_INT ) );
 			}
 		}
 
@@ -242,7 +242,7 @@ echo "			<a href=\"$base_url_edit&action=edit_risk\" class=\"add-btn\">";
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
-echo "					<li><a href=\"downloads/risk_export.csv\">Dowload</a></li>";
+echo '<li><a href="' . $base_url_list . '&download_export=risk_export">Download</a></li>';
 } else { 
 echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 }

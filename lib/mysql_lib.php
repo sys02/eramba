@@ -2,6 +2,7 @@
 
 include_once('configuration.inc');
 
+
 global $db_conf;
 
 $link = mysql_connect($db_conf['db_hostname'], $db_conf['db_username'], $db_conf['db_password']);

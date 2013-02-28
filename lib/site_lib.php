@@ -62,7 +62,7 @@ function show_menu_main() {
 
 			if ($used_section != $row['system_authorization_section_name']) {
 				if ( (!is_array($user_access) && $user_access == 'admin') || (is_array($user_access) && in_array($row['system_authorization_id'], $user_access)) ) {
-					echo '<li><a href="?section='.$row['system_authorization_section_name'].'&subsection=dashboard" ' . (is_this_menu_active($_GET["section"], $row['system_authorization_section_name'])) . '>'.$row['system_authorization_section_cute_name'].'</a></li>';
+					echo '<li><a href="?section='.$row['system_authorization_section_name'].'&subsection=dashboard" ' . (is_this_menu_active(@$_GET["section"], $row['system_authorization_section_name'])) . '>'.$row['system_authorization_section_cute_name'].'</a></li>';
 					$used_section = $row['system_authorization_section_name'];
 				}
 			}
@@ -87,7 +87,7 @@ function show_menu_sub($section) {
 	if (mysql_num_rows($result) > 0) {
 		while($row = mysql_fetch_assoc($result)) {
 			if ( (!is_array($user_access) && $user_access == 'admin') || (is_array($user_access) && in_array($row['system_authorization_id'], $user_access)) ) {
-				echo "<li><a href=\"$base_url?section=" . $section . "&subsection=" . $row['system_authorization_subsection_name'] . "\">" . $row['system_authorization_subsection_cute_name'] . "</a></li>";
+				echo "<li><a href=\"?section=" . $section . "&subsection=" . $row['system_authorization_subsection_name'] . "\">" . $row['system_authorization_subsection_cute_name'] . "</a></li>";
 			}
 		}
 	}
@@ -235,6 +235,32 @@ function validate_section_subsection($section,$subsection) {
 		}
 	}
 	
+}
+
+function download_export( $file_name ) {
+	ignore_user_abort(true);
+
+	$file = 'downloads/' . $file_name . '.csv';
+
+	header('Content-Description: File Transfer');
+	header('Content-Type: text/csv');
+	header('Content-Disposition: attachment; filename=' . basename( $file ));
+	header('Content-Transfer-Encoding: binary');
+	header('Expires: 0');
+	header('Cache-Control: must-revalidate');
+	header('Pragma: public');
+	header('Content-Length: ' . filesize( $file ));
+	ob_clean();
+	flush();
+	readfile( realpath( $file ) );
+
+	unlink( $file );
+	
+	if (connection_aborted()) {
+		unlink($f);
+	}
+
+	exit;
 }
 
 ?>

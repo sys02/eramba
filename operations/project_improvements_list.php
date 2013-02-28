@@ -182,7 +182,7 @@ echo "			<a href=\"$base_url_edit&action=edit\" class=\"add-btn\">";
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
-echo "					<li><a href=\"downloads/project_improvements_export.csv\">Dowload</a></li>";
+	echo '<li><a href="' . $base_url_list . '&download_export=project_improvements_export">Download</a></li>';
 } else { 
 echo "					<li><a href=\"$base_url_list&action=list&sort=1\">Just an Idea Projects</a></li>";
 echo "					<li><a href=\"$base_url_list&action=list&sort=2\">On-Going Projects</a></li>";

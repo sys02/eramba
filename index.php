@@ -1,8 +1,13 @@
 <?
-#ini_set('display_errors', '0');
 session_start();
 include_once("lib/mysql_lib.php");
 include_once("lib/site_lib.php");
+
+if ( $system_conf['debug'] )
+	ini_set('display_errors', 1);
+else
+	ini_set('display_errors', 0);
+	
 
 $logged_user_id = isset($_SESSION['logged_user_id']) ? $_SESSION['logged_user_id'] : null;
 
@@ -16,12 +21,15 @@ $logged_user_data = runSmallQuery(
 	`system_users_id`='" . $logged_user_id . "'"
 );
 
+if ( isset( $_GET['download_export'] ) & $_GET['download_export'] != '' ) {
+	download_export( $_GET['download_export'] );
+}
 
 include_once("header.php");
 
 
-$section = $_GET["section"];
-$subsection = $_GET["subsection"];
+$section = @$_GET["section"];
+$subsection = @$_GET["subsection"];
 
 $action = isset($_GET["action"]) ? $_GET['action'] : 'list';
 

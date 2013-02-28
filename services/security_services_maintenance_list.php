@@ -77,7 +77,7 @@
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
-echo "					<li><a href=\"downloads/security_services_maintenance_export.csv\">Dowload</a></li>";
+	echo '<li><a href="' . $base_url_list . '&download_export=security_services_maintenance_export">Download</a></li>';
 } else { 
 echo "					<li><a href=\"$this_url&action=csv&service_id=$service_id\">Export All</a></li>";
 }

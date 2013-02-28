@@ -148,7 +148,7 @@ echo "				<img src=\"img/profile-pic.png\" alt=\"Profile pic\"/>";
 		<nav id="menu-sub">
 			<ul>
 			<?php
-				show_menu_sub($_GET["section"]);
+				show_menu_sub(@$_GET["section"]);
 			?>
 			</ul>
 		</nav>
