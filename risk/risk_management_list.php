@@ -25,7 +25,8 @@
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	# i need an asset...if there's no asset i'm not doing anything!
-	$asset_id = filter_input( INPUT_GET, "asset_id", FILTER_SANITIZE_NUMBER_INT );
+	//$asset_id = filter_input( INPUT_GET, "asset_id", FILTER_SANITIZE_NUMBER_INT );
+	$asset_id = $_GET['asset_id'];
 
 	if ($action == "update") {
 		if (is_array($asset_id)) {
