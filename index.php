@@ -2,11 +2,6 @@
 session_start();
 include_once("lib/mysql_lib.php");
 include_once("lib/site_lib.php");
-
-if ( $system_conf['debug'] )
-	ini_set('display_errors', 1);
-else
-	ini_set('display_errors', 0);
 	
 
 $logged_user_id = isset($_SESSION['logged_user_id']) ? $_SESSION['logged_user_id'] : null;

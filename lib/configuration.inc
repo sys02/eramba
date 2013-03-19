@@ -3,7 +3,7 @@
 # cant touch this! (mc-hammer stuff)
 $system_conf['app_version'] = "1.0";
 $system_conf['license_number'] = "GPL v2";
-$system_conf['debug'] = "0";
+$system_conf['debug'] = 0;
 
 $system_conf['source_email'] = "";
 $system_conf['mail_server'] = "";

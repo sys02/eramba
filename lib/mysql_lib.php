@@ -2,6 +2,13 @@
 
 include_once('configuration.inc');
 
+global $system_conf;
+if ( $system_conf['debug'] ) {
+	ini_set('display_errors', 1);
+} else {
+	ini_set('display_errors', 0);
+}
+
 
 global $db_conf;
 
@@ -18,12 +25,17 @@ if (!$db_selected) {
 
 # this runs a query and expects only one result on the select (like LIMIT =1)
 function runSmallQuery($query) {
+	global $system_conf;
 	
 	if (!$query) { return; } 
 	
 	$result = mysql_query($query);
 	if (!$result) {
-		die("Invalid query (runSmallQuery) ($query): " . mysql_error());
+		if ($system_conf['debug']) {
+			echo "Invalid query (runSmallQuery) ($query): " . mysql_error();
+		} else {
+			die();
+		}
 	}
 
 	$table = array();
@@ -42,10 +54,15 @@ function runSmallQuery($query) {
 }
 
 function runQuery($query) {
-	
+	global $system_conf;
+
 	$result = mysql_query($query);
 	if (!$result) {
-		die("Invalid query (runQuery) ($query): " . mysql_error());
+		if ($system_conf['debug']) {
+			echo "Invalid query (runSmallQuery) ($query): " . mysql_error();
+		} else {
+			die();
+		}
 	}
 	
 	$table = array();
@@ -60,12 +77,17 @@ function runQuery($query) {
 }
 
 function runQueryNonAssoc($query) {
-	
+	global $system_conf;
+
 	if (!$query) { return; } 
 	
 	$result = mysql_query($query);
 	if (!$result) {
-		die("Invalid query (runQueryNonAssoc) ($query): " . mysql_error());
+		if ($system_conf['debug']) {
+			echo "Invalid query (runQueryNonAssoc) ($query): " . mysql_error();
+		} else {
+			die();
+		}
 	}
 
 	$table = array();
@@ -81,12 +103,17 @@ function runQueryNonAssoc($query) {
 }
 
 function runUpdateQuery($query) {
+	global $system_conf;
 	
 	if (!$query) { return; } 
 	
 	$result = mysql_query($query);
 	if (!$result) {
-		die("Invalid query (runUpdateQuery) ($query): " . mysql_error());
+		if ($system_conf['debug']) {
+			echo "Invalid query (runUpdateQuery) ($query): " . mysql_error();
+		} else {
+			die();
+		}
 	} else {
 		$last_id = mysql_insert_id();
 	}
