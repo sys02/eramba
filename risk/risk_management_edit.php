@@ -80,7 +80,8 @@ echo "						<textarea id=\"\" name=\"risk_threat\" class=\"filter-text\">$risk_i
 						<label for="description">Vulnerabilities</label>
 						<span class="description">For each one of the described threats, identify it's realted vulnerabilities.</span>
 <?
-echo "						<textarea id=\"\" name=\"risk_vulnerabilities\" class=\"filter-text\">$risk_item[risk_vulnerabilities]</textarea>";
+# echo "						<textarea id=\"\" name=\"risk_vulnerabilities\" class=\"filter-text\">$risk_item[risk_vulnerabilities]</textarea>";
+echo "						<textarea id=\"\" name=\"risk_vulnerabilities\">$risk_item[risk_vulnerabilities]</textarea>";
 ?>
 						</select>
 						<br>

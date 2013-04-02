@@ -1,9 +1,9 @@
 <?php
 
 # cant touch this! (mc-hammer stuff)
-$system_conf['app_version'] = "1.0";
+$system_conf['app_version'] = "1.1";
 $system_conf['license_number'] = "GPL v2";
-$system_conf['debug'] = 0;
+$system_conf['debug'] = 1;
 
 $system_conf['source_email'] = "";
 $system_conf['mail_server'] = "";
@@ -14,7 +14,7 @@ $sytem_conf['ad_dn'] = "";
 
 # you must define this
 $db_conf['db_hostname'] = "localhost";
-$db_conf['db_name'] = "dev_isms_v2";
+$db_conf['db_name'] = "dev_isms_v11";
 $db_conf['db_username'] = "root";
 $db_conf['db_password'] = "";
 
