@@ -32,8 +32,8 @@ function update_compliance_audit($compliance_audit_data, $compliance_audit_id) {
 	$sql = "UPDATE compliance_audit_tbl
 		SET
 		compliance_audit_title=\"$compliance_audit_data[compliance_audit_title]\",
-		compliance_audit_date=\"$compliance_audit_data[compliance_audit_date]\"
-		compliance_audit_compliance_audit_package_id=\"$compliance_audit_data[compliance_audit_compliance_audit_package_id]\"
+		compliance_audit_date=\"$compliance_audit_data[compliance_audit_date]\",
+		compliance_audit_package_id=\"$compliance_audit_data[compliance_audit_package_id]\"
 		WHERE
 		compliance_audit_id=\"$compliance_audit_id\"
 		";	

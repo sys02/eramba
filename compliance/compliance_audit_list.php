@@ -2,6 +2,7 @@
 	include_once("lib/compliance_audit_lib.php");
 	include_once("lib/site_lib.php");
 	include_once("lib/system_records_lib.php");
+	include_once("lib/tp_lib.php");
 
 	# general variables - YOU SHOULDNT NEED TO CHANGE THIS
 	$show_id = isset($_GET["show_id"]) ? $_GET["show_id"] : null;
@@ -136,7 +137,10 @@ echo "					<a href=\"?action=edit&section=operations&subsection=project_improvem
 echo "						</div>";
 echo "					</td>";
 echo "					<td>$compliance_audit_item[compliance_audit_date]</td>";
-echo "					<td>$compliance_audit_item[compliance_audit_package_id]</td>";
+
+	$compliance_package_name = lookup_tp("tp_id",$compliance_audit_item[compliance_audit_package_id]); 
+
+echo "					<td>$compliance_package_name[tp_name]</td>";
 echo "					<td></td>";
 echo "					<td></td>";
 echo "							<td class=\"action-cell\">
