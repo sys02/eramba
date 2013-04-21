@@ -5,6 +5,46 @@
 
 include_once("mysql_lib.php");
 
+function compliance_rate_missing_controls($third_party_id) {
+
+	$counter=0;
+	$missing_mitigation=0;
+	
+	# first i need to know which package this third party has
+	$compliance_package_list = list_compliance_package(" WHERE compliance_package_tp_id = \"$third_party_id\" AND compliance_package_disabled \"0\""); 
+
+	# i might have more than one .. so for each compliance package , i count and search how many have controls, etc
+	foreach($compliance_package_list as $compliance_package_item) {
+	
+		$compliance_package_item_list = list_compliance_package_item(" WHERE compliance_package_id = \"$compliance_package_item[compliance_package_id]\" AND compliance_package_item_disabled = \"0\"");
+		
+		foreach ($compliance_package_item_list as $compliance_package_item_item) {
+
+			$counter++;
+			
+			# i need to check if this control has some mitigantion on the compliance table
+			$mitigation_information = lookup_compliance_management("compliance_management_item_id", $compliance_package_item_item[compliance_package_item_id]);	
+
+			# if this is emprt, there's no mitigation
+			if (empty($mitigation_information)) {
+				$missing_mitigation++;
+			# if it is not empty, then there's some sort of mitigation ... i need to check if those controls used are really working
+			} else {
+				
+			}
+		
+		}
+
+	}
+
+	if ($counter>0) {
+	$math = $missing_mitigation/$counter;
+	}
+
+	return $math;
+	
+}
+
 function list_compliance_management($arguments) {
 	# MUST EDIT
 	$sql = "SELECT * FROM compliance_management_tbl".$arguments;

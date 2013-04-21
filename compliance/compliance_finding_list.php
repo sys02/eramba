@@ -15,7 +15,11 @@
 	$compliance_audit_id = $_GET["compliance_audit_id"];
 
 	if (is_numeric($compliance_audit_id)) { 
+		if (!$sort) {
 		$compliance_finding_list = list_compliance_finding(" WHERE compliance_audit_id = \"$compliance_audit_id\" AND compliance_finding_disabled = \"0\"");
+		} else {
+		$compliance_finding_list = list_compliance_finding(" WHERE compliance_audit_id = \"$compliance_audit_id\" AND compliance_finding_disabled = \"0\" ORDER by $sort");
+		}
 	} else {
 		exit;
 	}
