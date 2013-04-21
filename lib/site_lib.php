@@ -263,4 +263,96 @@ function download_export( $file_name ) {
 	exit;
 }
 
+function create_Calendar($month,$year) {
+
+date_default_timezone_set('America/Los_Angeles');
+
+
+	//array containing days of week.
+	$WeeksDays = array('Su','Mo','Tu','We','Th','Fr','Sa'); 
+	// define first day of the month.
+	$firstDayOfMonth = mktime(0,0,0,$month,1,$year);
+	// no of days in month.   
+	$numberDays = date('t',$firstDayOfMonth); 
+	//get first day of month
+	$dateComponents = getdate($firstDayOfMonth); 
+	// What is the name of the month in question?
+	$NameofMonth = $dateComponents['month'];
+	// What is the index value (0-6) of the first day of the
+	// month in question.
+	$dayOfWeek = $dateComponents['wday'];
+
+	// Create the table tag opener and day headers
+	$Calendar = "<table class='Calendar'>";
+	
+		$Calendar .= "<caption>$NameofMonth $year</caption>";
+ 		$Calendar .= "<tr>";
+	
+	
+		// Create the Calendar headers
+		foreach($WeeksDays as $day) {
+			$Calendar .= "<th class='header'>$day</th>";
+		}
+
+	// Create the rest of the Calendar
+	$currentDay = 1;
+	$Calendar .= "</tr><tr>";
+	
+	if ($dayOfWeek > 0) {
+		$Calendar .= "<td colspan='$dayOfWeek'>&nbsp;</td>";
+	}
+
+	$month = str_pad($month, 2, "0", STR_PAD_LEFT);
+	while ($currentDay <= $numberDays) {
+		//  when cloumn position is 7 means Saturday then starts a new row.
+		if ($dayOfWeek == 7) {
+			$dayOfWeek = 0;
+			$Calendar .= "</tr><tr>";
+	}
+
+	$currentDayRel = str_pad($currentDay, 2, "0", STR_PAD_LEFT);
+	$date = "$year-$month-$currentDayRel";
+
+	$Calendar .= "<td class='day' rel='$date'>$currentDay</td>";
+
+		# RED are risk stuff
+		# - Risk Review Periodicity
+		# - Risk Exception Expiration
+		
+		# GREEN are service stuff
+		# - Regular Review (is a month, not an exact date)  
+		# - Regular Mantainance (is a month, not an exact date)  
+		# - Regular Mantainance (is a month, not an exact date)  
+		# - Service Contract End Date
+
+		# BLUE is for compliance stuff
+		# - Compliance Exception Expiration
+		# - Audit Dates
+		# - Audit Finding Dates
+
+		# YELLOW is Operations stuff
+		# - Project Deadline
+		# - Policy Exceptions Deadline 
+
+		# GREAY is for Incidents
+		# - Incident Date Start 
+
+	$currentDay++;
+	$dayOfWeek++;
+
+	}
+
+	// Complete the row of the last week in month, if necessary
+	if ($dayOfWeek != 7) {
+		$remainingDays = 7 - $dayOfWeek;
+		$Calendar .= "<td colspan='$remainingDays'>&nbsp;</td>";
+	}
+	$Calendar .= "</tr>";
+	$Calendar .= "</table>";
+
+	return $Calendar;
+
+	}
+
+
 ?>
