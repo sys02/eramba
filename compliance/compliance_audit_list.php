@@ -1,5 +1,6 @@
 <?
 	include_once("lib/compliance_audit_lib.php");
+	include_once("lib/compliance_finding_lib.php");
 	include_once("lib/site_lib.php");
 	include_once("lib/system_records_lib.php");
 	include_once("lib/tp_lib.php");
@@ -14,13 +15,48 @@
 	$base_url_list = build_base_url($section,"compliance_audit_list");
 	$base_url_edit = build_base_url($section,"compliance_audit_edit");
 	
+	$base_url_edit_finding = build_base_url($section,"compliance_finding_edit");
+	$base_url_list_finding = build_base_url($section,"compliance_finding_list");
+
 	# local variables - YOU MUST ADJUST THIS! 
 	$compliance_audit_id = $_GET["compliance_audit_id"];
 	$compliance_audit_title = $_GET["compliance_audit_title"];
 	$compliance_audit_date = $_GET["compliance_audit_date"];
 	$compliance_audit_package_id = $_GET["compliance_audit_package_id"];
 	$compliance_audit_disabled = $_GET["compliance_audit_disabled"];
+	
+	# compliance finding stuf
+	$compliance_finding_id = $_GET["compliance_finding_id"];
+	$compliance_finding_title = $_GET["compliance_finding_title"];
+	$compliance_finding_description = $_GET["compliance_finding_description"];
+	$compliance_finding_status = $_GET["compliance_finding_status"];
+	$compliance_finding_deadline = $_GET["compliance_finding_deadline"];
+	$compliance_finding_disabled = $_GET["compliance_finding_disabled"];
 	 
+	# actions for compliance findings stuff ..
+	if ($action == "edit_compliance_finding" & is_numeric($compliance_finding_id)) {
+		$compliance_finding_update = array(
+			'compliance_finding_title' => $compliance_finding_title,
+			'compliance_finding_description' => $compliance_finding_description,
+			'compliance_finding_deadline' => $compliance_finding_deadline,
+			'compliance_finding_status' => $compliance_finding_status,
+		);	
+		update_compliance_finding($compliance_finding_update,$compliance_finding_id);
+		add_system_records("compliance","compliance_finding_edit","$compliance_finding_id",$_SESSION['logged_user_id'],"Update","");
+
+	} elseif ($action == "edit_compliance_finding") {
+		$compliance_finding_update = array(
+			'compliance_audit_id' => $compliance_audit_id,
+			'compliance_finding_title' => $compliance_finding_title,
+			'compliance_finding_description' => $compliance_finding_description,
+			'compliance_finding_deadline' => $compliance_finding_deadline,
+			'compliance_finding_status' => $compliance_finding_status,
+		);	
+		$compliance_finding_id = add_compliance_finding($compliance_finding_update);
+		add_system_records("compliance","compliance_finding_edit",$compliance_finding_id,$_SESSION['logged_user_id'],"Insert","");
+	}
+
+
 	#actions .. edit, update or disable - YOU MUST ADJUST THIS!
 	if ($action == "update" & is_numeric($compliance_audit_id)) {
 		$compliance_audit_update = array(
@@ -67,22 +103,6 @@ echo "			<a href=\"$base_url_edit&action=edit\" class=\"add-btn\">";
 				Add a new Audit 
 			</a>
 			
-			<div class="actions-wraper">
-				<a href="#" class="actions-btn">
-					Actions
-					<span class="select-icon"></span>
-				</a>
-				<ul class="action-submenu">
-<?
-# -------- TEMPLATE! YOU MUST ADJUST THIS ------------
-if ($action == "csv") {
-echo "					<li><a href=\"downloads/compliance_audit_export.csv\">Dowload</a></li>";
-} else { 
-echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
-}
-?>
-				</ul>
-			</div>
 		</div>
 		<br class="clear"/>
 		
@@ -146,12 +166,17 @@ echo "					<td></td>";
 echo "							<td class=\"action-cell\">
 
 								<div class=\"cell-label\">
-					No idea how many
+			";
+
+		$count = list_compliance_finding(" WHERE compliance_finding_disabled = \"0\"");	
+		echo count($count). " Items";
+
+echo "
 								</div>
 
 								<div class=\"cell-actions\">
-<a href=\"$base_url_edit_expenses&project_improvements_id=$project_improvements_item[project_improvements_id]\" class=\"edit-action\">add finding</a> 
-<a href=\"$base_url_list_expenses&project_improvements_id=$project_improvements_item[project_improvements_id]\" class=\"delete-action\">view finding</a>
+<a href=\"$base_url_edit_finding&compliance_audit_id=$compliance_audit_item[compliance_audit_id]\" class=\"edit-action\">add finding</a> 
+<a href=\"$base_url_list_finding&compliance_audit_id=$compliance_audit_item[compliance_audit_id]\" class=\"delete-action\">view all finding</a>
 						</td>";
 echo "				</tr>";
 	}
