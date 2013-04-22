@@ -4,6 +4,7 @@
 $system_conf['app_version'] = "1.1";
 $system_conf['license_number'] = "GPL v2";
 $system_conf['debug'] = 1;
+$system_conf['timezone'] = "America/Los_Angeles";
 
 $system_conf['source_email'] = "";
 $system_conf['mail_server'] = "";

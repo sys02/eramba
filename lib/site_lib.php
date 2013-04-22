@@ -2,6 +2,9 @@
 
 date_default_timezone_set('Europe/Bratislava');
 
+include_once("lib/risk_lib.php");
+include_once("lib/risk_exception_lib.php");
+
 function give_me_this_month() {
 	
 	$unix_time = time();	
@@ -208,7 +211,7 @@ echo "</div>";
 
 function validate_section_subsection($section,$subsection) {
 
-	$section_list = array("organization","system","asset","risk","security_services","compliance","operations","home","bcm");	
+	$section_list = array("organization","system","asset","risk","security_services","compliance","operations","calendar","bcm");	
 
 	$subsection_list = array("system_records_list","system_authorization_list","system_roles_list","system_records_edit","system_authorization_edit","system_roles_edit","bu_list","bu_edit","legal_list","legal_edit","tp_list","tp_edit","asset_classification_list","asset_classification_edit","asset_list","asset_edit","data_asset_list","data_asset_edit","risk_classification_list","risk_classification_edit","risk_management_list","risk_management_edit","risk_exception_list","risk_exception_edit","security_catalogue_list","security_catalogue_edit","security_services_audit_edit","service_contracts_list","service_contracts_edit","compliance_package_list","compliance_package_edit","compliance_package_item_edit","compliance_package_upload","compliance_management_list","compliance_management_step_two","compliance_management_edit","compliance_management","compliance_exception_list","compliance_exception_edit","project_improvements_list","security_incident_edit","security_incident_list","process_edit","dashboard","security_incident_classification_list","security_incident_classification_edit","policy_exceptions_list","policy_exceptions_edit","system_info","risk_tp_list","risk_tp_edit","project_improvements_edit","asset_label_list","asset_label_edit","risk_buss_list","risk_buss_edit","bcm_plans_list","bcm_plans_edit","bcm_plans_audit_edit","bcm_plans_audit_report","security_services_audit_report","bcm_plans_details_edit","project_improvements_expenses_edit","project_improvements_expenses_list","security_services_maintenance_edit","security_services_maintenance_list","compliance_audit_list","compliance_audit_edit","compliance_finding_list","compliance_finding_edit");
 
@@ -267,6 +270,32 @@ function create_Calendar($month,$year) {
 
 date_default_timezone_set('America/Los_Angeles');
 
+		$this_year = give_me_this_year();
+		
+		# RED are risk stuff
+		# - Risk Review Periodicity
+	$risk_review = list_risk(" WHERE YEAR(risk_periodicity_review) = $this_year AND risk_disabled = \"0\" "); 
+
+		# - Risk Exception Expiration
+	$risk_exception = list_risk_exception(" WHERE YEAR(risk_exception_expiration) = $this_year AND risk_exception_disabled = \"0\" "); 
+		
+		# GREEN are service stuff
+		# - Regular Review (is a month, not an exact date)  
+		# - Regular Mantainance (is a month, not an exact date)  
+		# - Regular Mantainance (is a month, not an exact date)  
+		# - Service Contract End Date
+
+		# BLUE is for compliance stuff
+		# - Compliance Exception Expiration
+		# - Audit Dates
+		# - Audit Finding Dates
+
+		# YELLOW is Operations stuff
+		# - Project Deadline
+		# - Policy Exceptions Deadline 
+
+		# GREAY is for Incidents
+		# - Incident Date Start 
 
 	//array containing days of week.
 	$WeeksDays = array('Su','Mo','Tu','We','Th','Fr','Sa'); 
@@ -313,29 +342,17 @@ date_default_timezone_set('America/Los_Angeles');
 	$currentDayRel = str_pad($currentDay, 2, "0", STR_PAD_LEFT);
 	$date = "$year-$month-$currentDayRel";
 
-	$Calendar .= "<td class='day' rel='$date'>$currentDay</td>";
 
-		# RED are risk stuff
-		# - Risk Review Periodicity
-		# - Risk Exception Expiration
-		
-		# GREEN are service stuff
-		# - Regular Review (is a month, not an exact date)  
-		# - Regular Mantainance (is a month, not an exact date)  
-		# - Regular Mantainance (is a month, not an exact date)  
-		# - Service Contract End Date
+	foreach($risk_exception as $risk_exception_item) {
+		if (array_search($date, $risk_exception_item)) {
+			$warning="(R-E)";
+		}
+	}
 
-		# BLUE is for compliance stuff
-		# - Compliance Exception Expiration
-		# - Audit Dates
-		# - Audit Finding Dates
+	$Calendar .= "<td class='day' rel='$date'>$currentDay $warning</td>";
 
-		# YELLOW is Operations stuff
-		# - Project Deadline
-		# - Policy Exceptions Deadline 
+	unset($warning);
 
-		# GREAY is for Incidents
-		# - Incident Date Start 
 
 	$currentDay++;
 	$dayOfWeek++;
