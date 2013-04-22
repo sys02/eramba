@@ -14,6 +14,7 @@ include_once("security_services_audit_audit_result_lib.php");
 function new_year_audit_updates() {
 
 	$this_year = give_me_this_year();
+	$next_year = $this_year++;
 
 	# i need to search if there's any audit for this year...
 	$current_audit_list = list_security_services_audit(" WHERE security_services_audit_planned_year = \"$this_year\"");	
@@ -25,7 +26,8 @@ function new_year_audit_updates() {
 		$security_services = list_security_services(" WHERE security_services_disabled = \"0\"");
 		if ($security_services) {
 			foreach($security_services as $security_services_item) {
-				$audit_id = real_add_security_services_audit($security_services_item[security_services_id]);
+				# $audit_id = real_add_security_services_audit($security_services_item[security_services_id]);
+				$audit_id = real_add_security_services_audit($service_information[security_services_id], $planned_audit[security_services_audit_calendar_id], $next_year, $service_information[security_services_audit_metric], $service_information[security_services_audit_success_criteria]);
 				#echo "puta: i will now add audits for the sec. serv id $security_services_item[security_services_id]<br>";
 				add_system_records("security_services","security_services_audit_edit",$audit_id,"SYSTEM","Insert","");
 			}
