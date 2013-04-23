@@ -3,7 +3,20 @@
 date_default_timezone_set('Europe/Bratislava');
 
 include_once("lib/risk_lib.php");
+include_once("lib/risk_tp_join_lib.php");
+include_once("lib/risk_buss_process_join_lib.php");
 include_once("lib/risk_exception_lib.php");
+
+include_once("lib/compliance_audit_lib.php");
+include_once("lib/compliance_finding_lib.php");
+include_once("lib/compliance_exception_lib.php");
+
+include_once("lib/project_improvements_lib.php");
+include_once("lib/security_incident_lib.php");
+include_once("lib/policy_exceptions_lib.php");
+
+include_once("lib/security_services_lib.php");
+include_once("lib/service_contracts_lib.php");
 
 function give_me_this_month() {
 	
@@ -274,28 +287,54 @@ date_default_timezone_set('America/Los_Angeles');
 		
 		# RED are risk stuff
 		# - Risk Review Periodicity
-	$risk_review = list_risk(" WHERE YEAR(risk_periodicity_review) = $this_year AND risk_disabled = \"0\" "); 
+	$risk_asset_review = array();
+	$risk_asset_list = list_distinct_risk_asset_join("");
+	foreach($risk_asset_list as $risk_asset_item) {
+		$risk_asset_data = lookup_risk("risk_id",$risk_asset_item[risk_asset_join_risk_id]);
+		array_push($risk_asset_review, $risk_asset_data);
+	}
+	
+	$risk_tp_review = array();
+	$risk_tp_list = list_risk_tp_join("");
+	foreach($risk_tp_list as $risk_tp_item) {
+		$risk_tp_data = lookup_risk("risk_id",$risk_tp_item[risk_tp_join_risk_id]);
+		array_push($risk_tp_review, $risk_tp_data);
+	}
+	
+	$risk_buss_review = array();
+	$risk_buss_list = list_risk_buss_process_join("");
+	foreach($risk_buss_list as $risk_buss_item) {
+		$risk_buss_data = lookup_risk("risk_id",$risk_buss_item[risk_buss_process_join_risk_id]);
+		array_push($risk_buss_review, $risk_buss_data);
+	}
 
 		# - Risk Exception Expiration
 	$risk_exception = list_risk_exception(" WHERE YEAR(risk_exception_expiration) = $this_year AND risk_exception_disabled = \"0\" "); 
 		
 		# GREEN are service stuff
 		# - Regular Review (is a month, not an exact date)  
-		# - Regular Mantainance (is a month, not an exact date)  
+	
 		# - Regular Mantainance (is a month, not an exact date)  
 		# - Service Contract End Date
+	$service_contracts = list_service_contracts(" WHERE YEAR(service_contracts_end) = $this_year AND service_contracts_disabled = \"0\" ");
 
 		# BLUE is for compliance stuff
 		# - Compliance Exception Expiration
+	$compliance_exception = list_compliance_exception(" WHERE YEAR(compliance_exception_expiration) = $this_year AND compliance_exception_disabled = \"0\" ");
 		# - Audit Dates
+	$compliance_audit = list_compliance_audit(" WHERE YEAR(compliance_audit_date) = $this_year AND compliance_audit_disabled = \"0\" ");
 		# - Audit Finding Dates
+	$compliance_finding = list_compliance_finding(" WHERE YEAR(compliance_finding_deadline) = $this_year AND compliance_finding_disabled = \"0\" ");
 
 		# YELLOW is Operations stuff
 		# - Project Deadline
+	$project_improvements = list_project_improvements(" WHERE YEAR(project_improvements_deadline) = $this_year AND project_improvements_disabled = \"0\" ");
 		# - Policy Exceptions Deadline 
+	$policy_exceptions = list_policy_exceptions(" WHERE YEAR(policy_exceptions_expiration_date) = $this_year AND policy_exceptions_disabled = \"0\" ");
 
 		# GREAY is for Incidents
 		# - Incident Date Start 
+	$security_incident = list_security_incident(" WHERE YEAR(security_incident_open_date) = $this_year AND security_incident_disabled = \"0\" ");
 
 	//array containing days of week.
 	$WeeksDays = array('Su','Mo','Tu','We','Th','Fr','Sa'); 
@@ -345,14 +384,94 @@ date_default_timezone_set('America/Los_Angeles');
 
 	foreach($risk_exception as $risk_exception_item) {
 		if (array_search($date, $risk_exception_item)) {
-			$warning="(R-E)";
+			$base_url_edit = build_base_url("risk","risk_exception_edit");
+			$warning_risk_exception="<a href=\"$base_url_edit&action=edit&risk_exception_id=$risk_exception_item[risk_exception_id]\">(RE)</a>";
+		}
+	}
+	
+	foreach($risk_asset_review as $risk_asset_review_item) {
+		if (array_search($date, $risk_asset_review_item)) {
+			$base_url_edit = build_base_url("risk","risk_management_edit");
+			$warning_risk_asset_review="<a href=\"$base_url_edit&action=edit&risk_id=$risk_asset_review_item[risk_id]\">(RR)</a>";
+		}
+	}
+	
+	foreach($risk_tp_review as $risk_tp_review_item) {
+		if (array_search($date, $risk_tp_review_item)) {
+			$base_url_edit = build_base_url("risk","risk_tp_edit");
+			$warning_risk_tp_review="<a href=\"$base_url_edit&action=edit&risk_id=$risk_tp_review_item[risk_id]\">(RR)</a>";
+		}
+	}
+	
+	foreach($risk_buss_review as $risk_buss_review_item) {
+		if (array_search($date, $risk_buss_review_item)) {
+			$base_url_edit = build_base_url("risk","risk_buss_edit");
+			$warning_risk_buss_review="<a href=\"$base_url_edit&action=edit&risk_id=$risk_buss_review_item[risk_id]\">(RR)</a>";
 		}
 	}
 
-	$Calendar .= "<td class='day' rel='$date'>$currentDay $warning</td>";
+	foreach($compliance_exception as $compliance_exception_item) {
+		if (array_search($date, $compliance_exception_item)) {
+			$base_url_edit = build_base_url("compliance","compliance_exception_edit");
+			$warning_compliance_exception="<a href=\"$base_url_edit&action=edit&compliance_exception_id=$compliance_exception_item[compliance_exception_id]\">(CE)</a>";
+		}
+	}
+	
+	foreach($compliance_finding as $compliance_finding_item) {
+		if (array_search($date, $compliance_finding_item)) {
+			$base_url_edit = build_base_url("compliance","compliance_finding_edit");
+			$warning_compliance_finding="<a href=\"$base_url_edit&action=edit&compliance_finding_id=$compliance_finding_item[compliance_finding_id]\">(CF)</a>";
+		}
+	}
+	
+	foreach($compliance_audit as $compliance_audit_item) {
+		if (array_search($date, $compliance_audit_item)) {
+			$base_url_edit = build_base_url("compliance","compliance_audit_edit");
+			$warning_compliance_audit="<a href=\"$base_url_edit&action=edit&compliance_audit_id=$compliance_audit_item[compliance_audit_id]\">(CA)</a>";
+		}
+	}
+	
+	foreach($policy_exceptions as $policy_exceptions_item) {
+		if (array_search($date, $policy_exceptions_item)) {
+			$base_url_edit = build_base_url("operations","policy_exceptions_edit");
+			$warning_policy_exceptions="<a href=\"$base_url_edit&action=edit&policy_exceptions_id=$policy_exceptions_item[policy_exceptions_id]\">(PE)</a>";
+		}
+	}
+	
+	foreach($project_improvements as $project_improvements_item) {
+		if (array_search($date, $project_improvements_item)) {
+			$base_url_edit = build_base_url("operations","project_improvements_edit");
+			$warning_project_improvements="<a href=\"$base_url_edit&action=edit&project_improvements_id=$project_improvements_item[project_improvements_id]\">(PI)</a>";
+		}
+	}
+	
+	foreach($security_incident as $security_incident_item) {
+		if (array_search($date, $security_incident_item)) {
+			$base_url_edit = build_base_url("operations","security_incident_edit");
+			$warning_security_incident="<a href=\"$base_url_edit&action=edit&security_incident_id=$security_incident_item[security_incident_id]\">(SI)</a>";
+		}
+	}
+	
+	foreach($service_contracts as $service_contracts_item) {
+		if (array_search($date, $service_contracts_item)) {
+			$base_url_edit = build_base_url("security_services","service_contracts_edit");
+			$warning_service_contracts="<a href=\"$base_url_edit&action=edit&service_contracts_id=$service_contracts_item[service_contracts_id]\">(SC)</a>";
+		}
+	}
 
-	unset($warning);
+	$Calendar .= "<td class='day' rel='$date'>$currentDay $warning_risk_exception $warning_risk_asset_review $warning_risk_tp_review $warning_risk_buss_review $warning_compliance_exception $warning_compliance_audit $warning_compliance_finding $warning_policy_exceptions $warning_project_improvements $warning_security_incident $warning_service_contracts</td>";
 
+	unset($warning_risk_exception);
+	unset($warning_risk_asset_review);
+	unset($warning_risk_tp_review);
+	unset($warning_risk_buss_review);
+	unset($warning_compliance_exception);
+	unset($warning_compliance_finding);
+	unset($warning_compliance_audit);
+	unset($warning_policy_exceptions);
+	unset($warning_project_improvements);
+	unset($warning_security_incident);
+	unset($warning_service_contracts);
 
 	$currentDay++;
 	$dayOfWeek++;
