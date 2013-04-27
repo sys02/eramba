@@ -53,9 +53,15 @@ echo "						<input type=\"text\" class=\"filter-text\" name=\"asset_name\" id=\"
 						<label for="legalType">Related BUs</label>
 						<span class="description">Choose one (or many) BU that is related to this Asset</span>
 						<select name="asset_bu_join[]" id="" class="chzn-select" multiple="multiple">
-						<option value="-1">Select a BU...</option>
 <?
 			$pre_selected_bu_list = list_asset_bu_join(" WHERE asset_bu_join_asset_id = \"$asset_item[asset_id]\"");	
+
+			if (count($pre_selected_bu_list) == 0) {
+				echo "<option value=\"-1\" selected>Select a BU...</option>";
+			} else {
+				echo "<option value=\"-1\">Select a BU...</option>";
+			}
+
 			$pre_selected_items = array();
 			foreach($pre_selected_bu_list as $pre_selected_bu_item) {
 				array_push($pre_selected_items,$pre_selected_bu_item[asset_bu_join_bu_id]);

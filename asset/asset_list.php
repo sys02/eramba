@@ -85,6 +85,7 @@
 			'asset_user_id' => $asset_user_id,
 			'asset_container_id' => $asset_container_id
 		);	
+
 		$new_asset_id =	add_asset($asset_update);
 		add_system_records("asset","asset_edit","$new_asset_id",$_SESSION['logged_user_id'],"Insert","");
 		
@@ -167,6 +168,15 @@ if ($action == "csv") {
 
 	$bu_list = list_bu(" WHERE bu_disabled =\"0\"");
 
+	$default_bu = array(
+		"bu_id" => "-1",
+		"bu_name" => "Un-Assigned Assets",
+		"bu_description" => "Default BU",
+		"bu_disabled" => "0"
+	);	
+
+	array_push($bu_list, $default_bu);
+	
 	foreach($bu_list as $bu_item) {
 
 	echo "<br><h4>BU Asset Name: $bu_item[bu_name]</h4>";
