@@ -18,6 +18,9 @@ include_once("lib/policy_exceptions_lib.php");
 include_once("lib/security_services_lib.php");
 include_once("lib/service_contracts_lib.php");
 
+include_once("lib/security_services_catalogue_audit_calendar_join_lib.php");
+include_once("lib/security_services_catalogue_maintenance_calendar_join_lib.php");
+
 function give_me_this_month() {
 	
 	$unix_time = time();	
@@ -313,8 +316,34 @@ date_default_timezone_set('America/Los_Angeles');
 		
 		# GREEN are service stuff
 		# - Regular Review (is a month, not an exact date)  
-	
-		# - Regular Mantainance (is a month, not an exact date)  
+	$control_audit = list_security_services_catalogue_audit_calendar_join("");
+
+	$control_audit_updated = array();
+	foreach($control_audit as $control_audit_item) {
+		$control_audit_random_time = rand( strtotime("1-$control_audit_item[security_services_audit_calendar_id]-$this_year"), strtotime("28-$control_audit_item[security_services_audit_calendar_id]-$this_year"));	
+		$control_audit_random_day_string = date("Y-m-d", $control_audit_random_time);
+		# debug
+		# echo "New Random Day: $control_audit_random_day_string vs $control_audit_item[security_services_audit_calendar_id]<br>";
+		$tmp_array = array(control_id => $control_audit_item[security_service_catalogue_id], day => $control_audit_random_day_string);
+		array_push($control_audit_updated,$tmp_array);
+		unset($tmp_array);
+	}
+
+
+	# - Regular Mantainance (is a month, not an exact date)  
+	$control_maintenance  = list_security_services_catalogue_maintenance_calendar_join("");
+	# since what i get is a month, i need to add one more element on the array with a random day (from 1st to 28th to include any month)
+	$control_maintenance_updated = array();
+	foreach($control_maintenance as $control_maintenance_item) {
+		$control_maintenance_random_time = rand( strtotime("1-$control_maintenance_item[security_services_maintenance_calendar_id]-$this_year"), strtotime("28-$control_maintenance_item[security_services_maintenance_calendar_id]-$this_year"));	
+		$control_maintenance_random_day_string = date("Y-m-d", $control_maintenance_random_time);
+		# debug
+		# echo "New Random Day: $control_maintenance_random_day_string vs $control_maintenance_item[security_services_maintenance_calendar_id]<br>";
+		$tmp_array = array(control_id => $control_maintenance_item[security_service_catalogue_id], day => $control_maintenance_random_day_string);
+		array_push($control_maintenance_updated,$tmp_array);
+		unset($tmp_array);
+	}
+
 		# - Service Contract End Date
 	$service_contracts = list_service_contracts(" WHERE YEAR(service_contracts_end) = $this_year AND service_contracts_disabled = \"0\" ");
 
@@ -458,8 +487,22 @@ date_default_timezone_set('America/Los_Angeles');
 			$warning_service_contracts="<a href=\"$base_url_edit&action=edit&service_contracts_id=$service_contracts_item[service_contracts_id]\">(SC)</a>";
 		}
 	}
+	
+	foreach($control_audit_updated as $control_audit_updated_item) {
+		if (array_search($date, $control_audit_updated_item)) {
+			$base_url_edit = build_base_url("security_services","security_catalogue_edit");
+			$warning_service_audit="<a href=\"$base_url_edit&action=edit&security_services_id=$control_audit_updated_item[control_id]\">(SA)</a>";
+		}
+	}
+	
+	foreach($control_maintenance_updated as $control_maintenance_updated_item) {
+		if (array_search($date, $control_maintenance_updated_item)) {
+			$base_url_edit = build_base_url("security_services","security_catalogue_edit");
+			$warning_service_maintenance="<a href=\"$base_url_edit&action=edit&security_services_id=$control_maintenance_updated_item[control_id]\">(SM)</a>";
+		}
+	}
 
-	$Calendar .= "<td class='day' rel='$date'>$currentDay $warning_risk_exception $warning_risk_asset_review $warning_risk_tp_review $warning_risk_buss_review $warning_compliance_exception $warning_compliance_audit $warning_compliance_finding $warning_policy_exceptions $warning_project_improvements $warning_security_incident $warning_service_contracts</td>";
+	$Calendar .= "<td class='day' rel='$date'>$currentDay $warning_risk_exception $warning_risk_asset_review $warning_risk_tp_review $warning_risk_buss_review $warning_compliance_exception $warning_compliance_audit $warning_compliance_finding $warning_policy_exceptions $warning_project_improvements $warning_security_incident $warning_service_contracts $warning_service_maintenance $warning_service_audit</td>";
 
 	unset($warning_risk_exception);
 	unset($warning_risk_asset_review);
@@ -472,6 +515,8 @@ date_default_timezone_set('America/Los_Angeles');
 	unset($warning_project_improvements);
 	unset($warning_security_incident);
 	unset($warning_service_contracts);
+	unset($warning_service_maintenance);
+	unset($warning_service_audit);
 
 	$currentDay++;
 	$dayOfWeek++;

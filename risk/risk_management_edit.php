@@ -71,6 +71,7 @@ echo "						<input type=\"text\" class=\"filter-text\" name=\"risk_title\" id=\"
 			list_drop_menu_asset($pre_selected_items,"asset_name");	
 ?>
 						</select>
+
 						<label for="name">Threats</label>
 						<span class="description">Describe the applicable threats that apply to the asset we are Risk Analysing. This is a good time to get creative (realistic tough).</span>
 <?
