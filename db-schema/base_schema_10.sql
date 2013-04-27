@@ -1942,7 +1942,7 @@ CREATE TABLE `tp_type_tbl` (
 
 LOCK TABLES `tp_type_tbl` WRITE;
 /*!40000 ALTER TABLE `tp_type_tbl` DISABLE KEYS */;
-INSERT INTO `tp_type_tbl` VALUES (1,'Customers',0),(2,'Providers',0),(3,'Regulators',0);
+INSERT INTO `tp_type_tbl` VALUES (1,'Customers',0),(2,'Suppliers',0),(3,'Regulators',0);
 /*!40000 ALTER TABLE `tp_type_tbl` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
