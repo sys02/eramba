@@ -133,7 +133,7 @@ echo "					<a href=\"?section=system&subsection=system_records_list&system_recor
 echo "					<a href=\"?action=edit&section=operations&subsection=project_improvements_edit&ciso_pmo_lookup_subsection=risk_exception_edit&ciso_pmo_lookup_item_id=$risk_exception_item[risk_exception_id]\" class=\"delete-action\">improve</a>";
 echo "						</div>";
 echo "					</td>";
-echo "					<td>$risk_exception_item[risk_exception_description]</td>";
+echo "					<td>".substr($risk_exception_item[risk_exception_description],0,100)."...</td>";
 echo "					<td><center>$risk_exception_item[risk_exception_author]</td>";
 echo "					<td><center>$risk_exception_item[risk_exception_expiration]</td>";
 echo "				</tr>";
