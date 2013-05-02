@@ -164,7 +164,7 @@ echo "							<td class=\"action-cell\">
 								<div class=\"cell-label\">
 			";
 
-		$count = list_compliance_finding(" WHERE compliance_finding_disabled = \"0\"");	
+		$count = list_compliance_finding(" WHERE compliance_finding_disabled = \"0\" AND compliance_audit_id = \"$compliance_audit_item[compliance_audit_id]\" ");	
 		echo count($count). " Items";
 
 echo "
