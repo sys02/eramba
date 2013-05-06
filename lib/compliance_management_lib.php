@@ -4,6 +4,73 @@
 # IF YOU WANT TO USE, YOU MUST RENAME FUNCTIONS!! :s/compliance_management/compliance_management/ - SAMEPLE
 
 include_once("mysql_lib.php");
+include_once("compliance_item_security_service_join_lib.php");
+
+function compliance_rate_strategy_mitigate($third_party_id) {
+
+	$counter=0;
+	$missing_mitigation=0;
+	$strategy_mitigate=0;
+	$strategy_na=0;
+	$strategy_ongoing=0;
+	$strategy_compliant=0;
+	$strategy_non_compliant=0;
+	$strategy_non_applicable=0;
+	
+	# first i need to know which package this third party has
+	$compliance_package_list = list_compliance_package(" where compliance_package_tp_id = \"$third_party_id\" and compliance_package_disabled = \"0\""); 
+
+	if (count($compliance_package_list)>0) {
+
+	# i might have more than one .. so for each compliance package , i count and search how many have controls, etc
+	foreach($compliance_package_list as $compliance_package_item) {
+	
+		$compliance_package_item_list = list_compliance_package_item(" where compliance_package_id = \"$compliance_package_item[compliance_package_id]\" and compliance_package_item_disabled = \"0\"");
+
+		# echo "puta deubg: $compliance_package_item[compliance_package_name] tiene:".count($compliance_package_item_list)."<br>";
+		
+		foreach ($compliance_package_item_list as $compliance_package_item_item) {
+
+			$counter++;
+
+			# echo "voy contando: $counter<br>";
+			# i need to check if this control has some mitigantion on the compliance table
+			$mitigation_strategy= lookup_compliance_management("compliance_management_item_id",$compliance_package_item_item[compliance_package_item_id]);
+
+			# check the response type 
+			if ($mitigation_strategy[compliance_management_response_id] == "1") {
+				#i found one mitigation strategy without controls ... 
+				$strategy_mitigate++;
+			} elseif ($mitigation_strategy[compliance_management_response_id] == "2") {
+				$strategy_na++;
+			} 	
+
+			# check the status
+			if ($mitigation_strategy[compliance_management_status_id] == "1") {
+				#i found one mitigation strategy without controls ... 
+				$strategy_ongoing++;
+			} elseif ($mitigation_strategy[compliance_management_status_id] == "2") {
+				$strategy_compliant++;
+			} elseif ($mitigation_strategy[compliance_management_status_id] == "3") {
+				$strategy_non_compliant++;
+			} elseif ($mitigation_strategy[compliance_management_status_id] == "4") {
+				$strategy_non_applicable++;
+			}
+		}
+
+	}
+
+	}
+
+	$stack = array();
+	if ($counter>0) {
+		$math = $missing_mitigation/$counter;
+		array_push($stack, round($strategy_mitigate/$counter,2), round($strategy_na/$counter,2), round($strategy_ongoing/$counter,2), round($strategy_compliant/$counter,2), round($strategy_non_compliant/$counter,2), round($strategy_non_applicable/$counter,2)); 
+	}
+
+	return $stack;
+	
+}
 
 function compliance_rate_missing_controls($third_party_id) {
 
@@ -11,37 +78,40 @@ function compliance_rate_missing_controls($third_party_id) {
 	$missing_mitigation=0;
 	
 	# first i need to know which package this third party has
-	$compliance_package_list = list_compliance_package(" WHERE compliance_package_tp_id = \"$third_party_id\" AND compliance_package_disabled \"0\""); 
+	$compliance_package_list = list_compliance_package(" where compliance_package_tp_id = \"$third_party_id\" and compliance_package_disabled = \"0\""); 
+
+	if (count($compliance_package_list)>0) {
 
 	# i might have more than one .. so for each compliance package , i count and search how many have controls, etc
 	foreach($compliance_package_list as $compliance_package_item) {
 	
-		$compliance_package_item_list = list_compliance_package_item(" WHERE compliance_package_id = \"$compliance_package_item[compliance_package_id]\" AND compliance_package_item_disabled = \"0\"");
+		$compliance_package_item_list = list_compliance_package_item(" where compliance_package_id = \"$compliance_package_item[compliance_package_id]\" and compliance_package_item_disabled = \"0\"");
+
+		# echo "puta deubg: $compliance_package_item[compliance_package_name] tiene:".count($compliance_package_item_list)."<br>";
 		
 		foreach ($compliance_package_item_list as $compliance_package_item_item) {
 
 			$counter++;
-			
-			# i need to check if this control has some mitigantion on the compliance table
-			$mitigation_information = lookup_compliance_management("compliance_management_item_id", $compliance_package_item_item[compliance_package_item_id]);	
 
-			# if this is emprt, there's no mitigation
-			if (empty($mitigation_information)) {
-				$missing_mitigation++;
-			# if it is not empty, then there's some sort of mitigation ... i need to check if those controls used are really working
-			} else {
-				
-			}
+			# echo "voy contando: $counter<br>";
+			# i need to check if this control has some mitigantion on the compliance table
+			$security_controls = lookup_compliance_item_security_services_join("compliance_security_services_join_compliance_id",$compliance_package_item_item[compliance_package_item_id]);
 		
+			if (!$security_controls) {
+				#i found one mitigation strategy without controls ... 
+				$missing_mitigation++;
+			}		
+
 		}
 
 	}
 
+	}
 	if ($counter>0) {
 	$math = $missing_mitigation/$counter;
 	}
 
-	return $math;
+	return round($math,2);
 	
 }
 
