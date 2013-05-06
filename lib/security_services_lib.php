@@ -96,6 +96,29 @@ function security_service_check($security_service_id) {
 
 }
 
+# this function checks if a security service is being used or not
+# returns:
+# NULL if all good
+# 1 if not in use at any of this: risks, third party risks, compliance
+function service_in_use($security_control_id) {
+
+	# first i check on the risk table: risk_security_services_join
+	$risk_security_services_join = lookup_risk_security_services_join("risk_security_services_join_security_services_id", $security_control_id);	
+	
+	# then i check on the compliance table: compliance_security_services_join
+	$compliance_security_services_join = lookup_compliance_item_security_services_join("compliance_security_services_join_security_services_id", $security_control_id); 		
+	# i need to check onthe data asset analysis...
+	$data_asset_security_services_join = lookup_data_asset_security_services_join("data_asset_security_services_join_security_services_id", $security_control_id);
+
+	#if any of these three has something, then this control is doing something ..
+	if (!$risk_security_services_join && !$compliance_security_services_join && !$data_asset_security_services_join) {
+		return 1;
+	} else {
+		return NULL;
+	}
+		
+}
+
 # he needs to return a whole html ready to drop a menu
 # he receives an array with an item of pre-selected items that must be pre-selected
 # he receives a second argument which is the order by lookup

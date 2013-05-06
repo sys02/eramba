@@ -56,7 +56,8 @@ function lookup_compliance_item_security_services_join($search_parameter, $item_
 	}
 
 	# MUST EDIT
-	$sql = "SELECT * from compliance_item_security_services_join WHERE $search_parameter = \"$item_id\""; 
+	#$sql = "SELECT * from compliance_item_security_services_join WHERE $search_parameter = \"$item_id\""; 
+	$sql = "SELECT * from compliance_security_services_join WHERE $search_parameter = \"$item_id\""; 
 	$result = runSmallQuery($sql);
 	return $result;
 }

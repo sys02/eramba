@@ -265,11 +265,18 @@ echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 		$warning_audit = " - (Warning: Audit Issues)";
 	}
 
+	# i need to check if the service is actually being used or not
+	if ( service_in_use($security_services_item[security_services_id]) ) {
+		$warning_not_in_use= " - (Warning: Control not in use!)";
+	} else {
+		$warning_not_in_use= "";
+	} 
+
 	$status_name = lookup_security_services_status("security_services_status_id", $security_services_item[security_services_status]);	
 
 echo "			<li>";
 echo "				<div class=\"header\">";
-echo "					Service Name: $security_services_item[security_services_name] $warning_audit";
+echo "					Service Name: $security_services_item[security_services_name] $warning_audit $warning_not_in_use";
 echo "					<span class=\"actions\">";
 echo "						<a class=\"edit\" href=\"$base_url_edit&action=edit&security_services_id=$security_services_item[security_services_id]\">edit</a>";
 echo "						&nbsp;|&nbsp;";
