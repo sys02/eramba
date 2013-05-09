@@ -72,6 +72,58 @@ function compliance_rate_strategy_mitigate($third_party_id) {
 	
 }
 
+function compliance_rate_failed_controls($third_party_id) {
+	
+	$counter=0;
+	$compliance_dashboard_control_failed=0;
+	
+	# first i need to know which package this third party has
+	$compliance_package_list = list_compliance_package(" where compliance_package_tp_id = \"$third_party_id\" and compliance_package_disabled = \"0\""); 
+
+	if (count($compliance_package_list)>0) {
+
+	# i might have more than one .. so for each compliance package , i count and search how many have controls, etc
+	foreach($compliance_package_list as $compliance_package_item) {
+	
+		$compliance_package_item_list = list_compliance_package_item(" where compliance_package_id = \"$compliance_package_item[compliance_package_id]\" and compliance_package_item_disabled = \"0\"");
+
+		# echo "puta deubg: $compliance_package_item[compliance_package_name] tiene:".count($compliance_package_item_list)."<br>";
+		
+		foreach ($compliance_package_item_list as $compliance_package_item_item) {
+
+			$counter++;
+
+			# echo "voy contando: $counter<br>";
+			# i need to check if this control has some mitigantion on the compliance table
+			$security_controls = lookup_compliance_item_security_services_join("compliance_security_services_join_compliance_id",$compliance_package_item_item[compliance_package_item_id]);
+
+			
+			# echo "checking control: $security_controls[compliance_security_services_join_security_services_id] <br>";
+
+			if ($security_controls[compliance_security_services_join_security_services_id]) {
+
+				$control_check = security_service_check($security_controls[compliance_security_services_join_security_services_id]);
+	
+				if ($control_check) {
+					# echo "Control not ok ($control_check)<br>";
+					$compliance_dashboard_control_failed++;	
+				}
+
+			}
+
+		}
+	}
+
+	}
+
+	if ($counter>0) {
+	$math = $compliance_dashboard_control_failed/$counter;
+	}
+
+	return round($math,2);
+
+}
+
 function compliance_rate_missing_controls($third_party_id) {
 
 	$counter=0;

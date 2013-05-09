@@ -28,6 +28,7 @@ echo "					<th><a class=\"asc\">Compliance Package</th>";
 echo "					<th>% Mitigated</th>";
 echo "					<th>% NA</th>";
 echo "					<th>% Missing Controls</th>";
+echo "					<th>% Failed Controls</th>";
 echo "					<th>% Comp. On-Going</th>";
 echo "					<th>% Compliant</th>";
 echo "					<th>% Non-Compliant</th>";
@@ -48,6 +49,7 @@ foreach($list_compliance_package as $list_compliance_package_item) {
 
 	$package_name = lookup_tp("tp_id", $list_compliance_package_item[compliance_package_tp_id]); 
 	$no_controls = ( compliance_rate_missing_controls($list_compliance_package_item[compliance_package_tp_id]) * 100 );
+	$failed_controls = ( compliance_rate_failed_controls($list_compliance_package_item[compliance_package_tp_id]) * 100 );
 	$strategy_response = compliance_rate_strategy_mitigate($list_compliance_package_item[compliance_package_tp_id]);
 
 
@@ -63,6 +65,7 @@ echo "					</td>";
 echo "					<td>".round($strategy_response[0]*100,2)." %</td>";
 echo "					<td>".round($strategy_response[1]*100,2)." %</td>";
 echo "					<td>$no_controls %</td>";
+echo "					<td>$failed_controls %</td>";
 echo "					<td>".round($strategy_response[2]*100,2)." %</td>";
 echo "					<td>".round($strategy_response[3]*100,2)." %</td>";
 echo "					<td>".round($strategy_response[4]*100,2)." %</td>";
