@@ -109,4 +109,54 @@ INSERT INTO `system_authorization_tbl` VALUES (1,8,'r','system','System Manageme
 UNLOCK TABLES;
 
 
+-- Table structure for table `tiv_threats_tbl`
+--
+
+DROP TABLE IF EXISTS `tiv_threats_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tiv_threats_tbl` (
+  `tiv_threats_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `tiv_threats_category` varchar(100) DEFAULT NULL,
+  `tiv_threats_name` varchar(100) DEFAULT NULL,
+  `tiv_threats_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`tiv_threats_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tiv_threats_tbl`
+--
+
+LOCK TABLES `tiv_threats_tbl` WRITE;
+/*!40000 ALTER TABLE `tiv_threats_tbl` DISABLE KEYS */;
+INSERT INTO `tiv_threats_tbl` VALUES (14,'Nature and Accidents','Earthquakes',0),(15,'Nature and Accidents','Landslides',0),(16,'Nature and Accidents','Volcanoes',0),(17,'Nature and Accidents','Fires ',0),(18,'Nature and Accidents','Storms and floods ',0),(19,'Nature and Accidents','Transportation accidents',0),(20,'Nature and Accidents','Hazardous materials related events ',0),(21,'Nature and Accidents','Solar flares',0),(22,'Current and Past Employees','Human error ',0),(23,'Current and Past Employees','Sabotage ',0),(24,'Current and Past Employees','Tampering ',0),(25,'Current and Past Employees','Vandalism ',0),(26,'Current and Past Employees','Theft ',0),(27,'Current and Past Employees','Unions',0),(28,'Current and Past Employees','Pandemics and disease ',0),(29,'Current and Past Employees','Insider trading ',0),(30,'Current and Past Employees','Fraud ',0),(31,'Current and Past Employees','Liability for employee actions ',0),(32,'Current and Past Employees','Scandals ',0),(33,'Current and Past Employees','Corporate crime ',0),(34,'Current and Past Employees','Discriminatory abuse ',0),(35,'Current and Past Employees','Workplace bullying ',0),(36,'Current and Past Employees','Sexual harassment ',0),(37,'Current and Past Employees','Professional misconduct ',0),(38,'Current and Past Employees','Negligence ',0),(39,'Current and Past Employees','Passive–aggressive behaviour ',0),(40,'Current and Past Employees','Workplace revenge ',0),(41,'Current and Past Employees','Insurance fraud ',0),(42,'Current and Past Employees','Lawsuits against employer ',0),(43,'Competitors','Industrial espionage ',0),(44,'Competitors','Intellectual property theft ',0),(45,'Competitors','Copyright infringement ',0),(46,'Competitors','Mudslinging ',0),(47,'Competitors','Illegal infiltration ',0),(48,'Competitors','Dirty tricks ',0),(49,'Competitors','Patent infringement ',0),(50,'Competitors','Competitive research ',0),(51,'Competitors','Price surveillance ',0),(52,'Litigants','Seeking confidential data as evidence ',0),(53,'The Press','Bad publicity ',0),(54,'The Press','Exposing trade secrets ',0),(55,'The Press','Exposing strategy and new products ',0),(56,'Hacking','IP Spoofing ',0),(57,'Hacking','Social engineering ',0),(58,'Hacking','Man-in-the-middle spoofing ',0),(59,'Hacking','DNS Poisoning ',0),(60,'Hacking','Trojan ',0),(61,'Hacking','Cracks ',0),(62,'Hacking','Worms ',0),(63,'Hacking','Viruses ',0),(64,'Hacking','Eavesdropping ',0),(65,'Hacking','Spam ',0),(66,'Hacking','Phishing ',0),(67,'Hacking','Spyware ',0),(68,'Hacking','Malware ',0),(69,'Hacking','Password Cracking ',0),(70,'Hacking','Network sniffing ',0),(71,'Hacking','Back door/trap door ',0),(72,'Hacking','Tunnelling ',0),(73,'Hacking','Website defacement ',0),(74,'Hacking','TCP/IP hijacking ',0),(75,'Hacking','Replay Attacks ',0),(76,'Hacking','System tampering ',0),(77,'Hacking','System penetration ',0),(78,'Criminals','Kidnapping ',0),(79,'Criminals','Bribery ',0),(80,'Criminals','Extortion ',0),(81,'Criminals','Fraud ',0),(82,'Criminals','Theft ',0),(83,'Criminals','Physical infrastructure attacks ',0),(84,'Criminals','Information blackmail ',0),(85,'Criminals','Assault ',0),(86,'Criminals','Sale of stolen information ',0),(87,'Criminals','Cyberstalking ',0),(88,'Governments','Acts of war',0),(89,'Governments','Nuclear war ',0),(90,'Governments','Biological warfare ',0),(91,'Governments','Chemical warfare ',0),(92,'Governments','Computer warfare',0),(93,'Governments','Espionage ',0),(94,'Governments','Terrorism ',0),(95,'Governments','Cyberwarfare ',0),(96,'Governments','Electromagnetic weapons ',0),(97,'Governments','Wiretapping ',0);
+/*!40000 ALTER TABLE `tiv_threats_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tiv_vuln_tbl`
+--
+
+DROP TABLE IF EXISTS `tiv_vuln_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tiv_vuln_tbl` (
+  `tiv_vuln_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tiv_vuln_category` varchar(100) DEFAULT NULL,
+  `tiv_vuln_name` varchar(100) DEFAULT NULL,
+  `tiv_vuln_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`tiv_vuln_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tiv_vuln_tbl`
+--
+
+LOCK TABLES `tiv_vuln_tbl` WRITE;
+/*!40000 ALTER TABLE `tiv_vuln_tbl` DISABLE KEYS */;
+INSERT INTO `tiv_vuln_tbl` VALUES (1,'Nature and Accidents','abcd',0),(2,'Nature and Accidents','sdf',0),(3,'Nature and Accidents','adaf',0),(4,'Nature and Accidents','dfas',0),(5,'Nature and Accidents','sf',0),(6,'Nature and Accidents','sf',0),(7,'Nature and Accidents','asf',0),(8,'Nature and Accidents','',0),(9,'Current and Past Employees','',0),(10,'Current and Past Employees','',0),(11,'Current and Past Employees','',0),(12,'Current and Past Employees','',0),(13,'Current and Past Employees','',0),(14,'Current and Past Employees','',0),(15,'Current and Past Employees','',0),(16,'Current and Past Employees','',0),(17,'Current and Past Employees','',0),(18,'Current and Past Employees','',0),(19,'Current and Past Employees','',0),(20,'Current and Past Employees','',0),(21,'Current and Past Employees','',0),(22,'Current and Past Employees','',0),(23,'Current and Past Employees','',0),(24,'Current and Past Employees','',0),(25,'Current and Past Employees','',0),(26,'Current and Past Employees','',0),(27,'Current and Past Employees','',0),(28,'Current and Past Employees','',0),(29,'Current and Past Employees','',0),(30,'Competitors','',0),(31,'Competitors','',0),(32,'Competitors','',0),(33,'Competitors','',0),(34,'Competitors','',0),(35,'Competitors','',0),(36,'Competitors','',0),(37,'Competitors','',0),(38,'Competitors','',0),(39,'Litigants','',0),(40,'The Press','',0),(41,'The Press','',0),(42,'The Press','',0),(43,'Hacking','',0),(44,'Hacking','',0),(45,'Hacking','',0),(46,'Hacking','',0),(47,'Hacking','',0),(48,'Hacking','',0),(49,'Hacking','',0),(50,'Hacking','',0),(51,'Hacking','',0),(52,'Hacking','',0),(53,'Hacking','',0),(54,'Hacking','',0),(55,'Hacking','',0),(56,'Hacking','',0),(57,'Hacking','',0),(58,'Hacking','',0),(59,'Hacking','',0),(60,'Hacking','',0),(61,'Hacking','',0),(62,'Hacking','',0),(63,'Hacking','',0),(64,'Hacking','',0),(65,'Criminals','',0),(66,'Criminals','',0),(67,'Criminals','',0),(68,'Criminals','',0),(69,'Criminals','',0),(70,'Criminals','',0),(71,'Criminals','',0),(72,'Criminals','',0),(73,'Criminals','',0),(74,'Criminals','',0),(75,'Governments','',0),(76,'Governments','',0),(77,'Governments','',0),(78,'Governments','',0),(79,'Governments','',0),(80,'Governments','',0),(81,'Governments','',0),(82,'Governments','',0),(83,'Governments','',0),(84,'Governments','',0);
+/*!40000 ALTER TABLE `tiv_vuln_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
 
