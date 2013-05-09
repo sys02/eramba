@@ -1,5 +1,8 @@
 	
 <?
+	
+	include_once("lib/tiv_threats_lib.php");
+	include_once("lib/tiv_vuln_lib.php");
 
 	include_once("lib/general_classification_lib.php");
 	include_once("lib/security_services_lib.php");
@@ -104,13 +107,28 @@ echo "						<textarea id=\"\" class=\"filter-text\" name=\"risk_tp_how\">$risk_i
 <?
 echo "						<textarea id=\"\" class=\"filter-text\" name=\"risk_threat\">$risk_item[risk_threat]</textarea>";
 ?>
+			<br>	
+			<br>	
+			<select name="tiv_threats" id="" class="chzn-select" multiple="multiple">
+			<option value="-1">Select one or many predefined Threats...</option>
+<?
+			list_drop_menu_tiv_threats(NULL,"tiv_threats_category");	
+?>
+			</select>
 						
 						<label for="description">Vulnerabilities</label>
 						<span class="description">For each one of the described threats, identify it's realted vulnerabilities.</span>
 <?
 echo "						<textarea id=\"\" class=\"filter-text\" name=\"risk_vulnerabilities\">$risk_item[risk_vulnerabilities]</textarea>";
 ?>
-						</select>
+			<br>	
+			<br>	
+			<select name="tiv_vuln" id="" class="chzn-select" multiple="multiple">
+			<option value="-1">Select one or many predefined Vulnerabilities...</option>
+<?
+			list_drop_menu_tiv_vuln(NULL,"tiv_vuln_category");	
+?>
+			</select>
 						<br>
 						<label for="legalType">Risk Classification</label>
 						<span class="description">Use the previously defined risk classification criterias and choose the appropiate classification profile for this risk.</span>

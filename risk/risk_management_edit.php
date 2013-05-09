@@ -15,6 +15,9 @@
 	include_once("lib/site_lib.php");
 	include_once("lib/risk_security_services_join_lib.php");
 
+	include_once("lib/tiv_threats_lib.php");
+	include_once("lib/tiv_vuln_lib.php");
+
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
@@ -77,6 +80,16 @@ echo "						<input type=\"text\" class=\"filter-text\" name=\"risk_title\" id=\"
 <?
 echo "						<textarea id=\"\" name=\"risk_threat\" class=\"filter-text\">$risk_item[risk_threat]</textarea>";
 ?>
+			<br>	
+			<br>	
+			<select name="tiv_threats" id="" class="chzn-select" multiple="multiple">
+			<option value="-1">Select one or many predefined Threats...</option>
+<?
+			list_drop_menu_tiv_threats(NULL,"tiv_threats_category");	
+?>
+			</select>
+
+
 						
 						<label for="description">Vulnerabilities</label>
 						<span class="description">For each one of the described threats, identify it's realted vulnerabilities.</span>
@@ -84,7 +97,15 @@ echo "						<textarea id=\"\" name=\"risk_threat\" class=\"filter-text\">$risk_i
 # echo "						<textarea id=\"\" name=\"risk_vulnerabilities\" class=\"filter-text\">$risk_item[risk_vulnerabilities]</textarea>";
 echo "						<textarea id=\"\" name=\"risk_vulnerabilities\">$risk_item[risk_vulnerabilities]</textarea>";
 ?>
-						</select>
+
+			<br>	
+			<br>	
+			<select name="tiv_vuln" id="" class="chzn-select" multiple="multiple">
+			<option value="-1">Select one or many predefined Vulnerabilities...</option>
+<?
+			list_drop_menu_tiv_vuln(NULL,"tiv_vuln_category");	
+?>
+			</select>
 						<br>
 						<label for="legalType">Risk Classification</label>
 						<span class="description">Use the previously defined risk classification criterias and choose the appropiate classification profile for this risk.</span>
