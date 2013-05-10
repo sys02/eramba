@@ -6,6 +6,10 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	
+	$attachments_ref_section = $_GET["attachments_ref_section"];
+	$attachments_ref_subsection = $_GET["attachments_ref_subsection"];
+	$attachments_ref_id = $_GET["attachments_ref_id"];
+	
 	#$base_url_list  = build_base_url($section,"compliance_package_list");
 
 ?>
@@ -30,7 +34,7 @@ echo "					<form name=\"compliance_package_edit\" method=\"POST\" action=\"$base
 						<label for="description">Upload File</label>
 						<span class="description">Select a File to Attach</span>
 <? 
-	echo "<input type=\"file\" name=\"compliance_package_csv_file\"><br>";
+	echo "<input type=\"file\" name=\"attachments_file\"><br>";
 ?>
 				</div>
 				
@@ -39,9 +43,14 @@ echo "					<form name=\"compliance_package_edit\" method=\"POST\" action=\"$base
 		
 		<div class="controls-wrapper">
 
-				    <INPUT type="hidden" name="action" value="upload_compliance_package">
-				    <INPUT type="hidden" name="section" value="compliance">
-				    <INPUT type="hidden" name="subsection" value="compliance_package_list">
+				    <INPUT type="hidden" name="action" value="upload">
+				    <INPUT type="hidden" name="section" value="attachments">
+				    <INPUT type="hidden" name="subsection" value="attachments_list">
+<?
+echo "				    <INPUT type=\"hidden\" name=\"attachments_ref_section\" value=\"$attachments_ref_section\">";
+echo "				    <INPUT type=\"hidden\" name=\"attachments_ref_subsection\" value=\"$attachments_ref_subsection\">";
+echo "				    <INPUT type=\"hidden\" name=\"attachments_ref_id\" value=\"$attachments_ref_id\">";
+?>
 
 			<a>
 			    <INPUT type="submit" value="Submit" class="add-btn"> 

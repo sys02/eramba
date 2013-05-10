@@ -2,7 +2,7 @@
 
 include_once("header.php");
 
-echo "<table width=\"200\" border=\"0\" cellspacing=\"20\" cellpadding=\"10\">";
+echo "<table width=\"200\" border=\"0\" cellspacing=\"20\" cellpadding=\"10\" class=\"main-table\">";
 echo "  <tr>";
 echo "    <td>".create_Calendar(1,2013)."</th>";
 echo "    <td>".create_Calendar(2,2013)."</th>";

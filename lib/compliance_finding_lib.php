@@ -22,6 +22,7 @@ function add_compliance_finding($compliance_finding_data) {
 		\"$compliance_finding_data[compliance_finding_title]\",
 		\"$compliance_finding_data[compliance_finding_description]\",
 		\"$compliance_finding_data[compliance_finding_deadline]\",
+		\"$compliance_finding_data[compliance_finding_package_item_id]\",
 		\"$compliance_finding_data[compliance_finding_status]\",
 		\"0\"
 		)
@@ -37,6 +38,7 @@ function update_compliance_finding($compliance_finding_data, $compliance_finding
 		compliance_finding_title=\"$compliance_finding_data[compliance_finding_title]\",
 		compliance_finding_description=\"$compliance_finding_data[compliance_finding_description]\",
 		compliance_finding_deadline=\"$compliance_finding_data[compliance_finding_deadline]\",
+		compliance_finding_package_item_id=\"$compliance_finding_data[compliance_finding_package_item_id]\",
 		compliance_finding_status=\"$compliance_finding_data[compliance_finding_status]\"
 		WHERE
 		compliance_finding_id=\"$compliance_finding_id\"

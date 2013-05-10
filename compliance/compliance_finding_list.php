@@ -4,6 +4,7 @@
 	include_once("lib/compliance_finding_lib.php");
 	include_once("lib/compliance_finding_status_lib.php");
 	include_once("lib/compliance_audit_lib.php");
+	include_once("lib/compliance_package_item_lib.php");
 
 	# general variables - YOU SHOULDNT NEED TO CHANGE THIS
 	$show_id = isset($_GET["show_id"]) ? $_GET["show_id"] : null;
@@ -12,17 +13,10 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 
-	$compliance_audit_id = $_GET["compliance_audit_id"];
 
-	if (is_numeric($compliance_audit_id)) { 
-		if (!$sort) {
-		$compliance_finding_list = list_compliance_finding(" WHERE compliance_audit_id = \"$compliance_audit_id\" AND compliance_finding_disabled = \"0\"");
-		} else {
-		$compliance_finding_list = list_compliance_finding(" WHERE compliance_audit_id = \"$compliance_audit_id\" AND compliance_finding_disabled = \"0\" ORDER by $sort");
-		}
-	} else {
-		exit;
-	}
+	$compliance_audit_id = $_GET["compliance_audit_id"];
+	$compliance_finding_id = $_GET["compliance_finding_id"];
+
 	
 	$base_url_list = build_base_url($section,"compliance_finding_list");
 	$base_url_audt_list = build_base_url($section,"compliance_audit_list");
@@ -39,6 +33,15 @@
 	}
 
 	# ---- END TEMPLATE ------
+	if (is_numeric($compliance_audit_id)) { 
+		if (!$sort) {
+		$compliance_finding_list = list_compliance_finding(" WHERE compliance_audit_id = \"$compliance_audit_id\" AND compliance_finding_disabled = \"0\"");
+		} else {
+		$compliance_finding_list = list_compliance_finding(" WHERE compliance_audit_id = \"$compliance_audit_id\" AND compliance_finding_disabled = \"0\" ORDER by $sort");
+		}
+	} else {
+		exit;
+	}
 
 ?>
 
@@ -80,6 +83,7 @@ echo "					<li><a href=\"$base_url_list&compliance_audit_id=$compliance_audit_id
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 echo "					<th>Title</th>";
+echo "					<th>Compliance Item</th>";
 echo "					<th>Description</th>";
 echo "					<th><a class=\"asc\" href=\"$base_url_list&compliance_audit_id=$compliance_audit_id&sort=compliance_finding_deadline\">Deadline</a></th>";
 echo "					<th><a class=\"asc\" href=\"$base_url_list&compliance_audit_id=$compliance_audit_id&sort=compliance_finding_status\">Status</a></th>";
@@ -94,6 +98,8 @@ echo "					<th><a class=\"asc\" href=\"$base_url_list&compliance_audit_id=$compl
 	foreach($compliance_finding_list as $compliance_finding_item) {
 
 		$finding = lookup_compliance_finding("compliance_finding_id",$compliance_finding_item[compliance_finding_id]);
+		$package_item = lookup_compliance_package_item("compliance_package_item_id",$compliance_finding_item["compliance_finding_package_item_id"]);
+		$tmp = "$package_item[compliance_package_item_original_id] - $package_item[compliance_package_item_name]";
 
 echo "	<tr class=\"even\">";
 echo "	<td class=\"action-cell\">";
@@ -103,12 +109,13 @@ echo "	</div>";
 echo "	<div class=\"cell-actions\">";
 echo "	<a href=\"$base_url_edit&compliance_finding_id=$compliance_finding_item[compliance_finding_id]\" class=\"edit-action\">edit</a> ";
 echo "	&nbsp;|&nbsp;";
-echo "	<a href=\"$base_url_list&action=disable&compliance_finding_id=$compliance_finding_item[compliance_finding_id]\" class=\"delete-action\">delete</a>";
+echo "	<a href=\"$base_url_list&action=disable&compliance_finding_id=$compliance_finding_item[compliance_finding_id]&compliance_audit_id=$compliance_audit_id\" class=\"delete-action\">delete</a>";
 echo "	&nbsp;|&nbsp;";
 echo "	<a href=\"?section=system&subsection=system_records_list&system_records_lookup_section=compliance&system_records_lookup_subsection=compliance_finding_edit&system_records_lookup_item_id=$compliance_finding_item[compliance_finding_id]\" class=\"delete-action\">records</a>";
 echo "						</div>";
 echo "					</td>";
-echo "					<td>$compliance_finding_item[compliance_finding_description]</td>";
+echo "					<td>".substr($tmp,0,60)."</td>";
+echo "					<td>".substr($compliance_finding_item[compliance_finding_description],0,60)."...</td>";
 echo "					<td>$compliance_finding_item[compliance_finding_deadline]</td>";
 
 	$status = lookup_compliance_finding_status("compliance_finding_status_id", $compliance_finding_item[compliance_finding_status]); 

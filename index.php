@@ -32,7 +32,7 @@ if ( validate_section_subsection($section,NULL) && validate_section_subsection(N
 	include_from_db($section, $subsection, $action);
 } else {
 	# bu default i send them to the organization tab
-	$section="organization";
+	$section="calendar";
 	$subsection="dashboard";
 	include_from_db($section, $subsection, $action);
 }

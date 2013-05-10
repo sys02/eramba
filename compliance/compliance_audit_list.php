@@ -32,6 +32,7 @@
 	$compliance_finding_status = $_GET["compliance_finding_status"];
 	$compliance_finding_deadline = $_GET["compliance_finding_deadline"];
 	$compliance_finding_disabled = $_GET["compliance_finding_disabled"];
+	$compliance_finding_package_item_id = $_GET["compliance_finding_package_item_id"];
 	 
 	# actions for compliance findings stuff ..
 	if ($action == "edit_compliance_finding" & is_numeric($compliance_finding_id)) {
@@ -39,7 +40,8 @@
 			'compliance_finding_title' => $compliance_finding_title,
 			'compliance_finding_description' => $compliance_finding_description,
 			'compliance_finding_deadline' => $compliance_finding_deadline,
-			'compliance_finding_status' => $compliance_finding_status,
+			'compliance_finding_package_item_id' => $compliance_finding_package_item_id,
+			'compliance_finding_status' => $compliance_finding_status
 		);	
 		update_compliance_finding($compliance_finding_update,$compliance_finding_id);
 		add_system_records("compliance","compliance_finding_edit","$compliance_finding_id",$_SESSION['logged_user_id'],"Update","");
@@ -50,7 +52,8 @@
 			'compliance_finding_title' => $compliance_finding_title,
 			'compliance_finding_description' => $compliance_finding_description,
 			'compliance_finding_deadline' => $compliance_finding_deadline,
-			'compliance_finding_status' => $compliance_finding_status,
+			'compliance_finding_package_item_id' => $compliance_finding_package_item_id,
+			'compliance_finding_status' => $compliance_finding_status
 		);	
 		$compliance_finding_id = add_compliance_finding($compliance_finding_update);
 		add_system_records("compliance","compliance_finding_edit",$compliance_finding_id,$_SESSION['logged_user_id'],"Insert","");
