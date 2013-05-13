@@ -4,6 +4,8 @@
 	include_once("lib/asset_lib.php");
 	include_once("lib/security_incident_service_lib.php");
 	include_once("lib/compliance_item_security_service_join_lib.php");
+	include_once("lib/compliance_package_item_lib.php");
+	include_once("lib/compliance_package_lib.php");
 	include_once("lib/risk_security_services_join_lib.php");
 	include_once("lib/data_asset_security_services_join_lib.php");
 	include_once("lib/asset_classification_lib.php");
@@ -30,6 +32,9 @@
 	$action = $_GET["action"];
 	
 	$base_url_list = build_base_url($section,"security_catalogue_list");
+	$base_url_compliance = build_base_url("compliance","compliance_package_item_edit");
+	$base_url_risk = build_base_url("risk","risk_management_edit");
+	$base_url_risk_tp = build_base_url("risk","risk_tp_edit");
 	$base_url_audit_report_list = build_base_url($section,"security_services_audit_report");
 	$base_url_edit = build_base_url($section,"security_catalogue_edit");
 	$base_url_maintenance_report_list = build_base_url($section,"security_services_maintenance_list");
@@ -422,6 +427,119 @@ echo "								<td class=\"center\">$service_contracts_item[service_contracts_end
 echo "							</tr>";
 
 }
+
+echo "						</table>";
+echo "					</div>";
+echo "<br>";
+
+echo "					<div class=\"rounded\">";
+echo "						<table class=\"sub-table\">";
+echo "							<tr>";
+echo "								<th><center>Mitigation Type</th>";
+echo "								<th><center>Description</th>";
+echo "							</tr>";
+
+	#- Asset Risk (risk_title)
+	$risk_asset = list_risk_asset_join("");	
+	$tmp_array = array();
+	foreach ($risk_asset as $risk_asset_item) { 
+		array_push($tmp_array, $risk_asset_item[risk_asset_join_risk_id]);
+	} 
+
+	$risk_asset_service  = list_risk_security_services_join("");	
+	foreach($risk_asset_service as $risk_asset_service_list) {
+	if ( $security_services_item[security_services_id] == $risk_asset_service_list[risk_security_services_join_security_services_id] ) { 
+	if ( array_search($risk_asset_service_list[risk_security_services_join_risk_id], $tmp_array) ) {
+
+			$risk_info = lookup_risk("risk_id",$risk_asset_service_list[risk_security_services_join_risk_id]);
+echo "			<tr>";
+echo "			<td class=\"center\">Asset based Risk</td>";
+echo "			<td class=\"center\"><a href=\"$base_url_risk&risk_id=$risk_asset_service_list[risk_security_services_join_risk_id]\">$risk_info[risk_title]</a></td>";
+echo "			</tr>";
+	}
+	}
+	}
+	
+	#- Third Party Risk (risk_title)
+	$risk_tp = list_risk_tp_join("");
+	$tmp_array = array();
+	foreach ($risk_tp as $risk_tp_item) { 
+		array_push($tmp_array, $risk_tp_item[risk_tp_join_risk_id]);
+	} 
+
+	$risk_tp_service  = list_risk_security_services_join("");	
+	foreach($risk_tp_service as $risk_tp_service_list) {
+	if ( $security_services_item[security_services_id] == $risk_tp_service_list[risk_security_services_join_security_services_id] ) { 
+	if ( array_search($risk_tp_service_list[risk_security_services_join_risk_id], $tmp_array) ) {
+
+			$risk_info = lookup_risk("risk_id",$risk_tp_service_list[risk_security_services_join_risk_id]);
+echo "			<tr>";
+echo "			<td class=\"center\">Third Party based Risk</td>";
+echo "			<td class=\"center\"><a href=\"$base_url_risk_tp&risk_id=$risk_asset_service_list[risk_security_services_join_risk_id]\">$risk_info[risk_title]</a></td>";
+echo "			</tr>";
+	}
+	}
+	}
+
+	#- Data Flows (Asset Name)
+	$data_asset = list_data_asset(" WHERE data_asset_disabled = \"0\"");
+	$tmp_array = array();
+	foreach ($data_asset as $data_asset_item) { 
+		array_push($tmp_array, $data_asset_item[data_asset_id]);
+	} 
+
+	$data_asset_service  = list_data_asset_security_services_join("");	
+	foreach($data_asset_service as $data_asset_service_list) {
+	if ( $security_services_item[security_services_id] == $data_asset_service_list[data_asset_security_services_join_security_services_id] ) { 
+
+	if ( array_search($data_asset_service_list[data_asset_security_services_join_data_asset_id], $tmp_array) ) {
+
+			$data_info = lookup_data_asset("data_asset_id",$data_asset_service_list[data_asset_security_services_join_data_asset_id]);
+			$asset_info = lookup_asset("asset_id",$data_info[data_asset_asset_id]);
+echo "			<tr>";
+echo "			<td class=\"center\">Data Flow Analysis</td>";
+echo "			<td class=\"center\"><a href=\"$base_url_data_asset&risk_id=$risk_asset_service_list[risk_security_services_join_risk_id]\">$asset_info[asset_name]</a></td>";
+echo "			</tr>";
+	}
+	}
+	}
+	
+
+
+	#- Compliance (Compliance title)
+	$compliance = list_compliance_package_item(" WHERE compliance_package_item_disabled = \"0\"");	
+	$tmp_array = array();
+	foreach ($compliance as $compliance_item) { 
+		array_push($tmp_array, $compliance_item[compliance_package_item_id]);
+	} 
+
+	$compliance_service  = list_compliance_item_security_services_join("");
+
+	foreach($compliance_service as $compliance_service_list) {
+
+	if ( $security_services_item[security_services_id] == $compliance_service_list[compliance_security_services_join_security_services_id] ) { 
+
+	if ( array_search($compliance_service_list[compliance_security_services_join_compliance_id], $tmp_array) ) {
+
+			$compliance_package_item_info = lookup_compliance_package_item("compliance_package_item_id",$compliance_service_list[compliance_security_services_join_compliance_id]);
+			$compliance_package_info = lookup_compliance_package("compliance_package_id",$compliance_package_item_info[compliance_package_id]);
+
+			$tp_info = lookup_tp("tp_id",$compliance_package_info[compliance_package_tp_id]);	
+
+echo "			<tr>";
+echo "			<td class=\"center\">Compliance</td>";
+echo "			<td class=\"center\"><a href=\"$base_url_compliance&compliance_package_id=$compliance_package_item_info[compliance_package_id]&compliance_package_item_id=$compliance_package_item_info[compliance_package_item_id]\"> ($tp_info[tp_name]) - $compliance_package_item_info[compliance_package_item_name]</a></td>";
+echo "			</tr>";
+	}
+	}
+	}
+	
+
+echo "							<tr>";
+echo "								<td class=\"center\">$service_provider_name[tp_name]</td>";
+echo "								<td class=\"center\">$service_contracts_item[service_contracts_name]</td>";
+echo "							</tr>";
+
 
 echo "						</table>";
 echo "					</div>";
