@@ -7,6 +7,7 @@
 	include_once("lib/general_classification_lib.php");
 	include_once("lib/security_incident_status_lib.php");
 	include_once("lib/site_lib.php");
+	include_once("lib/tp_lib.php");
 	include_once("lib/asset_lib.php");
 
 	$section = $_GET["section"];
@@ -46,6 +47,15 @@ echo "					<form name=\"edit\" method=\"GET\" action=\"$base_url_list\">";
 	<label for="description">Incident Description</label>
 	<span class="description">Describe the Security Incident in detail (when, what, where, why, whom, how).</span>
 <? echo "<textarea name=\"security_incident_description\" class=\"filter-text\">$security_incident_item[security_incident_description]</textarea>";?>
+	
+	<label for="legalType">Third Parties Affected</label>
+	<span class="description"></span>
+	<select name="security_incident_tp_id" id="" class="chzn-select">
+	<option value="-1">Select the affected Third Party (If any)</option>
+<?
+	list_drop_menu_tp($security_incident_item[security_incident_tp_id],"tp_name");	
+?>
+	</select>
 	
 	<label for="legalType">Incident Classification</label>
 	<span class="description"></span>

@@ -22,6 +22,7 @@
 	# local variables - YOU MUST ADJUST THIS! 
 	$security_incident_id = $_GET["security_incident_id"];
 	$security_incident_owner_id = $_GET["security_incident_owner_id"];
+	$security_incident_tp_id = $_GET["security_incident_tp_id"];
 	$security_incident_title = $_GET["security_incident_title"];
 	$security_incident_open_date = $_GET["security_incident_open_date"];
 	$security_incident_description = $_GET["security_incident_description"];
@@ -36,6 +37,7 @@
 	if ($action == "edit" && is_numeric($security_incident_id)) {
 		$security_incident_update = array(
 			'security_incident_owner_id' => $security_incident_owner_id,
+			'security_incident_tp_id' => $security_incident_tp_id,
 			'security_incident_title' => $security_incident_title,
 			'security_incident_open_date' => $security_incident_open_date,
 			'security_incident_description' => $security_incident_description,
@@ -63,6 +65,7 @@
 	} elseif ($action == "edit" && !is_numeric($security_incident_id)) {
 		$security_incident_update = array(
 			'security_incident_owner_id' => $security_incident_owner_id,
+			'security_incident_tp_id' => $security_incident_tp_id,
 			'security_incident_title' => $security_incident_title,
 			'security_incident_open_date' => $security_incident_open_date,
 			'security_incident_description' => $security_incident_description,
@@ -140,6 +143,7 @@ echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=security_incident_name\">Incident Title</a></th>";
+echo "					<th><a href=\"$base_url_list&sort=security_incident_tp_id\">Third Party</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=security_incident_description\">Description</a></th>";
 echo "					<th>Security Controls</th>";
 echo "					<th><a href=\"$base_url_list&sort=security_incident_classification_id\">Classification</a></th>";
@@ -182,6 +186,10 @@ echo "						<a class=\"delete\" href=\"?action=edit&section=operations&subsectio
 echo "						</div>";
 echo "					</td>";
 	$classification_name = lookup_security_incident_classification("security_incident_classification_id",$security_incident_item[security_incident_classification_id]);
+	$tp_name = lookup_tp("tp_id",$security_incident_item[security_incident_tp_id]);
+
+echo "					<td>$tp_name[tp_name]</td>";
+
 echo "					<td><a href=\"$base_url_edit&action=edit&security_incident_id=$security_incident_item[security_incident_id]\">".substr($security_incident_item[security_incident_description],0,50)."...</a></td>";
 
 echo "<td>";

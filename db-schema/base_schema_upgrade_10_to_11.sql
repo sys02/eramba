@@ -160,3 +160,5 @@ INSERT INTO `tiv_vuln_tbl` VALUES (1,'Nature and Accidents','abcd',0),(2,'Nature
 /*!40000 ALTER TABLE `tiv_vuln_tbl` ENABLE KEYS */;
 UNLOCK TABLES;
 
+ALTER TABLE `uat_isms_v11`.`security_incident_tbl` ADD COLUMN `security_incident_tp_id` INT NULL  AFTER `security_incident_owner_id` ;
+

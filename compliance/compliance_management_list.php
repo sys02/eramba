@@ -33,6 +33,7 @@ echo "					<th>% Comp. On-Going</th>";
 echo "					<th>% Compliant</th>";
 echo "					<th>% Non-Compliant</th>";
 echo "					<th>% Comp. N/A</th>";
+echo "					<th># Incident</th>";
 ?>
 				</tr>
 			</thead>
@@ -51,6 +52,7 @@ foreach($list_compliance_package as $list_compliance_package_item) {
 	$no_controls = ( compliance_rate_missing_controls($list_compliance_package_item[compliance_package_tp_id]) * 100 );
 	$failed_controls = ( compliance_rate_failed_controls($list_compliance_package_item[compliance_package_tp_id]) * 100 );
 	$strategy_response = compliance_rate_strategy_mitigate($list_compliance_package_item[compliance_package_tp_id]);
+	$incident = list_security_incident(" WHERE security_incident_disabled = \"0\" and security_incident_tp_id = \"$package_name[tp_id]\"");
 
 
 echo "				<tr class=\"even\">";
@@ -70,6 +72,7 @@ echo "					<td>".round($strategy_response[2]*100,2)." %</td>";
 echo "					<td>".round($strategy_response[3]*100,2)." %</td>";
 echo "					<td>".round($strategy_response[4]*100,2)." %</td>";
 echo "					<td>".round($strategy_response[5]*100,2)." %</td>";
+echo "					<td>".count($incident)."</td>";
 echo "				</tr>";
 
 }
