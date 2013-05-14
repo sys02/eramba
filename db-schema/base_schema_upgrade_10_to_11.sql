@@ -160,5 +160,14 @@ INSERT INTO `tiv_vuln_tbl` VALUES (1,'Nature and Accidents','abcd',0),(2,'Nature
 /*!40000 ALTER TABLE `tiv_vuln_tbl` ENABLE KEYS */;
 UNLOCK TABLES;
 
-ALTER TABLE `uat_isms_v11`.`security_incident_tbl` ADD COLUMN `security_incident_tp_id` INT NULL  AFTER `security_incident_owner_id` ;
+ALTER TABLE `security_incident_tbl` ADD COLUMN `security_incident_tp_id` INT NULL  AFTER `security_incident_owner_id` ;
+
+CREATE  TABLE `security_services_classification_tbl` (
+  `security_services_classification_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `security_services_classification_name` VARCHAR(100) NULL ,
+  `security_services_classification_criteria` TEXT NULL ,
+  `security_services_classification_disabled` INT NULL DEFAULT 1 ,
+  PRIMARY KEY (`security_services_classification_id`) );
+
+ALTER TABLE `security_services_tbl` ADD COLUMN `security_services_classification_id` INT NULL  AFTER `security_services_status` ;
 

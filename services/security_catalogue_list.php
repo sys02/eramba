@@ -21,6 +21,7 @@
 	include_once("lib/service_contracts_security_service_join_lib.php");
 	include_once("lib/security_services_catalogue_maintenance_calendar_join_lib.php");
 	include_once("lib/security_services_maintenance_lib.php");
+	include_once("lib/security_services_classification_lib.php");
 
 	global $services_conf;
 
@@ -48,6 +49,7 @@
 	$security_services_objective = $_GET["security_services_objective"];
 	$security_services_documentation_url = $_GET["security_services_documentation_url"];
 	$security_services_status = $_GET["security_services_status"];
+	$security_services_classification_id = $_GET["security_services_classification_id"];
 
 	if (!is_numeric($security_services_status)) {
 		$security_services_status="1";
@@ -71,6 +73,7 @@
 			'security_services_objective' => $security_services_objective,
 			'security_services_documentation_url' => $security_services_documentation_url,
 			'security_services_status' => $security_services_status,
+			'security_services_classification_id' => $security_services_classification_id,
 			'security_services_audit_metric' => $security_services_audit_metric,
 			'security_services_audit_success_criteria' => $security_services_audit_success_criteria,
 			'security_services_regular_maintenance' => $security_services_regular_maintenance,
@@ -129,6 +132,7 @@
 			'security_services_objective' => $security_services_objective,
 			'security_services_documentation_url' => $security_services_documentation_url,
 			'security_services_status' => $security_services_status,
+			'security_services_classification_id' => $security_services_classification_id,
 			'security_services_audit_metric' => $security_services_audit_metric,
 			'security_services_audit_success_criteria' => $security_services_audit_success_criteria,
 			'security_services_regular_maintenance' => $security_services_regular_maintenance,
@@ -279,6 +283,7 @@ echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 	} 
 
 	$status_name = lookup_security_services_status("security_services_status_id", $security_services_item[security_services_status]);	
+	$classification_name = lookup_security_services_classification("security_services_classification_id", $security_services_item[security_services_classification_id]);	
 
 echo "			<li>";
 echo "				<div class=\"header\">";
@@ -300,6 +305,7 @@ echo "						<tr>";
 echo "							<th>Objective</th>";
 echo "							<th>Documentation</th>";
 echo "							<th><center>Status</center></th>";
+echo "							<th><center>Classification</center></th>";
 echo "						</tr>";
 
 echo "						<tr>";
@@ -310,6 +316,7 @@ echo "								</div>";
 echo "							</td>";
 echo "							<td class=\"center\">$security_services_item[security_services_documentation_url]</td>";
 echo "							<td class=\"center\">$status_name[security_services_status_name]</td>";
+echo "							<td class=\"center\">$classification_name[security_services_classification_name]</td>";
 echo "						</tr>";
 	#}
 

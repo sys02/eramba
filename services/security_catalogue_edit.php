@@ -11,6 +11,7 @@
 	include_once("lib/asset_lib.php");
 	include_once("lib/legal_lib.php");
 	include_once("lib/asset_classification_lib.php");
+	include_once("lib/security_services_classification_lib.php");
 	include_once("lib/site_lib.php");
 	include_once("lib/service_contracts_lib.php");
 	include_once("lib/service_contracts_security_service_join_lib.php");
@@ -68,6 +69,15 @@ echo "						<textarea id=\"\" name=\"security_services_objective\" class=\"filte
 						<option value="-1">Select the Service Status</option>
 <?
 						list_drop_menu_security_services_status($security_services_item[security_services_status],"security_services_status_id");	
+?>
+						</select>
+						
+						<label for="legalType">Service Classification</label>
+						<span class="description">Use a pre-defined classification criteria as a priotization tool</span>
+						<select name="security_services_classification_id" id="" class="chzn-select">
+						<option value="-1">Select the Service Classification</option>
+<?
+						list_drop_menu_security_services_classification($security_services_item[security_services_classification_id],"security_services_classification_id");	
 ?>
 						</select>
 						
