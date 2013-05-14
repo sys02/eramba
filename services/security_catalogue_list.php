@@ -31,6 +31,7 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	
+	$base_url_security_incident = build_base_url("operations","security_incident_edit");
 	$base_url_list = build_base_url($section,"security_catalogue_list");
 	$base_url_compliance = build_base_url("compliance","compliance_package_item_edit");
 	$base_url_risk = build_base_url("risk","risk_management_edit");
@@ -459,6 +460,29 @@ echo "			</tr>";
 	}
 	}
 	}
+
+	#- Incidents
+	$security_incident = list_security_incident(" WHERE security_incident_disabled = \"0\"");	
+	$tmp_array = array();
+
+	foreach ($security_incident as $security_incident_item) { 
+		array_push($tmp_array, $security_incident_item[security_incident_id]);
+	} 
+
+	$security_incident_service  = list_security_incident_service_join("");	
+	foreach($security_incident_service as $security_incident_service_list) {
+	if ( $security_services_item[security_services_id] == $security_incident_service_list[security_incident_service_service_id] ) { 
+	if ( array_search($security_incident_service_list[security_incident_service_incident_id], $tmp_array) ) {
+
+			$security_incident_info = lookup_security_incident("security_incident_id",$security_incident_service_list[security_incident_service_incident_id]);
+echo "			<tr>";
+echo "			<td class=\"center\">Security Incident</td>";
+echo "			<td class=\"center\"><a href=\"$base_url_security_incident&security_incident_id=$security_incident_service_list[security_incident_service_incident_id]\">$security_incident_info[security_incident_title]</a></td>";
+echo "			</tr>";
+	}
+	}
+	}
+	
 	
 	#- Third Party Risk (risk_title)
 	$risk_tp = list_risk_tp_join("");
