@@ -1,7 +1,7 @@
 	
 <?
 	include_once("lib/security_services_status_lib.php");
-	# include_once("lib/security_services_maintenance_calendar_lib.php");
+	## include_once("lib/security_services_maintenance_calendar_lib.php");
 	include_once("lib/security_services_audit_calendar_lib.php");
 	include_once("lib/security_services_catalogue_audit_calendar_join_lib.php");
 	include_once("lib/security_services_lib.php");
@@ -54,13 +54,13 @@ echo "					<form name=\"security_services_edit\" method=\"GET\" action=\"$base_u
 						<label for="name">Name of the Service</label>
 						<span class="description">Give a name to the service your program is intended to deliver. Examples: Internet Gateways, Encryption, Physical Lockers, Etc.</span>
 <?
-echo "						<input type=\"text\" class=\"filter-text\" name=\"security_services_name\" id=\"\" value=\"$security_services_item[security_services_name]\"/>";
+echo "						<input type=\"text\" class=\"\" name=\"security_services_name\" id=\"\" value=\"$security_services_item[security_services_name]\"/>";
 ?>
 						
 						<label for="description">Service Objective</label>
 						<span class="description">Give a brief description on what this services does. It's sometimes usefull to answer, what happens if the service wouldnt be available?</span>
 <?
-echo "						<textarea id=\"\" name=\"security_services_objective\" class=\"filter-text\">$security_services_item[security_services_objective]</textarea>";
+echo "						<textarea id=\"\" name=\"security_services_objective\" class=\"\">$security_services_item[security_services_objective]</textarea>";
 ?>
 						
 						<label for="legalType">Service Status</label>
@@ -84,24 +84,24 @@ echo "						<textarea id=\"\" name=\"security_services_objective\" class=\"filte
 						<label for="description">Service Documentation</label>
 						<span class="description">Document the URLs or links where to find the documentation for each lifecycle phase: Proposed (business case, emails, etc), Design (design documents, budgets, costs, etc), Transition (operational manuals, etc).</span>
 <?
-echo "						<textarea class=\"filter-text\" id=\"\" name=\"security_services_documentation_url\">$security_services_item[security_services_documentation_url]</textarea>";
+echo "						<textarea class=\"\" id=\"\" name=\"security_services_documentation_url\">$security_services_item[security_services_documentation_url]</textarea>";
 ?>
 						
 						<label for="legalType">Service Metrics</label>
 						<span class="description">You'll be asked to defined two things: how you will measure metrics and what is the criteria used to decide if the sample is representative of a service delivered as expected at previous stages</span>
 <?
 				if (empty($security_services_item[security_services_audit_metric])) { 
-echo "				<textarea class=\"filter-text\" id=\"\" name=\"security_services_audit_metric\">Describe the metric</textarea>";
+echo "				<textarea class=\"\" id=\"\" name=\"security_services_audit_metric\">Describe the metric</textarea>";
 				} else {
-echo "				<textarea class=\"filter-text\" id=\"\" name=\"security_services_audit_metric\">$security_services_item[security_services_audit_metric]</textarea>";
+echo "				<textarea class=\"\" id=\"\" name=\"security_services_audit_metric\">$security_services_item[security_services_audit_metric]</textarea>";
 				}
 
 echo "<br><br>";
 
 				if (empty($security_services_item[security_services_audit_metric])) { 
-echo "				<textarea class=\"filter-text\" id=\"\" name=\"security_services_audit_success_criteria\">Describe the metric success criteria</textarea>";
+echo "				<textarea class=\"\" id=\"\" name=\"security_services_audit_success_criteria\">Describe the metric success criteria</textarea>";
 				} else {
-echo "				<textarea class=\"filter-text\" id=\"\" name=\"security_services_audit_success_criteria\">$security_services_item[security_services_audit_success_criteria]</textarea>";
+echo "				<textarea class=\"\" id=\"\" name=\"security_services_audit_success_criteria\">$security_services_item[security_services_audit_success_criteria]</textarea>";
 				}
 ?>
 				<label for="name">Metric Regular Review (Audit)</label>
@@ -120,7 +120,7 @@ echo "				<textarea class=\"filter-text\" id=\"\" name=\"security_services_audit
 						<label for="legalType">Service Maintenance</label>
 						<span class="description">Some human managed controls require regular maintenance tasks .. some examples are User Reviews, Analysis of Logs, etc. This helps to set how regular those controls are so no-one forgets</span>
 <?
-echo "				<textarea class=\"filter-text\" id=\"\" name=\"security_services_regular_maintenance\">$security_services_item[security_services_regular_maintenance]</textarea>";
+echo "				<textarea class=\"\" id=\"\" name=\"security_services_regular_maintenance\">$security_services_item[security_services_regular_maintenance]</textarea>";
 
 ?>
 				<label for="name">Maintenance Peridiocity</label>
@@ -141,18 +141,18 @@ echo "				<textarea class=\"filter-text\" id=\"\" name=\"security_services_regul
 
 <?
 				if (empty($security_services_item[security_services_cost_opex])) { 
-echo "				<input type=\"text\" class=\"filter-number\" name=\"security_services_cost_opex\" value=\"\"/>";
+echo "				<input type=\"text\" class=\"\" name=\"security_services_cost_opex\" value=\"\"/>";
 				} else {
-echo "				<input type=\"text\" class=\"filter-number\" name=\"security_services_cost_opex\" value=\"$security_services_item[security_services_cost_opex]\"/>";
+echo "				<input type=\"text\" class=\"\" name=\"security_services_cost_opex\" value=\"$security_services_item[security_services_cost_opex]\"/>";
 				}
 
 echo "		<label for=\"name\">Service Cost (CAPEX)</label>";
 echo "		<span class=\"description\">For those of you who must keep budgets tidy, it's important to keep as clear as possible how much effort is required to operate the service in financial (CAPEX)</span>";
 
 				if (empty($security_services_item[security_services_cost_capex])) { 
-echo "				<input type=\"text\" class=\"filter-number\" name=\"security_services_cost_capex\" value=\"\"/>";
+echo "				<input type=\"text\" class=\"\" name=\"security_services_cost_capex\" value=\"\"/>";
 				} else {
-echo "				<textarea class=\"filter-number\" id=\"\" name=\"security_services_cost_capex\">$security_services_item[security_services_cost_capex]</textarea>";
+echo "				<textarea class=\"\" id=\"\" name=\"security_services_cost_capex\">$security_services_item[security_services_cost_capex]</textarea>";
 				}
 
 echo "		<label for=\"name\">Service Cost (Resource Utilization)</label>";
@@ -161,9 +161,9 @@ echo "		<span class=\"description\">Define what resource utilization in FTE (ful
 
 
 				if (empty($security_services_item[security_services_cost_operational_resource])) { 
-echo "				<input type=\"text\" class=\"filter-number\" name=\"security_services_cost_operational_resource\" value=\"\"/>";
+echo "				<input type=\"text\" class=\"\" name=\"security_services_cost_operational_resource\" value=\"\"/>";
 				} else {
-echo "				<input type=\"text\" class=\"filter-number\" name=\"security_services_cost_operational_resource\" value=\"$security_services_item[security_services_cost_operational_resource]\"/>";
+echo "				<input type=\"text\" class=\"\" name=\"security_services_cost_operational_resource\" value=\"$security_services_item[security_services_cost_operational_resource]\"/>";
 				}
 ?>
 		
