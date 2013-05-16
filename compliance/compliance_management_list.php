@@ -25,8 +25,8 @@
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 echo "					<th><a class=\"asc\">Compliance Package</th>";
-echo "					<th>% Mitigated</th>";
-echo "					<th>% NA</th>";
+echo "					<th>% Strategy Mitigate</th>";
+echo "					<th>% Strategy NA</th>";
 echo "					<th>% Missing Controls</th>";
 echo "					<th>% Failed Controls</th>";
 echo "					<th>% Comp. On-Going</th>";
