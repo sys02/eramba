@@ -135,6 +135,11 @@ if ($action == "csv") {
 				if ( security_service_check($selected_services_item[data_asset_security_services_join_security_services_id]) ) {
 					$warning_wrong_service = " - (Warning - Controls used here are faulty!) ";
 				}
+				
+				$tmp = lookup_security_services("security_services_id",$selected_services_item[data_asset_security_services_join_security_services_id]);
+				if ($tmp[security_services_status] != "4") {  
+					$warning_not_production = "(Warning: Controls not in Production!)";
+				}
 			}
 		} else {
 			$warning_missing_service = " - (Warning - Your data analisys might be missing some controls!) ";
@@ -144,10 +149,11 @@ if ($action == "csv") {
 
 echo "			<li>";
 echo "				<div class=\"header\">";
-echo "					Business Unit: $asset_item[asset_name] $warning_wrong_service $warning_missing_service";
+echo "					Business Unit: $asset_item[asset_name] $warning_wrong_service $warning_missing_service $warning_not_production";
 
 			unset($warning_wrong_service);
 			unset($warning_missing_service);
+			unset($warning_not_production);
 	
 echo "					<span class=\"actions\">";
 echo "						<a class=\"edit\" href=\"$asset_identification_url&asset_id=$asset_item[asset_id]\">view this asset</a>";

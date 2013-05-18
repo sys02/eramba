@@ -54,10 +54,13 @@ CREATE TABLE `compliance_finding_tbl` (
   `compliance_finding_description` text,
   `compliance_finding_deadline` date DEFAULT NULL,
   `compliance_finding_status` int(11) DEFAULT NULL,
+  `compliance_finding_package_item_id` int(11) DEFAULT NULL,
   `compliance_finding_disabled` int(11) DEFAULT '1',
   PRIMARY KEY (`compliance_finding_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+
 
 --
 -- Table structure for table `attachments_tbl`

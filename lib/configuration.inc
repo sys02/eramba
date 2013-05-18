@@ -15,7 +15,7 @@ $sytem_conf['ad_dn'] = "";
 
 # you must define this
 $db_conf['db_hostname'] = "localhost";
-$db_conf['db_name'] = "uat_isms_v11";
+$db_conf['db_name'] = "globant_prod_v11";
 $db_conf['db_username'] = "root";
 $db_conf['db_password'] = "";
 

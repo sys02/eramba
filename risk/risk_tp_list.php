@@ -345,18 +345,30 @@ echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 		}
 	}	
 
+	#unset($security_services_for_this_risk_list);
+	
+	foreach($security_services_for_this_risk_list as $security_services_for_this_risk_item) {
+		$tmp = lookup_security_services("security_services_id",$security_services_for_this_risk_item[risk_security_services_join_security_services_id]);
+		if ($tmp[security_services_status] != "4") {  
+			$warning_not_production = "(Warning: Controls not in Production!)";
+		} else {
+			$warning_not_production = "";
+		}
+		unset($tmp);
+	}
 	unset($security_services_for_this_risk_list);
 
 
 
 echo "			<li>";
 echo "				<div class=\"header\">";
-echo "					Risk Title: $risk_data[risk_title] $warning_expired_risk $warning_control $warning_expired_exception $warning_no_control";
+echo "					Risk Title: $risk_data[risk_title] $warning_expired_risk $warning_control $warning_expired_exception $warning_no_control $warning_not_production";
 
 	unset($warning_expired_risk);
 	unset($warning_control);
 	unset($warning_expired_exception);
 	unset($warning_no_controls);
+	unset($warning_not_production);
 	
 echo "					<span class=\"actions\">";
 echo "						<a class=\"edit\" href=\"$base_url_edit&action=edit&risk_id=$risk_data[risk_id]\">edit</a>";

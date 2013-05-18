@@ -169,8 +169,15 @@ echo "			<td>\n";
 			foreach($applicable_security_services as $service_item) {
 				$security_services_details = lookup_security_services("security_services_id",$service_item[compliance_security_services_join_security_services_id]);	
 				if ( security_service_check($service_item[compliance_security_services_join_security_services_id]) ) {
-					$warning = "(!)";
+					$warning = "(Audit Issues)";
 				}
+
+				$tmp = lookup_security_services("security_services_id",$service_item[compliance_security_services_join_security_services_id]);
+				if ($tmp[security_services_status] != "4") {  
+					$warning = "(Not in Production)";
+				}
+				unset($tmp);
+			
 				echo "- <a href=\"$security_services_url&sort=$security_services_details[security_services_id]\">$security_services_details[security_services_name] $warning<br></a>\n";
 				unset($warning);
 
