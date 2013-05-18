@@ -517,7 +517,7 @@ foreach($risk_exception_for_this_risk_list as $risk_exception_for_this_risk_item
 	$risk_exception_data = lookup_risk_exception("risk_exception_id",$risk_exception_for_this_risk_item[risk_risk_exception_join_risk_exception_id]);	
 echo "				<tr>";
 	echo "<td class=\"left\">$risk_exception_data[risk_exception_title]</td>";
-	echo "<td class=\"left\">$risk_exception_data[risk_exception_description]</td>";
+	echo "<td class=\"left\">".substr($risk_exception_data[risk_exception_description],0,100)."...</td>";
 	echo "<td class=\"center\">$risk_exception_data[risk_exception_author]</td>";
 	echo "<td class=\"center\">$risk_exception_data[risk_exception_expiration]</td>";
 echo "				</tr>";
