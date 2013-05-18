@@ -34,6 +34,7 @@ echo "					<th>% Compliant</th>";
 echo "					<th>% Non-Compliant</th>";
 echo "					<th>% Comp. N/A</th>";
 echo "					<th># Incident</th>";
+echo "					<th># Open Audit Items</th>";
 ?>
 				</tr>
 			</thead>
@@ -54,6 +55,16 @@ foreach($list_compliance_package as $list_compliance_package_item) {
 	$strategy_response = compliance_rate_strategy_mitigate($list_compliance_package_item[compliance_package_tp_id]);
 	$incident = list_security_incident(" WHERE security_incident_disabled = \"0\" and security_incident_tp_id = \"$package_name[tp_id]\"");
 
+	$finding_counter=0;
+	$audit  = lookup_compliance_audit("compliance_audit_package_id",$list_compliance_package_item[compliance_package_tp_id]);
+	if (count($audit)>0) {
+	foreach($audit as $audit_item) {
+		$finding = list_compliance_finding(" WHERE compliance_audit_id = \"$audit_item[compliance_audit_package_id]\" AND compliance_finding_disabled = \"0\" AND compliance_finding_status = \"1\"");
+		if (count($finding)>0) {
+			$finding_counter = $finding_counter + count($finding);	
+		}
+	}
+	}
 
 echo "				<tr class=\"even\">";
 echo "					<td class=\"action-cell\">";
@@ -73,6 +84,7 @@ echo "					<td>".round($strategy_response[3]*100,2)." %</td>";
 echo "					<td>".round($strategy_response[4]*100,2)." %</td>";
 echo "					<td>".round($strategy_response[5]*100,2)." %</td>";
 echo "					<td>".count($incident)."</td>";
+echo "					<td>$finding_counter</td>";
 echo "				</tr>";
 
 }
