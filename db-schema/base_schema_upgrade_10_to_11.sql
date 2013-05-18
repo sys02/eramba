@@ -174,3 +174,5 @@ CREATE  TABLE `security_services_classification_tbl` (
 
 ALTER TABLE `security_services_tbl` ADD COLUMN `security_services_classification_id` INT NULL  AFTER `security_services_status` ;
 
+ALTER TABLE `security_incident_tbl` ADD COLUMN `security_incident_reporter_id` VARCHAR(45) NULL  AFTER `security_incident_owner_id` , ADD COLUMN `security_incident_victim_id` VARCHAR(45) NULL  AFTER `security_incident_reporter_id` ;
+

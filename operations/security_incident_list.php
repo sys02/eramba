@@ -32,12 +32,16 @@
 	$security_incident_status_id = $_GET["security_incident_status_id"];
 	$security_incident_disabled = $_GET["security_incident_disabled"];
 	$security_incident_service = $_GET["security_incident_service"];
+	$security_incident_reporter_id = $_GET["security_incident_reporter_id"];
+	$security_incident_victim_id = $_GET["security_incident_victim_id"];
 	 
 	#actions .. edit, update or disable - YOU MUST ADJUST THIS!
 	if ($action == "edit" && is_numeric($security_incident_id)) {
 		$security_incident_update = array(
 			'security_incident_owner_id' => $security_incident_owner_id,
 			'security_incident_tp_id' => $security_incident_tp_id,
+			'security_incident_reporter_id' => $security_incident_reporter_id,
+			'security_incident_victim_id' => $security_incident_victim_id,
 			'security_incident_title' => $security_incident_title,
 			'security_incident_open_date' => $security_incident_open_date,
 			'security_incident_description' => $security_incident_description,
@@ -66,6 +70,8 @@
 		$security_incident_update = array(
 			'security_incident_owner_id' => $security_incident_owner_id,
 			'security_incident_tp_id' => $security_incident_tp_id,
+			'security_incident_reporter_id' => $security_incident_reporter_id,
+			'security_incident_victim_id' => $security_incident_victim_id,
 			'security_incident_title' => $security_incident_title,
 			'security_incident_open_date' => $security_incident_open_date,
 			'security_incident_description' => $security_incident_description,
@@ -144,13 +150,14 @@ echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=security_incident_name\">Incident Title</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=security_incident_tp_id\">Third Party</a></th>";
-echo "					<th><a href=\"$base_url_list&sort=security_incident_description\">Description</a></th>";
+echo "					<th><a href=\"$base_url_list&sort=security_incident_reporter_id\">Reporter</a></th>";
+echo "					<th><a href=\"$base_url_list&sort=security_incident_victim_id\">Victim</a></th>";
+echo "					<th><a href=\"$base_url_list&sort=security_incident_owner_id\">Owner</a></th>";
 echo "					<th>Security Controls</th>";
 echo "					<th><a href=\"$base_url_list&sort=security_incident_classification_id\">Classification</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=security_incident_status_id\">Status</a></th>";
-echo "					<th><a href=\"$base_url_list&sort=security_incident_date\">Open Date</a></th>";
-echo "					<th><a href=\"$base_url_list&sort=security_incident_date\">Closure Date</a></th>";
-echo "					<th><a href=\"$base_url_list&sort=security_incident_owner_id\">Owner</a></th>";
+echo "					<th><a href=\"$base_url_list&sort=security_incident_open_date\">Open Date</a></th>";
+echo "					<th><a href=\"$base_url_list&sort=security_incident_closure_date\">Closure Date</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=security_incident_compromised_asset_id\">Asset</a></th>";
 ?>
 				</tr>
@@ -162,7 +169,7 @@ echo "					<th><a href=\"$base_url_list&sort=security_incident_compromised_asset
 	if ($show_id) {
 		$security_incident_list = list_security_incident(" WHERE security_incident_disabled = 0 AND security_incident_id = $show_id");
 	} else {
-		if ($sort == "security_incident_description" OR $sort == "security_incident_name") {
+		if ($sort == "security_incident_name" OR $sort == "security_incident_tp_id" OR $sort == "security_incident_victim_id" OR $sort == "security_incident_victim_id" OR $sort == "security_incident_classification_id" OR $sort == "security_incident_status_id" OR $sort == "security_incident_open_date" OR $sort == "security_incident_closure_date" OR $sort == "security_incident_owner_id" OR $sort == "security_incident_compromised_asset_id") {
 			$security_incident_list = list_security_incident(" WHERE security_incident_disabled = 0 ORDER by $sort");
 		} else {
 			$security_incident_list = list_security_incident(" WHERE security_incident_disabled = 0 ORDER by security_incident_open_date");
@@ -190,7 +197,10 @@ echo "					</td>";
 
 echo "					<td>$tp_name[tp_name]</td>";
 
-echo "					<td><a href=\"$base_url_edit&action=edit&security_incident_id=$security_incident_item[security_incident_id]\">".substr($security_incident_item[security_incident_description],0,50)."...</a></td>";
+echo "					<td>$security_incident_item[security_incident_reporter_id]</td>";
+echo "					<td>$security_incident_item[security_incident_victim_id]</td>";
+echo "					<td>$security_incident_item[security_incident_owner_id]</td>";
+
 
 echo "<td>";
 $controls_list = list_security_incident_service_join(" WHERE security_incident_service_incident_id = \"$security_incident_item[security_incident_id]\"");
@@ -211,7 +221,6 @@ echo "					<td>$classification_name[security_incident_classification_name]</td>"
 echo "					<td>$status_name[security_incident_status_name]</td>";
 echo "					<td>$security_incident_item[security_incident_open_date]</td>";
 echo "					<td>$security_incident_item[security_incident_closure_date]</td>";
-echo "					<td>$security_incident_item[security_incident_owner_id]</td>";
 	$asset_name = lookup_asset("asset_id",$security_incident_item[security_incident_compromised_asset_id]);
 echo "					<td>$asset_name[asset_name]</td>";
 echo "				</tr>";

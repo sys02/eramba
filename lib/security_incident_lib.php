@@ -18,6 +18,8 @@ function add_security_incident($security_incident_data) {
 		VALUES (
 		\"$security_incident_data[security_incident_id]\",
 		\"$security_incident_data[security_incident_owner_id]\",
+		\"$security_incident_data[security_incident_reporter_id]\",
+		\"$security_incident_data[security_incident_victim_id]\",
 		\"$security_incident_data[security_incident_tp_id]\",
 		\"$security_incident_data[security_incident_title]\",
 		\"$security_incident_data[security_incident_open_date]\",
@@ -38,7 +40,9 @@ function update_security_incident($security_incident_data, $security_incident_id
 	$sql = "UPDATE security_incident_tbl
 		SET
 		security_incident_owner_id=\"$security_incident_data[security_incident_owner_id]\",
-		security_incident_owner_id=\"$security_incident_data[security_incident_tp_id]\",
+		security_incident_tp_id=\"$security_incident_data[security_incident_tp_id]\",
+		security_incident_reporter_id=\"$security_incident_data[security_incident_reporter_id]\",
+		security_incident_victim_id=\"$security_incident_data[security_incident_victim_id]\",
 		security_incident_title=\"$security_incident_data[security_incident_title]\",
 		security_incident_open_date=\"$security_incident_data[security_incident_open_date]\",
 		security_incident_description=\"$security_incident_data[security_incident_description]\",

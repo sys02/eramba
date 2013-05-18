@@ -95,6 +95,14 @@ echo "					<form name=\"edit\" method=\"GET\" action=\"$base_url_list\">";
 	<span class="description">Describe who is assigned on this incident and is responsible for it's treatment</span>
 <? echo "<input type=\"text\" class=\"filter-text\" name=\"security_incident_owner_id\" id=\"security_incident_owner\" value=\"$security_incident_item[security_incident_owner_id]\"/>";?>
 						
+	<label for="description">Security Incident Reporter</label>
+	<span class="description">Describe who reported the incident</span>
+<? echo "<input type=\"text\" class=\"filter-text\" name=\"security_incident_reporter_id\" id=\"security_incident_owner\" value=\"$security_incident_item[security_incident_reporter_id]\"/>";?>
+	
+	<label for="description">Security Incident Victim</label>
+	<span class="description">Describe who was involved on this incident</span>
+<? echo "<input type=\"text\" class=\"filter-text\" name=\"security_incident_victim_id\" id=\"security_incident_victim_id\" value=\"$security_incident_item[security_incident_victim_id]\"/>";?>
+
 	<label for="description">Security Incident Open Date</label>
 	<span class="description">Describe the time when the Incident has been reported</span>
 <? echo "<input type=\"text\" class=\"filter-date datepicker\" name=\"security_incident_open_date\" id=\"security_incident_open_date\" value=\"$security_incident_item[security_incident_open_date]\"/>";?>
