@@ -176,3 +176,23 @@ ALTER TABLE `security_services_tbl` ADD COLUMN `security_services_classification
 
 ALTER TABLE `security_incident_tbl` ADD COLUMN `security_incident_reporter_id` VARCHAR(45) NULL  AFTER `security_incident_owner_id` , ADD COLUMN `security_incident_victim_id` VARCHAR(45) NULL  AFTER `security_incident_reporter_id` ;
 
+INSERT INTO `system_authorization_tbl` (`system_authorization_order`, `system_authorization_action_type`, `system_authorization_section_name`, `system_authorization_section_cute_name`, `system_authorization_subsection_name`, `system_authorization_subsection_cute_name`, `system_authorization_subsection_submenu`, `system_authorization_target_url`, `system_authorization_disabled`) VALUES (4, 'r', 'security_services', 'Security Services', 'security_services_analysis_list', 'Security Services Analysis', 1, 'services/security_services_analysis_list.php', 0);
+
+CREATE  TABLE `globant_prod_v11`.`security_services_analysis_tbl` (
+  `security_services_analysis_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `security_services_analysis_control_id` INT NULL ,
+  `security_services_analysis_fa` INT NULL ,
+  `security_services_analysis_resources` INT NULL ,
+  `security_services_analysis_opex` INT NULL ,
+  `security_services_analysis_contracts` INT NULL ,
+  `security_services_analysis_capex` INT NULL ,
+  `security_services_analysis_classification_name` INT NULL ,
+  `security_services_analysis_risk_asset` INT NULL ,
+  `security_services_analysis_tp_risk` INT NULL ,
+  `security_services_analysis_data_flows` INT NULL ,
+  `security_services_analysis_compliance` INT NULL ,
+  `security_services_analysis_disabled` INT NULL ,
+  PRIMARY KEY (`security_services_analysis_id`) );
+
+ALTER TABLE `security_services_analysis_tbl` ADD COLUMN `security_services_analysis_control_name` VARCHAR(100) NULL  AFTER `security_services_analysis_id` ;
+

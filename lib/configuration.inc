@@ -20,7 +20,7 @@ $db_conf['db_username'] = "root";
 $db_conf['db_password'] = "";
 
 # optional, define your currency.
-$services_conf['system_currency'] = "EUR";
+$services_conf['system_currency'] = "$";
 
 # set this to True or False 
 $risk_conf['use_eramba_formulas'] = "True";
