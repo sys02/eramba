@@ -11,6 +11,7 @@ include_once("lib/data_asset_security_services_join_lib.php");
 include_once("lib/compliance_item_security_service_join_lib.php");
 include_once("lib/compliance_package_item_lib.php");
 include_once("lib/compliance_package_lib.php");
+include_once("lib/system_records_lib.php");
 
 function build_security_services_analysis() {
 
@@ -29,7 +30,8 @@ function build_security_services_analysis() {
 			$list_of_audits = list_security_services_audit(" WHERE security_services_audit_security_service_id =\"$control_item[security_services_id]\" AND security_services_audit_result != \"2\" AND security_services_audit_disabled =\"0\""); 	
 			$security_services_analysis_fa = count($list_of_audit);
 
-			$security_services_analysis_resources = $control_item[security_services_cost_operational_resource];
+			$security_services_analysis_resource = $control_item[security_services_cost_operational_resource];
+
 			$security_services_analysis_opex= $control_item[security_services_cost_opex];
 
 			$service_contracts = list_service_contracts_security_services(" WHERE security_services_id = \"$control_item[security_services_id]\""); 
@@ -43,12 +45,14 @@ function build_security_services_analysis() {
 
 			$security_services_analysis_capex = $control_item[security_services_cost_capex];
 
-			$tmp = lookup_security_services_classification("security_services_classification_id",$control_item[security_services_id]);
+			$tmp = lookup_security_services_classification("security_services_classification_id",$control_item[security_services_classification_id]);
 			$security_services_analysis_classification_name = $tmp[security_services_classification_name];
 
+			$security_services_analysis_resource = $control_item[security_services_cost_operational_resource];
 	
 	#- Asset Risk (risk_title)
 	$security_services_analysis_risk_asset=0;
+	$security_services_analysis_risk_score=0;
 	$risk_asset = list_risk_asset_join("");	
 	$tmp_array = array();
 	foreach ($risk_asset as $risk_asset_item) { 
@@ -60,6 +64,8 @@ function build_security_services_analysis() {
 	if ( $control_item[security_services_id] == $risk_asset_service_list[risk_security_services_join_security_services_id] ) { 
 	if ( array_search($risk_asset_service_list[risk_security_services_join_risk_id], $tmp_array) ) {
 		$security_services_analysis_risk_asset++;
+		$tmp_risk = lookup_risk("risk_id",$risk_asset_service_list[risk_security_services_join_risk_id]);
+		$security_services_analysis_risk_score = $security_services_analysis_risk_score + $tmp_risk[risk_classification_score];
 	}
 	}
 	}
@@ -77,6 +83,8 @@ function build_security_services_analysis() {
 	if ( $control_item[security_services_id] == $risk_tp_service_list[risk_security_services_join_security_services_id] ) { 
 	if ( array_search($risk_tp_service_list[risk_security_services_join_risk_id], $tmp_array) ) {
 		$security_services_analysis_tp_risk++;
+		$tmp_risk = lookup_risk("risk_id",$risk_tp_service_list[risk_security_services_join_risk_id]);
+		$security_services_analysis_risk_score = $security_services_analysis_risk_score + $tmp_risk[risk_classification_score];
 	}
 	}
 	}
@@ -100,7 +108,7 @@ function build_security_services_analysis() {
 	}
 	
 	#- Compliance (Compliance title)
-	$security_services_analysis_compliance;
+	$security_services_analysis_compliance=0;
 	$compliance = list_compliance_package_item(" WHERE compliance_package_item_disabled = \"0\"");	
 	$tmp_array = array();
 	foreach ($compliance as $compliance_item) { 
@@ -118,23 +126,32 @@ function build_security_services_analysis() {
 
 	$security_services_analysis_control_name = $control_item[security_services_name]; 
 
+	$security_services_analysis_mit_total = $security_services_analysis_risk_asset + $security_services_analysis_tp_risk + $security_services_analysis_data_flows +$security_services_analysis_compliance; 
+
 	# now i should be able to insert on the table
 
 		$analysis_data = array(
 			'security_services_analysis_control_name' => $security_services_analysis_control_name,
 			'security_services_analysis_control_id' => $security_services_analysis_control_id,
 			'security_services_analysis_fa' => $security_services_analysis_fa,
+			'security_services_analysis_resource' => $security_services_analysis_resource,
 			'security_services_analysis_opex' => $security_services_analysis_opex,
 			'security_services_analysis_contracts' => $security_services_analysis_contracts,
 			'security_services_analysis_capex' => $security_services_analysis_capex,
 			'security_services_analysis_classification_name' => $security_services_analysis_classification_name,
+			'security_services_analysis_risk_score' => $security_services_analysis_risk_score,
 			'security_services_analysis_risk_asset' => $security_services_analysis_risk_asset,
 			'security_services_analysis_tp_risk' => $security_services_analysis_tp_risk,
 			'security_services_analysis_data_flows' => $security_services_analysis_data_flows,
-			'security_services_analysis_compliance' => $security_services_analysis_compliance
+			'security_services_analysis_compliance' => $security_services_analysis_compliance,
+			'security_services_analysis_mit_total' => $security_services_analysis_mit_total
 		);	
+
 		$legal_id = add_security_services_analysis($analysis_data);
 
+
+	unset($security_services_analysis_tp_risk);
+	
 		}
 	}
 
@@ -161,14 +178,17 @@ function add_security_services_analysis($security_services_analysis_data) {
 		\"$security_services_analysis_data[security_services_analysis_control_name]\",
 		\"$security_services_analysis_data[security_services_analysis_control_id]\",
 		\"$security_services_analysis_data[security_services_analysis_fa]\",
+		\"$security_services_analysis_data[security_services_analysis_resource]\",
 		\"$security_services_analysis_data[security_services_analysis_opex]\",
 		\"$security_services_analysis_data[security_services_analysis_contracts]\",
 		\"$security_services_analysis_data[security_services_analysis_capex]\",
 		\"$security_services_analysis_data[security_services_analysis_classification_name]\",
+		\"$security_services_analysis_data[security_services_analysis_risk_score]\",
 		\"$security_services_analysis_data[security_services_analysis_risk_asset]\",
 		\"$security_services_analysis_data[security_services_analysis_tp_risk]\",
 		\"$security_services_analysis_data[security_services_analysis_data_flows]\",
 		\"$security_services_analysis_data[security_services_analysis_compliance]\",
+		\"$security_services_analysis_data[security_services_analysis_mit_total]\",
 		\"0\"
 		)
 		";	
@@ -269,9 +289,9 @@ function export_security_services_analysis_csv() {
 	$export_file = "downloads/security_services_analysis_export.csv";
 	$handler = fopen($export_file, 'w');
 	
-	fwrite($handler, "security_services_analysis_id,security_services_analysis_name,security_services_analysis_description,security_services_analysis_disabled\n");
+	fwrite($handler, "security_services_analysis_id,security_services_analysis_control_name,security_services_analysis_control_id,security_services_analysis_fa,security_services_analysis_opex,security_services_analysis_contracts,security_services_analysis_capex,security_services_analysis_classification_name,security_services_analysis_risk_score,security_services_analysis_risk_asset,security_services_analysis_tp_risk,security_services_analysis_data_flows,security_services_analysis_compliance,security_services_analysis_mit_total,security_services_analysis_resource\n");
 	foreach($result as $line) {
-		fwrite($handler,"$line[security_services_analysis_id],$line[security_services_analysis_name],$line[security_services_analysis_descripion],$line[security_services_analysis_disabled]\n");
+		fwrite($handler,"$line[security_services_analysis_id],$line[security_services_analysis_control_name],$line[security_services_analysis_control_id],$line[security_services_analysis_fa],$line[security_services_analysis_opex],$line[security_services_analysis_contracts],$line[security_services_analysis_capex],$line[security_services_analysis_classification_name],$line[security_services_analysis_risk_score],$line[security_services_analysis_risk_asset],$line[security_services_analysis_tp_risk],$line[security_services_analysis_data_flows],$line[security_services_analysis_compliance],$line[security_services_analysis_mit_total],$line[security_services_analysis_resource]\n");
 	}
 	
 	fclose($handler);

@@ -1,0 +1,78 @@
+security_services_analysis_id,security_services_analysis_control_name,security_services_analysis_control_id,security_services_analysis_fa,security_services_analysis_opex,security_services_analysis_contracts,security_services_analysis_capex,security_services_analysis_classification_name,security_services_analysis_risk_score,security_services_analysis_risk_asset,security_services_analysis_tp_risk,security_services_analysis_data_flows,security_services_analysis_compliance,security_services_analysis_mit_total,security_services_analysis_resource
+2919,Corporate Antivirus,557,0,0,36000,0,Critical,52,9,0,0,2,11,0.00
+2920,Regular Vulnerability Scanning  External,558,0,0,0,0,,12,2,0,0,5,7,0.00
+2921,Regular Vulnerability Scanning - Internal,559,0,0,1200,0,,12,4,0,0,5,9,0.00
+2922,CCTV - Laminar,560,0,0,0,40000,,7,2,0,0,0,2,0.00
+2923,CCTV - SP,561,0,0,0,70000,,7,2,0,0,0,2,0.00
+2924,CCTV - NP,562,0,0,0,70000,,7,2,0,0,0,2,0.00
+2925,Laptop Encryption Policy,563,0,0,0,0,Critical,12,2,0,0,0,2,0.00
+2926,User Administrator reviews of network devices,564,0,0,0,0,,3,1,0,0,1,2,0.00
+2927,PBX DOS Log Detector,565,0,0,0,0,,6,1,0,0,0,1,0.00
+2928,Email Group Review,566,0,0,0,0,,0,0,0,0,1,1,0.00
+2929,General Data Access Criteria Matrix,567,0,0,0,0,,0,0,0,0,3,3,0.00
+2930,Fire Detection Systems - SP,568,0,0,0,0,,7,2,0,0,1,3,0.00
+2931,Fire Detection Systems - NP,569,0,0,0,0,,7,2,0,0,1,3,0.00
+2932,Security Awareness Trainings,570,0,0,0,0,Critical,9,3,0,0,2,5,0.00
+2933,Share Drives & AD Groups Reviews,571,0,0,0,0,Critical,0,0,0,0,1,1,0.00
+2934,Google Apps Mobile Phone Policy,572,0,0,0,0,Critical,6,1,0,0,0,1,0.00
+2935,Wifi WPA2 Encryption,573,0,0,0,0,,7,2,0,0,0,2,0.00
+2936,Astaro VPN SSL,574,0,0,0,0,,0,0,0,0,1,1,0.00
+2937,Secure Disposal of Data and Equipment,575,0,0,0,0,,6,1,0,0,2,3,0.00
+2938,Laptops and Desktops Windows Standard Image,576,0,0,0,0,Critical,12,2,0,0,0,2,0.00
+2939,Laptops and Desktops Mac-OS Standard Configuration,577,0,0,0,0,,6,1,0,0,0,1,0.00
+2940,Motion Alarms - SP,578,0,0,0,0,,4,1,0,0,1,2,0.00
+2941,Motion Alarms - NP,579,0,0,0,0,,4,1,0,0,1,2,0.00
+2942,Verizon - AD Reviews,580,0,0,0,0,Critical,0,0,0,0,1,1,0.00
+2943,Verizon - Physical Controls,581,0,0,21600,4000,Critical,0,0,0,0,1,1,0.30
+2944,Globant AD GPO,582,0,0,0,0,Critical,62,10,1,0,4,15,0.00
+2945,Log Book - NP,583,0,0,0,0,,4,1,0,0,1,2,0.00
+2946,Log Book - SP,584,0,0,0,0,,4,1,0,0,1,2,0.00
+2947,InvGate Software Reviews,585,0,0,0,0,,14,3,0,0,3,6,0.00
+2948,Glow Periodic Billing Rights Reviews,586,0,0,0,0,,3,1,0,0,0,1,0.00
+2949,Trac-Internal Periodic User Reviews,587,0,0,0,0,,12,2,0,0,1,3,0.00
+2950,Trac-External Periodic User Reviews,588,0,0,0,0,,12,2,0,0,1,3,0.00
+2951,Globant AD - DNA Periodic User Reviews,589,0,0,0,0,Critical,58,12,0,0,3,15,0.00
+2952,Globant Systems Backup Policy,590,0,0,0,0,Critical,84,16,1,0,1,18,0.00
+2953,Physical Access Controls - Laminar,591,0,0,0,0,,7,2,0,0,1,3,0.00
+2954,Physical Access Controls - NP,592,0,0,0,0,,7,2,0,0,1,3,0.00
+2955,Physical Access Controls - SP,593,0,0,0,0,,7,2,0,0,1,3,0.00
+2956,Review of Rogue Wifi APs,594,0,0,0,0,,0,0,0,0,0,0,0.00
+2957,Glow - Database User Reviews,595,0,0,0,0,,0,0,0,0,1,1,0.00
+2958,CCTV - Tucuman,596,0,0,0,0,,0,0,0,0,0,0,0.00
+2959,CCTV - Rosario,597,0,0,0,0,,0,0,0,0,0,0,0.00
+2960,CCTV - Chaco,598,0,0,0,0,,0,0,0,0,0,0,0.00
+2961,Globant-Employee NDA Agreements,599,0,0,0,0,,0,0,0,0,0,0,0.00
+2962,Customer-Globant Employee NDA Agreements,600,0,0,0,0,,6,0,1,0,2,3,0.00
+2963,Screening Checks - Physical Aptitude,601,0,0,0,0,,0,0,0,0,0,0,0.00
+2964,Clear Desk Policy,603,0,0,0,0,,0,0,0,0,0,0,0.00
+2965,Paper Shreders,604,0,0,0,0,,0,0,0,0,1,1,0.00
+2966,UPS Systems / Diesel Generator - SP,605,0,0,0,0,,12,3,0,0,1,4,0.00
+2967,UPS Systems / Diesel Generator - NP,606,0,0,0,0,,10,2,0,0,1,3,0.00
+2968,Network Firewalls,608,0,0,0,0,Critical,12,2,0,0,6,8,0.00
+2969,Envision SIEM,609,0,0,7000,15000,Critical,28,6,0,0,5,11,0.00
+2970,Globant Time Server,610,0,0,0,0,,0,0,0,0,1,1,0.00
+2971,Centralised Logging,611,0,0,0,0,,0,0,0,0,0,0,0.00
+2972,Business Continuity Plans,612,0,0,0,0,Critical,0,0,0,0,5,5,0.00
+2973,Manned Guards - SP,613,0,0,235000,0,,4,1,0,0,4,5,0.00
+2974,Manned Guards - NP,614,0,0,235000,0,,4,1,0,0,4,5,0.00
+2975,Security at the SDLC,615,0,0,0,0,,0,0,0,0,5,5,0.00
+2976,Standard Linux Servers Configuration,616,0,0,0,0,,0,0,0,0,0,0,0.00
+2977,Standard Windows Servers Configuration,617,0,0,0,0,,0,0,0,0,0,0,0.00
+2978,Standard Switches Routers Configuration,618,0,0,0,0,,0,0,0,0,0,0,0.00
+2979,CCTV - Cordoba,619,0,0,0,0,,0,0,0,0,0,0,0.00
+2980,System Patching,620,0,0,0,0,,58,10,0,0,0,10,0.00
+2981,Glober Assets Lifecycle,624,0,0,0,0,Critical,0,0,0,0,6,6,0.00
+2982,SAP Systems Management,625,0,0,0,0,,12,3,0,0,1,4,0.00
+2983,Publishing Applications and Data Assets,626,0,0,0,0,,48,8,0,0,3,11,0.00
+2984,Google Apps Administrator User Reviews,628,0,0,0,0,Critical,9,2,0,0,2,4,0.00
+2985,Change managment,629,0,0,0,0,,39,7,0,0,5,12,0.00
+2986,IDS,630,0,0,0,0,,0,0,0,0,0,0,0.00
+2987,Security Policies,631,0,0,0,0,,0,0,0,0,48,48,0.10
+2988,Sony Network Controls,632,0,0,0,0,,0,0,0,0,1,1,0.10
+2989,EA - Logical Controls,633,0,0,0,0,,0,0,0,0,1,1,0.10
+2990,EA - Network Controls,634,0,0,0,0,,0,0,0,0,1,1,0.10
+2991,EA - Physical Controls,635,0,0,0,0,,0,0,0,0,1,1,0.10
+2992,JPMC - Network Controls,636,0,1000,0,0,,0,0,0,0,1,1,0.10
+2993,JPMC - Physical Controls,637,0,0,0,0,,0,0,0,0,2,2,0.10
+2994,JPMC - Systems Controls,638,0,0,0,0,,0,0,0,0,2,2,0.10
+2995,Disney - HR Controls,639,0,0,0,0,,0,0,0,0,2,2,0.10

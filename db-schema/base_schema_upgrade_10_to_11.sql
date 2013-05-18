@@ -178,21 +178,32 @@ ALTER TABLE `security_incident_tbl` ADD COLUMN `security_incident_reporter_id` V
 
 INSERT INTO `system_authorization_tbl` (`system_authorization_order`, `system_authorization_action_type`, `system_authorization_section_name`, `system_authorization_section_cute_name`, `system_authorization_subsection_name`, `system_authorization_subsection_cute_name`, `system_authorization_subsection_submenu`, `system_authorization_target_url`, `system_authorization_disabled`) VALUES (4, 'r', 'security_services', 'Security Services', 'security_services_analysis_list', 'Security Services Analysis', 1, 'services/security_services_analysis_list.php', 0);
 
-CREATE  TABLE `globant_prod_v11`.`security_services_analysis_tbl` (
-  `security_services_analysis_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `security_services_analysis_control_id` INT NULL ,
-  `security_services_analysis_fa` INT NULL ,
-  `security_services_analysis_resources` INT NULL ,
-  `security_services_analysis_opex` INT NULL ,
-  `security_services_analysis_contracts` INT NULL ,
-  `security_services_analysis_capex` INT NULL ,
-  `security_services_analysis_classification_name` INT NULL ,
-  `security_services_analysis_risk_asset` INT NULL ,
-  `security_services_analysis_tp_risk` INT NULL ,
-  `security_services_analysis_data_flows` INT NULL ,
-  `security_services_analysis_compliance` INT NULL ,
-  `security_services_analysis_disabled` INT NULL ,
-  PRIMARY KEY (`security_services_analysis_id`) );
+--
+-- Table structure for table `security_services_analysis_tbl`
+--
 
-ALTER TABLE `security_services_analysis_tbl` ADD COLUMN `security_services_analysis_control_name` VARCHAR(100) NULL  AFTER `security_services_analysis_id` ;
+DROP TABLE IF EXISTS `security_services_analysis_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `security_services_analysis_tbl` (
+  `security_services_analysis_id` int(10) NOT NULL AUTO_INCREMENT,
+  `security_services_analysis_control_name` varchar(100) DEFAULT NULL,
+  `security_services_analysis_control_id` int(11) DEFAULT NULL,
+  `security_services_analysis_fa` int(11) DEFAULT NULL,
+  `security_services_analysis_resource` decimal(10,2) DEFAULT NULL,
+  `security_services_analysis_opex` int(11) DEFAULT NULL,
+  `security_services_analysis_contracts` int(11) DEFAULT NULL,
+  `security_services_analysis_capex` int(11) DEFAULT NULL,
+  `security_services_analysis_classification_name` varchar(100) DEFAULT NULL,
+  `security_services_analysis_risk_score` int(11) DEFAULT NULL,
+  `security_services_analysis_risk_asset` int(11) DEFAULT NULL,
+  `security_services_analysis_tp_risk` int(11) DEFAULT NULL,
+  `security_services_analysis_data_flows` int(11) DEFAULT NULL,
+  `security_services_analysis_compliance` int(11) DEFAULT NULL,
+  `security_services_analysis_mit_total` int(11) DEFAULT NULL,
+  `security_services_analysis_disabled` int(11) DEFAULT NULL,
+  PRIMARY KEY (`security_services_analysis_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3227 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
 
