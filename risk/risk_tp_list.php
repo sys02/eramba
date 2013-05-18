@@ -23,6 +23,7 @@
 	
 	$base_url_list = build_base_url($section,"risk_tp_list");
 	$base_url_edit = build_base_url($section,"risk_tp_edit");
+	$base_url_service_list = build_base_url("security_services","security_catalogue_list");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$tp_id = $_GET["tp_id"];
@@ -487,7 +488,7 @@ foreach($security_services_for_this_risk_list as $security_services_for_this_ris
 	$security_service_data = lookup_security_services("security_services_id",$security_services_for_this_risk_item[risk_security_services_join_security_services_id]);	
 	$security_services_status_name = lookup_security_services_status("security_services_status_id",$security_service_data[security_services_status]);
 echo "				<tr>";
-	echo "<td class=\"left\">$security_service_data[security_services_name]</td>";
+	echo "<td class=\"left\"><a href=\"$base_url_service_list&sort=$security_service_data[security_services_id]\">$security_service_data[security_services_name]</a></td>";
 	echo "<td class=\"left\">".substr($security_service_data[security_services_objective],0,100)."...</td>";
 	echo "<td class=\"center\">$security_services_status_name[security_services_status_name]</td>";
 
