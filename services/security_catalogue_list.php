@@ -566,10 +566,6 @@ echo "			</tr>";
 	}
 	
 
-echo "							<tr>";
-echo "								<td class=\"center\">$service_provider_name[tp_name]</td>";
-echo "								<td class=\"center\">$service_contracts_item[service_contracts_name]</td>";
-echo "							</tr>";
 
 
 echo "						</table>";
