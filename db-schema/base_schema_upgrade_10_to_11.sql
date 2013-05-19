@@ -206,4 +206,27 @@ CREATE TABLE `security_services_analysis_tbl` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3227 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+-- Table structure for table `tiv_vuln_tbl`
+--
 
+DROP TABLE IF EXISTS `tiv_vuln_tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tiv_vuln_tbl` (
+  `tiv_vuln_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tiv_vuln_category` varchar(100) DEFAULT NULL,
+  `tiv_vuln_name` varchar(100) DEFAULT NULL,
+  `tiv_vuln_disabled` int(11) DEFAULT '1',
+  PRIMARY KEY (`tiv_vuln_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tiv_vuln_tbl`
+--
+
+LOCK TABLES `tiv_vuln_tbl` WRITE;
+/*!40000 ALTER TABLE `tiv_vuln_tbl` DISABLE KEYS */;
+INSERT INTO `tiv_vuln_tbl` VALUES (1,'Nature and Accidents','Seismic Areas',0),(2,'Nature and Accidents','Flooding Prone Areas',0),(3,'Nature and Accidents','Loose of Energy',0),(4,'Nature and Accidents','Warm Climate',0),(5,'Nature and Accidents','Cold Climate',0),(6,'Nature and Accidents','Ice',0),(7,'Nature and Accidents','Tornados',0),(8,'Nature and Accidents','Hurricane',0),(9,'Current and Past Employees','Intentional Theft',0),(10,'Current and Past Employees','Creeping Accounts',0),(11,'Current and Past Employees','Weak Check-Out Process',0),(12,'Current and Past Employees','Complot',0),(13,'Current and Past Employees','Employee Rotation',0),(14,'Current and Past Employees','Lack of Segregation of Duties',0),(30,'Criminals','Complot',0),(31,'Criminals','Intellectual Property Theft',0),(40,'The Press','Reputational Issues',0),(43,'Hacking','Weak Systems',0),(44,'Hacking','Lack of Patching',0),(45,'Hacking','Creeping Accounts',0),(46,'Hacking','Weak Passwords',0),(47,'Hacking','Weak Authetication Systems',0),(48,'Hacking','Lack of Account Reviews',0),(49,'Hacking','Lack of Anti-Virus',0),(50,'Hacking','Lack of Processes',0),(51,'Hacking','Weak Change Management',0),(52,'Hacking','Weak Authorization Systems',0),(53,'Hacking','Web-Application Vulnerabilities',0),(54,'Hacking','Wrong Configurations',0),(55,'Hacking','Open Network Ports',0),(56,'Hacking','Weak Encryption',0),(57,'Hacking','Weak Security Awareness',0),(58,'Hacking','Lack of Integrity Checks',0),(59,'Hacking','Social Engineering',0),(65,'Current and Past Employees','Unintentional Theft',0),(66,'Current and Past Employees','Unintentional Loss',0),(67,'Current and Past Employees','Unintentional Disclosure of Information',0),(68,'Criminals','Intentional Disclosure of Information',0),(75,'Governments','Counter-Intelligence',0);
+/*!40000 ALTER TABLE `tiv_vuln_tbl` ENABLE KEYS */;
+UNLOCK TABLES;
