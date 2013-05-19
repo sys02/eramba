@@ -41,6 +41,18 @@ echo "					<form name=\"edit\" method=\"GET\" action=\"$base_url_list\">";
 	<label for="description">Goal</label>
 	<span class="description">Describe the project Goal, it's roadmap and deliverables.</span>
 <? echo "<textarea name=\"project_improvements_goal\" class=\"filter-text\">$project_improvements_item[project_improvements_goal]</textarea>";?>
+	
+	<label for="description">RCA</label>
+	<span class="description">Describe the root cause analysis of why this is required.</span>
+<? echo "<textarea name=\"project_improvements_goal\" class=\"filter-text\">$project_improvements_item[project_improvements_rca]</textarea>";?>
+	
+	<label for="description">Proactive Plan</label>
+	<span class="description">If this project aims to mitigate an incident or improve something on your system, describe the proactive plans (stop the bleeding).</span>
+<? echo "<textarea name=\"project_improvements_goal\" class=\"filter-text\">$project_improvements_item[project_improvements_proactive]</textarea>";?>
+		
+	<label for="description">Reactive Plan</label>
+	<span class="description">If this project aims to mitigate an incident or improve something on your system, describe the long term plans.</span>
+<? echo "<textarea name=\"project_improvements_goal\" class=\"filter-text\">$project_improvements_item[project_improvements_reactive]</textarea>";?>
 						
 	<label for="description">Project Start Date</label>
 	<span class="description">Document the project kick-off date. The date format for this field is YYYY-MM-DD, the default is todays date.</span>

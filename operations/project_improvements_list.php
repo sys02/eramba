@@ -20,6 +20,9 @@
 	$project_improvements_id = $_GET["project_improvements_id"];
 	$project_improvements_title = $_GET["project_improvements_title"];
 	$project_improvements_goal = $_GET["project_improvements_goal"];
+	$project_improvements_rca = $_GET["project_improvements_rca"];
+	$project_improvements_proactive = $_GET["project_improvements_proactive"];
+	$project_improvements_reactive = $_GET["project_improvements_reactive"];
 	$project_improvements_start = $_GET["project_improvements_start"];
 	$project_improvements_deadline = $_GET["project_improvements_deadline"];
 	$project_improvements_status_id = $_GET["project_improvements_status_id"];
@@ -67,6 +70,9 @@
 		$project_improvements_update = array(
 			'project_improvements_title' => $project_improvements_title,
 			'project_improvements_goal' => $project_improvements_goal,
+			'project_improvements_rca' => $project_improvements_rca,
+			'project_improvements_proactive' => $project_improvements_proactive,
+			'project_improvements_reactive' => $project_improvements_reactive,
 			'project_improvements_start' => $project_improvements_start,
 			'project_improvements_deadline' => $project_improvements_deadline,
 			'project_improvements_status_id' => $project_improvements_status_id,
@@ -85,6 +91,9 @@
 			'project_improvements_id' => $project_improvements_id,
 			'project_improvements_title' => $project_improvements_title,
 			'project_improvements_goal' => $project_improvements_goal,
+			'project_improvements_rca' => $project_improvements_rca,
+			'project_improvements_proactive' => $project_improvements_proactive,
+			'project_improvements_reactive' => $project_improvements_reactive,
 			'project_improvements_start' => $project_improvements_start,
 			'project_improvements_deadline' => $project_improvements_deadline,
 			'project_improvements_status_id' => $project_improvements_status_id,
@@ -267,6 +276,42 @@ echo "							</tr>";
 echo " 					<th>Project Goal</th>";
 echo "							<tr>";
 echo " 					<td>$project_improvements_item[project_improvements_goal]</td>";
+echo "							</tr>";
+echo "						</table>";
+echo "					</div>";
+echo "<br>";
+echo "<br>";
+echo "					<div class=\"rounded\">";
+echo "						<table class=\"sub-table\">";
+echo "							<tr>";
+echo "							</tr>";
+echo " 					<th>Root Cause Analysis</th>";
+echo "							<tr>";
+echo " 					<td>$project_improvements_item[project_improvements_rca]</td>";
+echo "							</tr>";
+echo "						</table>";
+echo "					</div>";
+echo "<br>";
+echo "<br>";
+echo "					<div class=\"rounded\">";
+echo "						<table class=\"sub-table\">";
+echo "							<tr>";
+echo "							</tr>";
+echo " 					<th>Proactive Plans</th>";
+echo "							<tr>";
+echo " 					<td>$project_improvements_item[project_improvements_proactive]</td>";
+echo "							</tr>";
+echo "						</table>";
+echo "					</div>";
+echo "<br>";
+echo "<br>";
+echo "					<div class=\"rounded\">";
+echo "						<table class=\"sub-table\">";
+echo "							<tr>";
+echo "							</tr>";
+echo " 					<th>Reactive Plans</th>";
+echo "							<tr>";
+echo " 					<td>$project_improvements_item[project_improvements_reactive]</td>";
 echo "							</tr>";
 echo "						</table>";
 echo "					</div>";
