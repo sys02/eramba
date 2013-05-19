@@ -27,8 +27,8 @@ function build_security_services_analysis() {
 
 			$security_services_analysis_control_id = $control_item[security_services_id];
 			
-			$list_of_audits = list_security_services_audit(" WHERE security_services_audit_security_service_id =\"$control_item[security_services_id]\" AND security_services_audit_result != \"2\" AND security_services_audit_disabled =\"0\""); 	
-			$security_services_analysis_fa = count($list_of_audit);
+			$list_of_audits = list_security_services_audit(" WHERE security_services_audit_security_service_id =\"$control_item[security_services_id]\" AND security_services_audit_result = \"3\" AND security_services_audit_disabled =\"0\""); 	
+			$security_services_analysis_fa = count($list_of_audits);
 
 			$security_services_analysis_resource = $control_item[security_services_cost_operational_resource];
 
