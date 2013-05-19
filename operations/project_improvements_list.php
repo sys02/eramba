@@ -28,6 +28,7 @@
 	$project_improvements_status_id = $_GET["project_improvements_status_id"];
 	$project_improvements_plan_budget = $_GET["project_improvements_plan_budget"];
 	$project_improvements_owner_id = $_GET["project_improvements_owner_id"];
+	$project_improvements_completion = $_GET["project_improvements_completion"];
 	$project_improvements_expenses_date = $_GET["project_improvements_expenses_date"]; 
 
 	# expenses stuff
@@ -45,6 +46,8 @@
 	$base_url_edit = build_base_url($section,"project_improvements_edit");
 	$base_url_edit_expenses = build_base_url($section,"project_improvements_expenses_edit");
 	$base_url_list_expenses = build_base_url($section,"project_improvements_expenses_list");
+	$base_url_achievements_edit = build_base_url($section,"project_improvements_achievements_edit");
+	$base_url_achievements_list = build_base_url($section,"project_improvements_achievements_list");
 	
 	# local variables - YOU MUST ADJUST THIS! 
 	$project_improvements_id = $_GET["project_improvements_id"];
@@ -77,7 +80,8 @@
 			'project_improvements_deadline' => $project_improvements_deadline,
 			'project_improvements_status_id' => $project_improvements_status_id,
 			'project_improvements_plan_budget' => $project_improvements_plan_budget,
-			'project_improvements_owner_id' => $project_improvements_owner_id
+			'project_improvements_owner_id' => $project_improvements_owner_id,
+			'project_improvements_completion' => $project_improvements_completion
 		);	
 		update_project_improvements($project_improvements_update,$project_improvements_id);
 		add_system_records("operations","project_improvements_edit","$project_improvements_id",$_SESSION['logged_user_id'],"Update","");
@@ -98,7 +102,8 @@
 			'project_improvements_deadline' => $project_improvements_deadline,
 			'project_improvements_status_id' => $project_improvements_status_id,
 			'project_improvements_plan_budget' => $project_improvements_plan_budget,
-			'project_improvements_owner_id' => $project_improvements_owner_id
+			'project_improvements_owner_id' => $project_improvements_owner_id,
+			'project_improvements_completion' => $project_improvements_completion
 		);	
 		
 		$id = add_project_improvements($project_improvements_update);
@@ -243,6 +248,7 @@ echo "							<th class=\"center\">Status</th>";
 echo "							<th class=\"center\">Start</th>";
 echo "							<th class=\"center\">Planned End</th>";
 echo "							<th class=\"center\">Owner</th>";
+echo "							<th class=\"center\">Completion</th>";
 echo "							<th class=\"center\">Plan Budget</th>";
 echo "							<th class=\"center\">Current Budget</th>";
 echo "						</tr>";
@@ -253,13 +259,22 @@ echo "							<td><center>$status_item[project_improvements_status_name]</td>";
 echo "							<td><center>$project_improvements_item[project_improvements_start]</td>";
 echo "							<td><center>$project_improvements_item[project_improvements_deadline]</td>";
 echo "							<td><center>$project_improvements_item[project_improvements_owner_id]</td>";
-echo "							<td><center>$project_improvements_item[project_improvements_plan_budget] $services_conf[system_currency]</td>";
-echo "							<td class=\"action-cell\">
 
+echo "							<td class=\"action-cell\">
+								<div class=\"cell-label\">
+					$project_improvements_item[project_improvements_completion] % 
+								</div>
+								<div class=\"cell-actions\">
+<a href=\"$base_url_achievements_edit&project_improvements_id=$project_improvements_item[project_improvements_id]\" class=\"edit-action\">add an update</a> 
+<a href=\"$base_url_achievements_list&project_improvements_id=$project_improvements_item[project_improvements_id]\" class=\"delete-action\">view all updates</a>
+						</td>";
+
+echo "							<td><center>$project_improvements_item[project_improvements_plan_budget] $services_conf[system_currency]</td>";
+
+echo "							<td class=\"action-cell\">
 								<div class=\"cell-label\">
 					$project_improvements_item[project_improvements_current_budget] $services_conf[system_currency]
 								</div>
-
 								<div class=\"cell-actions\">
 <a href=\"$base_url_edit_expenses&project_improvements_id=$project_improvements_item[project_improvements_id]\" class=\"edit-action\">add an expense</a> 
 <a href=\"$base_url_list_expenses&project_improvements_id=$project_improvements_item[project_improvements_id]\" class=\"delete-action\">view all expenses</a>
