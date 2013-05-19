@@ -311,9 +311,9 @@ echo "		</div>";
 echo "  </td>";
 echo " 	<td>$bcm_plans_item[bcm_plans_details_when]</td>";
 echo " 	<td>$bcm_plans_item[bcm_plans_details_who]</td>";
-echo " 	<td>$bcm_plans_item[bcm_plans_details_what]</td>";
+echo " 	<td>".substr($bcm_plans_item[bcm_plans_details_what],0,80)."...</td>";
 echo " 	<td>$bcm_plans_item[bcm_plans_details_where]</td>";
-echo " 	<td>$bcm_plans_item[bcm_plans_details_how]</td>";
+echo " 	<td>".substr($bcm_plans_item[bcm_plans_details_how],0,20)."...</td>";
 echo "	</tr>";
 	}
 echo "	</tr>";
