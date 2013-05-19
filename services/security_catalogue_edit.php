@@ -156,7 +156,7 @@ echo "				<textarea class=\"\" id=\"\" name=\"security_services_cost_capex\">$se
 				}
 
 echo "		<label for=\"name\">Service Cost (Resource Utilization)</label>";
-echo "		<span class=\"description\">Define what resource utilization in FTE (full time employees) this control requires. Example: 1.5 (one full time and a half)</span>";
+echo "		<span class=\"description\">How many hours of your resources this control consumes over a month? Think on defining, communicating, fixing, auditing, operating and reviewing the controls.</span>";
 
 
 
