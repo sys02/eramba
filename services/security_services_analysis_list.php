@@ -79,7 +79,7 @@ echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_mit_tota
 
 echo "			<tbody>";
 		
-		if ($sort == "security_services_analysis_control_name" OR $sort == "security_services_analysis_fa" OR $sort == "security_services_analysis_opex" OR $sort == "security_services_analysis_contracts" OR $sort == "security_services_analysis_capex" OR $sort == "security_services_analysis_classification_name" OR $sort == "security_services_analysis_risk_asset" OR $sort == "security_services_analysis_tp_risk" OR $sort == "security_services_analysis_data_flows" OR $sort == "security_services_analysis_compliance" OR $sort == "security_services_analysis_mit_total" OR $sort = "security_services_analysis_risk_score" OR $sort="security_services_analysis_resource") {
+		if ($sort == "security_services_analysis_control_name" OR $sort == "security_services_analysis_fa" OR $sort == "security_services_analysis_opex" OR $sort == "security_services_analysis_contracts" OR $sort == "security_services_analysis_capex" OR $sort == "security_services_analysis_classification_name" OR $sort == "security_services_analysis_risk_asset" OR $sort == "security_services_analysis_tp_risk" OR $sort == "security_services_analysis_data_flows" OR $sort == "security_services_analysis_compliance" OR $sort == "security_services_analysis_mit_total" OR $sort == "security_services_analysis_risk_score" OR $sort=="security_services_analysis_resource") {
 
 			$data = list_security_services_analysis(" WHERE security_services_analysis_disabled = 0 ORDER by $sort");
 		} else {
