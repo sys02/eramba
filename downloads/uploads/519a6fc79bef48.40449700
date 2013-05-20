@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+
+
+  
+
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/trac/glb-security/chrome/agilo/stylesheet/agilo_theme.css" />
+    <link rel="stylesheet" type="text/css" media="print" href="/trac/glb-security/chrome/agilo/stylesheet/print.css" />
+    <title>
+      LogAudits – glb-security
+    </title>
+        <link rel="search" href="/trac/glb-security/search" />
+        <link rel="help" href="/trac/glb-security/wiki/TracGuide" />
+        <link rel="alternate" href="/trac/glb-security/wiki/LogAudits?format=txt" type="text/x-trac-wiki" title="Plain Text" />
+        <link rel="start" href="/trac/glb-security/wiki" />
+        <link rel="stylesheet" href="/trac/glb-security/chrome/fivestarvote/css/fivestarvote.css" type="text/css" /><link rel="stylesheet" href="/trac/glb-security/chrome/common/css/wiki.css" type="text/css" /><link rel="stylesheet" href="/trac/glb-security/chrome/agilo/stylesheet/agilo.css" type="text/css" /><link rel="stylesheet" href="/trac/glb-security/chrome/keywordsuggest/autocomplete.css" type="text/css" />
+        <link rel="shortcut icon" href="/trac/glb-security/chrome/common/trac.ico" type="image/x-icon" />
+        <link rel="icon" href="/trac/glb-security/chrome/common/trac.ico" type="image/x-icon" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/trac/glb-security/search/opensearch" title="Search glb-security" />
+    <script type="text/javascript" src="/trac/glb-security/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/trac/glb-security/chrome/common/js/trac.js"></script><script type="text/javascript" src="/trac/glb-security/chrome/common/js/search.js"></script><script type="text/javascript" src="/trac/glb-security/chrome/fivestarvote/js/fivestarvote.js"></script><script type="text/javascript" src="/trac/glb-security/chrome/agilo/js/sidebar.js"></script><script type="text/javascript" src="/trac/glb-security/chrome/agilo/js/cookies.js"></script><script type="text/javascript" src="/trac/glb-security/chrome/agilo/js/settings.js"></script><script type="text/javascript" src="/trac/glb-security/chrome/agilo/js/collapse.js"></script><script type="text/javascript" src="/trac/glb-security/chrome/agilo/js/ie-patches.js"></script><script type="text/javascript" src="/trac/glb-security/chrome/keywordsuggest/jquery.bgiframe.min.js"></script><script type="text/javascript" src="/trac/glb-security/chrome/keywordsuggest/jquery.autocomplete.pack.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/trac/glb-security/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("#content").find("h1,h2,h3,h4,h5,h6").addAnchor("Link to this section");
+      });
+    </script>
+	<script type="text/javascript" src="/trac/glb-security/chrome/agilo/js/lib/jquery.form.js"></script>
+    <script type="text/javascript" src="/trac/glb-security/chrome/agilo/js/lib/jquery.cookie.js"></script>
+	<script type="text/javascript" src="/trac/glb-security/chrome/agilo/js/third_parties_hacks.js"></script>
+	<script type="text/javascript" src="/trac/glb-security/chrome/agilo/js/utilities.js"></script>
+	<script type="text/javascript">
+	//<![CDATA[
+		// Initialize the variables right at the start, so other js can use it in document.ready handlers
+		BASE_URL = "/trac/glb-security";
+		CHROME_URL = "/trac/glb-security/chrome";
+		// Normalise base url pattern so it also works with mod_python which can hickup on double slashes...
+		if ((/\/$/).test(BASE_URL))
+			BASE_URL = BASE_URL.slice(0, -1);
+		// No caching of ajax. Ever. Especially in IE 7!
+		$.ajaxSetup({cache: false});
+		// If we use metadata we want to put json into the data attribute
+		if ($.metadata)
+			$.metadata.setType('attr', 'data');
+		// Disable selection on the navigation
+		$(document).ready(function() {
+			setTimeout('if ($.fn.disableSelection) $(".menu").disableSelection()',500);
+		});
+	//]]>
+	</script>
+</head>
+	<body>
+	<div class="menu">
+	<form class="search" id="search_form" action="/trac/glb-security/search" method="get">
+	<label>Search</label>
+	<input type="text" id="proj-search" name="q" size="18" value="" />
+	</form>
+        <div id="project_logo_container">
+            <a id="logo" href="http://projects.corp.globant.com">
+                <img src="/globant2.gif" alt="Globant" />
+            </a>
+        </div>
+        <ul class="button group mainnav">
+		                <li><a href="/trac/glb-security/wiki" class="iconWiki">Wiki</a></li>
+		                <li><a href="/trac/glb-security/timeline" class="iconTimeline">Timeline</a></li>
+		                <li><a href="/trac/glb-security/roadmap" class="iconRoadmap">Roadmap</a></li>
+		                <li><a href="/trac/glb-security/browser" class="iconBrowser">Browse Source</a></li>
+		                <li><a href="/trac/glb-security/report" class="iconTickets">View Tickets</a></li>
+		                <li><a href="/trac/glb-security/search" class="iconSearch">Search</a></li>
+		                <li><a href="/trac/glb-security/tags" class="iconTags">Tags</a></li>
+		                <li><a href="/trac/glb-security/admin" title="Administration" class="iconAdmin">Admin</a></li>
+		                <li><a href="/trac/glb-security/team" class="iconTeams">Teams</a></li>
+		                <li><a href="/trac/glb-security/blog" class="iconBlog">Blog</a></li>
+		                <li><a href="/trac/glb-security/importer" class="iconImporter">Import</a></li>
+		                <li><a href="/trac/glb-security/dashboard" class="iconDashboard">Dashboard</a></li>
+		                <li><a href="/trac/glb-security/watchlist" class="iconWatchlist">Watchlist</a></li>
+		</ul>
+        <ul class="button group metanav">
+		                <li>logged in as esteban.ribicic</li>
+		                <li><a href="/trac/glb-security/logout" class="iconLogout">Logout</a></li>
+		                <li><a href="/trac/glb-security/prefs" class="iconPrefs">Preferences</a></li>
+		                <li><a href="/trac/glb-security/agilo-help">Help/Guide</a></li>
+		                <li><a href="/trac/glb-security/about" class="iconAbout">About Trac</a></li>
+		                <li><a href="/trac/glb-security/rpc" class="iconRpc">API</a></li>
+			<li><a href="http://www.agile42.com/">agile42</a></li>
+		</ul>
+	</div>
+	<div class="sidebar"><!-- TODO: make this a harmonica, or add an all toggle -->
+	<!-- TODO: fix the empty space at the bottom. -->
+		<label>Actions</label>
+		<ul class="tree">
+			
+    <li>
+        <a href="/trac/glb-security/newticket?type=requirement">
+           New Requirement
+        </a>
+    </li><li>
+        <a href="/trac/glb-security/newticket?type=task">
+           New Task
+        </a>
+    </li><li>
+        <a href="/trac/glb-security/newticket?type=story">
+           New User Story
+        </a>
+    </li><li>
+        <a href="/trac/glb-security/newticket?type=bug">
+           New Bug
+        </a>
+    </li>
+
+		</ul>
+		<label>Backlogs</label>
+		<ul class="backlogs tree">
+			
+      <!-- global backlog -->
+        <li>
+          <a href="/trac/glb-security/backlog/Product%20Backlog">Product Backlog</a>
+        </li>
+      <!-- sprint backlog -->
+        <li class="inlinebuttons">
+          Sprint Backlog for sprint:
+          <form name="sprint_view" action="/trac/glb-security/backlog/Sprint%20Backlog" method="get">
+            <select name="bscope" onChange="$(this.form).submit()">
+            </select>
+                <input type="submit" name="view" value="View" />
+          </form>
+        </li>
+
+		</ul>
+		<label>Tickets</label>
+		<ul class="tickets tree">
+		</ul>
+    <label>Wiki</label>
+	<ul class="wiki tree">
+	</ul>
+	</div>
+	<div class="main"><!-- Main Content -->
+	<div id="ctxtnav" class="nav">
+	<h2>Context Navigation</h2>
+	<ul>
+		<li class="first "><span class="active" id="fivestarvotes" title="Current Vote: 0 users voted for a total of 0"><object><ul class="star-rating"><li class="current-rating" style="width: 0%">Currently 0/5 stars.</li><li><a class="item one-star" href="/trac/glb-security/fivestarvote/1/wiki/LogAudits">1</a></li><li><a class="item two-star" href="/trac/glb-security/fivestarvote/2/wiki/LogAudits">2</a></li><li><a class="item three-star" href="/trac/glb-security/fivestarvote/3/wiki/LogAudits">3</a></li><li><a class="item four-star" href="/trac/glb-security/fivestarvote/4/wiki/LogAudits">4</a></li><li><a class="item five-star" href="/trac/glb-security/fivestarvote/5/wiki/LogAudits">5</a></li></ul></object></span></li><li><a href="/trac/glb-security/wiki/WikiStart">Start Page</a></li><li><a href="/trac/glb-security/wiki/TitleIndex">Index</a></li><li><a href="/trac/glb-security/wiki/LogAudits?action=history">History</a></li><li><a href="/trac/glb-security/wiki/LogAudits?action=diff&amp;version=17">Last Change</a></li><li class="last"><a href="/trac/glb-security/watchlist?action=watch&amp;realm=wiki&amp;resid=LogAudits" title="Add wiki to watchlist">Watch</a></li>
+	</ul>
+	<hr />
+	</div>
+    <div id="content" class="wiki">
+      <div class="wikipage searchable">
+        
+          <h2 id="MonitoringLoggingSystem">Monitoring Logging System</h2>
+<p>
+Continuously analyze new threats and modify controls as necessary. Audits will be done according to the planned schedule shown in the Procedure.
+</p>
+<h3 id="Introduction">Introduction</h3>
+<p>
+Logs are kept in a central server. A SIEM, RSA Envision, hosted at mordor.globant.com. Automatic alerts and Reports exist for all Basic and Common Security Events. This are checked once they arrived to our mail. No log is kept if nothing abnormal was found. Only when they show abnormality, the corresponding action, according to our Response Management Procedure, are taken.  To be able to keep up with emerging threats this Audits described below will be performed.
+</p>
+<p>
+Report - <a class="ext-link" href="https://docs.google.com/a/globant.com/spreadsheet/ccc?key=0AiKm0gFW81SsdHVRTVpCcXdERzNiMVlSTUk3aDFUUkE#gid=0"><span class="icon"> </span>here</a>
+</p>
+<h3 id="LoggingPolicies">Logging Policies</h3>
+<ul><li><a class="ext-link" href="https://docs.google.com/a/globant.com/document/d/1VyIgeQriqEU8FeF6usKBI_50G28D3vggIbgU5XV2NYc/edit#"><span class="icon"> </span>Logging Policies</a>
+</li></ul><h3 id="Procedure">Procedure</h3>
+<ul><li>Analysis will be done from Envision Analysis Console.
+</li></ul><ul><li>Every Month, the Analyst will dedicate one hour, at least, to review Logs.
+</li></ul><ul><li>Timeframe will be from the last Timeframe day in Excel, to the current day.
+</li></ul><ul><li>Select a Device Type that hasn't been previously audited. If all Types have been audited, the cycle can start with any of your choice.
+</li></ul><ul><li>Select Device. Same cycle as Device Type.
+</li></ul><ul><li>Select Event Types. Select ALL if possible.
+</li></ul><ul><li>You can use Sting Matching filters to look for Specificity.
+</li></ul><h4 id="Whattolook">What to look</h4>
+<p>
+Analyst will need to acquire knowledge and experience. As new Reviews will be done, the analyst will know with more accuracy what to look, and what to ignore.
+We will be looking for abnormalities, strange behaviours, etc.
+</p>
+<h4 id="WhatNOTtolook">What NOT to look</h4>
+<p>
+To avoid unnecesary searches that are already on alerts or Reports you need to see the Alert and Report Sections on the SIEM.
+Here is a list: it may not be accurate. please refer to the SIEM Sections.
+</p>
+<ul><li>Locked AD Users
+</li><li>Unix Jumphosts Failed Logins
+</li></ul><h4 id="FillingtheReport">Filling the Report</h4>
+<p>
+After the Review is finished, the Analyst must fill the <a class="ext-link" href="https://docs.google.com/a/globant.com/spreadsheet/ccc?key=0AiKm0gFW81SsdHVRTVpCcXdERzNiMVlSTUk3aDFUUkE#gid=0"><span class="icon"> </span>Report</a>.
+</p>
+<p>
+All Columns are self-explanatory. Here we describe the ones that can cause confusion.
+</p>
+<ul><li>Date - The date the Review is made.
+</li><li>Filters - Can be blank if none was used.
+</li><li>Site - Mordor is the only available for the time being.
+</li><li>Wiki ID - Investigation Section ID to link with Report. Only if something was investigated.
+</li><li>Action - What was the result of the Review. Can be NONE when nothing is found.
+</li><li>Result - If something was found, summarize how the investigation ended, or is pending. If there is an incident or Control improvement needed, raise TAR and associate it.
+</li></ul><h3 id="Investigations">Investigations</h3>
+<p>
+Here you can see the Investigations initiated due to something found in the Revision. An ID needs to be linked from the Excel Report.
+</p>
+<ul><li><a class="wiki" href="/trac/glb-security/wiki/LogAuditInv1">#1 Windows abnormal authentication by service userID internal-support.</a> 
+</li><li><a class="wiki" href="/trac/glb-security/wiki/LogAuditInv2">#2 Linux Error Message - kernel: hdc: drive_cmd: error=0x04 { AbortedCommand } </a>
+</li><li><a class="wiki" href="/trac/glb-security/wiki/LogAuditInv3">#3 Squid devices not Logging</a>
+</li><li><a class="wiki" href="/trac/glb-security/wiki/LogAuditInv4">#4 Trend Logs Check. Result: Passed a potential security risk</a>
+</li></ul>
+        
+        
+      </div>
+          <div class="buttons">
+              <form method="get" action="/trac/glb-security/wiki/LogAudits" id="modifypage">
+                <div>
+                  <input type="hidden" name="action" value="edit" />
+                      <input type="submit" value="Edit this page" />
+                </div>
+              </form>
+    <form method="get" action="/trac/glb-security/attachment/wiki/LogAudits/" id="attachfile">
+      <div>
+        <input type="hidden" name="action" value="new" />
+        <input type="submit" name="attachfilebutton" value="Attach file" />
+      </div>
+    </form>
+              <form method="get" action="/trac/glb-security/wiki/LogAudits">
+                <div id="delete">
+                  <input type="hidden" name="action" value="delete" />
+                  <input type="hidden" name="version" value="17" />
+                    <input type="submit" name="delete_version" value="Delete this version" />
+                  <input type="submit" value="Delete page" />
+                </div>
+              </form>
+          </div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="last first">
+          <a rel="nofollow" href="/trac/glb-security/wiki/LogAudits?format=txt">Plain Text</a>
+        </li>
+      </ul>
+    </div>
+	<div id="bottom">
+	<p><span class="agilo_version">0.9.3</span> © 2008-2010
+	<a href="http://www.agile42.com/" target="_blank">agile42</a> all
+	rights reserved
+        (this page was served in: 0.57444 sec.)
+    </p>
+	</div>
+	</div>
+	</body>
+</html>

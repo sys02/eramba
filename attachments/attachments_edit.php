@@ -1,19 +1,23 @@
 <?
 
 	include_once("lib/site_lib.php");
+	include_once("lib/attachments_lib.php");
+	include_once("lib/system_records_lib.php");
 
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
-	$action = $_GET["action"];
-	
+
+	$action = $_POST["action"];
+
 	$attachments_ref_section = $_GET["attachments_ref_section"];
 	$attachments_ref_subsection = $_GET["attachments_ref_subsection"];
-	$attachments_ref_id = $_GET["attachments_ref_id"];
+	$attachments_ref_id= $_GET["attachments_ref_id"];
+
 	
-	#$base_url_list  = build_base_url($section,"compliance_package_list");
+
+	$base_url_list  = build_base_url($section,"attachments_list");
 
 ?>
-
 
 	<section id="content-wrapper">
 		<h3>Upload an Attachment</h3>
@@ -34,7 +38,7 @@ echo "					<form name=\"compliance_package_edit\" method=\"POST\" action=\"$base
 						<label for="description">Upload File</label>
 						<span class="description">Select a File to Attach</span>
 <? 
-	echo "<input type=\"file\" name=\"attachments_file\"><br>";
+	echo "<input type=\"file\" name=\"file\"><br>";
 ?>
 				</div>
 				

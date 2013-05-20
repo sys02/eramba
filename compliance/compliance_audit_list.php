@@ -18,8 +18,8 @@
 	$base_url_edit_finding = build_base_url($section,"compliance_finding_edit");
 	$base_url_list_finding = build_base_url($section,"compliance_finding_list");
 
-	$base_url_edit_attachments = build_base_url("attachments","compliance_attachments_edit");
-	$base_url_list_attachments = build_base_url("attachments","compliance_attachments_list");
+	$base_url_edit_attachments = build_base_url("attachments","attachments_edit");
+	$base_url_list_attachments = build_base_url("attachments","attachments_list");
 
 	# local variables - YOU MUST ADJUST THIS! 
 	$compliance_audit_id = $_GET["compliance_audit_id"];
@@ -179,7 +179,7 @@ echo "
 								<div class=\"cell-actions\">
 <a href=\"$base_url_edit_finding&compliance_audit_id=$compliance_audit_item[compliance_audit_id]\" class=\"edit-action\">add finding</a> 
 <a href=\"$base_url_list_finding&compliance_audit_id=$compliance_audit_item[compliance_audit_id]\" class=\"edit-action\">view all finding</a>
-<a href=\"$base_url_edit_attachments&attachments_ref_section=compliance&attachments_ref_subsection=compliance_audit_edit&attachments_ref_id=$compliance_audit_item[compliance_audit_id]\" class=\"edit-action\">add attachment</a>
+<a href=\"$base_url_edit_attachments&attachments_ref_section=compliance&attachments_ref_subsection=compliance_audit_list&attachments_ref_id=$compliance_audit_item[compliance_audit_id]\" class=\"edit-action\">add attachment</a>
 <a href=\"$base_url_list_attachments&compliance_audit_id=$compliance_audit_item[compliance_audit_id]\" class=\"\">view all attachments</a>
 						</td>";
 echo "				</tr>";
