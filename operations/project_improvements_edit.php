@@ -71,9 +71,13 @@ echo "					<form name=\"edit\" method=\"GET\" action=\"$base_url_list\">";
 <? echo "<input type=\"text\" class=\"filter-text\" name=\"project_improvements_plan_budget\" id=\"project_improvements_plan_budget\" value=\"$project_improvements_item[project_improvements_plan_budget]\"/>";?>
 	
 	<label for="description">Current Budget</label>
-	<span class="description">Document the current budget for this project</span>
+	<span class="description">This is the current level of investment based on the inputs.</span>
 <? echo "<input type=\"text\" class=\"filter-text\" disabled=\"disabled\" name=\"project_improvements_current_budget\" id=\"project_improvements_current_budget\" value=\"$project_improvements_item[project_improvements_current_budget]\"/>";?>
 						
+	<label for="description">Project Completion Percentage</label>
+	<span class="description">This is the current project completion based on the input achievements.</span>
+<? echo "<input type=\"text\" class=\"filter-text\" disabled=\"disabled\" name=\"project_improvements_completion\" id=\"project_improvements_completion\" value=\"$project_improvements_item[project_improvements_completion]\"/>";?>
+
 	<label for="legalType">Project Status</label>
 	<span class="description"></span>
 	<select name="project_improvements_status_id" id="" class="chzn-select">

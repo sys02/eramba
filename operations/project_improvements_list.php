@@ -5,6 +5,7 @@
 	include_once("lib/system_users_lib.php");
 	include_once("lib/project_improvements_lib.php");
 	include_once("lib/project_improvements_expenses_lib.php");
+	include_once("lib/project_improvements_achievements_lib.php");
 	include_once("lib/project_improvements_status_lib.php");
 
 	# get global vars
@@ -36,6 +37,13 @@
 	$project_improvements_expenses_description = $_GET["project_improvements_expenses_description"];
 	$project_improvements_expenses_amount = $_GET["project_improvements_expenses_amount"];
 	$project_improvements_expenses_disabled = $_GET["project_improvements_expenses_disabled"];
+
+	# achievements stuff
+	$project_improvements_achievements_id = $_GET["project_improvements_achievements_id"];
+	$project_improvements_achievements_text = $_GET["project_improvements_achievements_text"];
+	$project_improvements_achievements_date = $_GET["project_improvements_achievements_date"];
+	$project_improvements_achievements_owner = $_GET["project_improvements_achievements_owner"];
+	$project_improvements_achievements_disabled = $_GET["project_improvements_achievements_disabled"];
 		
 	# this got to have a value
 	if ($project_improvements_status_id == "-1") {
@@ -111,7 +119,41 @@
 		
 		
 	 }
+	
+	if ($action == "edit_achievements" && is_numeric($project_improvements_achievements_id) && is_numeric($project_improvements_id)) {
+		
+		#it seems i need to add an expense to a project	
+		$project_improvements_update = array(
+			'project_improvements_achievements_text' => $project_improvements_achievements_text,
+			'project_improvements_achievements_owner' => $project_improvements_achievements_owner,
+			'project_improvements_achievements_date' => $project_improvements_achievements_date
+		);	
 
+		$id = update_project_improvements_achievements($project_improvements_update, $project_improvements_achievements_id);
+		add_system_records("operations","project_improvements_achievements_edit","$id",$_SESSION['logged_user_id'],"Update","");
+		
+		# now i need to update the current_budget ..
+		update_current_completion($project_improvements_id,$project_improvements_completion);
+	}
+
+	if ($action == "edit_achievements" && !is_numeric($project_improvements_achievements_id) && is_numeric($project_improvements_id)) {
+
+		#it seems i need to add an expense to a project	
+		$project_improvements_update = array(
+			'project_improvements_achievements_proj_id' => $project_improvements_id,
+			'project_improvements_achievements_text' => $project_improvements_achievements_text,
+			'project_improvements_achievements_owner' => $project_improvements_achievements_owner,
+			'project_improvements_achievements_date' => $project_improvements_achievements_date
+		);	
+
+		$id = add_project_improvements_achievements($project_improvements_update);
+		add_system_records("operations","project_improvements_achievements_edit","$id",$_SESSION['logged_user_id'],"Insert","");
+		
+		# now i need to update the current_budget ..
+		update_current_completion($project_improvements_id,$project_improvements_completion);
+
+	}
+	
 	if ($action == "edit_expenses" && !is_numeric($project_improvements_expenses_id) && is_numeric($project_improvements_id)) {
 
 		#it seems i need to add an expense to a project	
@@ -144,6 +186,11 @@
 		
 		# now i need to update the current_budget ..
 		update_current_budget($project_improvements_id);
+	}
+        
+	if ($action == "disable_achievements" && is_numeric($project_improvements_achievements_id)) {
+		disable_project_improvements_achievements($project_improvements_achievements_id);
+		add_system_records("operations","project_improvements_achievements_edit","$project_improvements_achievements_id",$_SESSION['logged_user_id'],"Disable","");
 	}
 
         if ($action == "disable_expenses" && is_numeric($project_improvements_expenses_id)) {

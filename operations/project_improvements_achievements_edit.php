@@ -3,13 +3,14 @@
 	include_once("lib/project_improvements_lib.php");
 	include_once("lib/project_improvements_status_lib.php");
 	include_once("lib/project_improvements_expenses_lib.php");
+	include_once("lib/project_improvements_achievements_lib.php");
 	include_once("lib/site_lib.php");
 
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	$project_improvements_id = $_GET["project_improvements_id"];
-	$project_improvements_expense_id= $_GET["project_improvements_expense_id"];
+	$project_improvements_achievements_id= $_GET["project_improvements_achievements_id"];
 	
 	$base_url_list = build_base_url($section,"project_improvements_list");
 
@@ -17,16 +18,16 @@
 		$project_improvements_item = lookup_project_improvements("project_improvements_id",$project_improvements_id);
 	}
 
-	if (is_numeric($project_improvements_expense_id)) {
-		$project_expenses_item = lookup_project_improvements_expenses("project_improvements_expenses_id",$project_improvements_expense_id);
+	if (is_numeric($project_improvements_achievements_id)) {
+		$project_expenses_item = lookup_project_improvements_achievements("project_improvements_achievements_id",$project_improvements_achievements_id);
 	}
 
 ?>
 
 
 	<section id="content-wrapper">
-		<h3>Edit or Create a Project Expense</h3>
-		<span class="description">Use this form to create or edit new improvement expense. In this way you can control financial expenses on your projects.</span>
+		<h3>Edit or Create a Project Update</h3>
+		<span class="description">Use this form to update news on the project</span>
 		<div class="tab-wrapper"> 
 			<ul class="tabs">
 				<li class="first active">
@@ -40,21 +41,24 @@
 <?
 echo "					<form name=\"edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
-						<label for="name">Expense Amount</label>
-						<span class="description">Register the amount you have invested on this project</span>
-<? echo "						<input type=\"text\" class=\"filter-number\" name=\"project_improvements_expenses_amount\" id=\"project_improvements_expenses_amount\" value=\"$project_expenses_item[project_improvements_expenses_amount]\"/>";?>
+						<label for="name">Update Owner</label>
+						<span class="description">Who is responsible for this update?</span>
+<? echo "						<input type=\"text\" class=\"-number\" name=\"project_improvements_achievements_owner\" id=\"project_improvements_achievements_owner\" value=\"$project_expenses_item[project_improvements_achievements_owner]\"/>";?>
 						
 	<label for="description">Description</label>
-	<span class="description">Describe the expense description.</span>
-<? echo "<textarea name=\"project_improvements_expenses_description\" class=\"filter-text\">$project_expenses_item[project_improvements_expenses_description]</textarea>";?>
+	<span class="description">Describe the project update description.</span>
+<? echo "<textarea name=\"project_improvements_achievements_text\" class=\"filter-text\">$project_expenses_item[project_improvements_achievements_text]</textarea>";?>
 						
 
-		<label for="name">Expense Date</label>
-		<span class="description">Record the date when the expense was made.</span>
+		<label for="name">Update Date</label>
+		<span class="description">Record the date when the update was achieved.</span>
 <?
-echo "	<input type=\"text\" class=\"filter-date datepicker\" name=\"project_improvements_expenses_date\" id=\"\" value=\"$project_expenses_item[project_improvements_expenses_date]\"/>";
+echo "	<input type=\"text\" class=\"filter-date datepicker\" name=\"project_improvements_achievements_date\" id=\"\" value=\"$project_expenses_item[project_improvements_achievements_date]\"/>";
 ?>
 						
+		<label for="name">Project Completion Percentage</label>
+		<span class="description">How complete is this project?</span>
+		<? echo "<input type=\"text\" class=\"\" name=\"project_improvements_completion\" id=\"project_improvements_completion\" value=\"$project_improvements_item[project_improvements_completion]\"/>";?>
 
 			</div>
 		</div>
@@ -62,11 +66,11 @@ echo "	<input type=\"text\" class=\"filter-date datepicker\" name=\"project_impr
 		
 		<div class="controls-wrapper">
 
-				    <INPUT type="hidden" name="action" value="edit_expenses">
+				    <INPUT type="hidden" name="action" value="edit_achievements">
 				    <INPUT type="hidden" name="section" value="operations">
 				    <INPUT type="hidden" name="subsection" value="project_improvements_list">
 <? echo " 			    <INPUT type=\"hidden\" name=\"project_improvements_id\" value=\"$project_improvements_item[project_improvements_id]\">"; ?>
-<? echo " 			    <INPUT type=\"hidden\" name=\"project_improvements_expenses_id\" value=\"$project_improvements_expense_id\">"; ?>
+<? echo " 			    <INPUT type=\"hidden\" name=\"project_improvements_achievements_id\" value=\"$project_improvements_achievements_id\">"; ?>
 			<a>
 			    <INPUT type="submit" value="Submit" class="add-btn"> 
 			</a>
