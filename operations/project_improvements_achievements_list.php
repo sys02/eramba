@@ -23,11 +23,12 @@
 	}
 	
 	$base_url_list = build_base_url($section,"project_improvements_list");
+	$base_url_list_achievements = build_base_url($section,"project_improvements_achievements_list");
 	$base_url_edit  = build_base_url($section,"project_improvements_achievements_edit");
 	
 	if ($action == "csv") {
-		#export_legal_csv();
-		#add_system_records("operations","project_improvements_expenses_edit","$legal_id",$_SESSION['logged_user_id'],"Export","");
+		export_project_improvements_achievements_csv();
+		add_system_records("operations","project_improvements_achievements_edit","$",$_SESSION['logged_user_id'],"Export","");
 	}
 
 	# ---- END TEMPLATE ------
@@ -56,9 +57,9 @@ echo "			<a href=\"$base_url_edit&project_improvements_id=$project_improvements_
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
-	echo '<li><a href="' . $base_url_list . '&download_export=legal_export">Download</a></li>';
+	echo '<li><a href="' . $base_url_list . '&download_export=project_improvements_achievements_export">Download</a></li>';
 } else { 
-echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
+echo "					<li><a href=\"$base_url_list_achievements&action=csv&project_improvements_id=$project_improvements_id\">Export All</a></li>";
 }
 ?>
 				</ul>

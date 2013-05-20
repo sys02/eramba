@@ -49,6 +49,17 @@ function update_project_improvements_current_budget($current_budget, $project_im
 	return $result;
 }
 
+function update_current_completion($project_improvements_id, $completion) {
+	$sql = "UPDATE project_improvements_tbl
+		SET
+		project_improvements_completion=\"$completion\"
+		WHERE
+		project_improvements_id=\"$project_improvements_id\"
+		";	
+	$result = runUpdateQuery($sql);
+	return $result;
+}
+
 function update_project_improvements($project_improvements_data, $project_improvements_id) {
 	$sql = "UPDATE project_improvements_tbl
 		SET
