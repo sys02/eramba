@@ -91,7 +91,7 @@ foreach($data as $data_item) {
 echo "				<tr class=\"even\">";
 echo "					<td><a href=\"$base_url_services&sort=$data_item[security_services_analysis_control_id]\">$data_item[security_services_analysis_control_name]</a></td>";
 echo "					<td>$data_item[security_services_analysis_fa]</td>";
-echo "					<td>$data_item[security_services_analysis_resource] FTE</td>";
+echo "					<td>$data_item[security_services_analysis_resource] Days/Year</td>";
 echo "					<td>$data_item[security_services_analysis_opex] $services_conf[system_currency]</td>";
 echo "					<td>$data_item[security_services_analysis_contracts] $services_conf[system_currency]</td>";
 echo "					<td>$data_item[security_services_analysis_capex] $services_conf[system_currency]</td>";

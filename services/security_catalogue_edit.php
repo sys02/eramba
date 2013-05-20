@@ -156,7 +156,7 @@ echo "				<textarea class=\"\" id=\"\" name=\"security_services_cost_capex\">$se
 				}
 
 echo "		<label for=\"name\">Service Cost (Resource Utilization)</label>";
-echo "		<span class=\"description\">How many hours of your resources this control consumes over a month? Think on defining, communicating, fixing, auditing, operating and reviewing the controls.</span>";
+echo "		<span class=\"description\">How many days of your resources this control consumes over a year? Think on defining, communicating, fixing, auditing, operating and reviewing the controls.</span>";
 
 
 
