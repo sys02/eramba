@@ -151,7 +151,7 @@ echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=security_incident_name\">Incident Title</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=security_incident_tp_id\">Third Party</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=security_incident_reporter_id\">Reporter</a></th>";
-echo "					<th><a href=\"$base_url_list&sort=security_incident_victim_id\">Victim</a></th>";
+echo "					<th><a href=\"$base_url_list&sort=security_incident_victim_id\">Affected</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=security_incident_owner_id\">Owner</a></th>";
 echo "					<th>Security Controls</th>";
 echo "					<th><a href=\"$base_url_list&sort=security_incident_classification_id\">Classification</a></th>";
