@@ -169,7 +169,7 @@ echo "						<tr>";
 echo "							<th>Process Name</th>";
 echo "							<th>Description</th>";
 echo "							<th><center>MTO</th>";
-echo "							<th><center>Revenue/Day</th>";
+echo "							<th><center>RTO</th>";
 echo "						</tr>";
 
 	$process_list = list_process(" WHERE bu_id = $bu_item[bu_id] AND process_disabled = \"0\"");
@@ -189,8 +189,8 @@ echo "						<a class=\"delete\" href=\"?section=operations&subsection=project_im
 echo "								</div>";
 echo "							</td>";
 echo "							<td>".substr($process_item[process_description],0,100)."...</td>";
-echo "							<td><center>$process_item[process_mto] Days</td>";
-echo "							<td><center>$process_item[process_revenue] $services_conf[system_currency]</td>";
+echo "							<td><center>$process_item[process_mto]</td>";
+echo "							<td><center>$process_item[process_revenue]</td>";
 echo "						</tr>";
 	}
 

@@ -41,10 +41,10 @@ echo "					<form name=\"process_edit\" method=\"GET\" action=\"$base_url_list\">
 						<label for="description">Description</label>
 						<span class="description">Give a brief description of what the Process does, so everyone is in the same page.</span>
 <? echo "						<textarea name=\"process_description\" class=\"filter-text\">$process_item[process_description]</textarea>";?>
-						<label for="name">Process Revenue / Day</label>
-						<span class="description">This will later be used as prioritization tool for BCM</span>
+						<label for="name">Recovery Time Objective (RTO)</label>
+						<span class="description">This will later be used as the main criteria to develop a backup plan for the systems that support this business process.</span>
 <? echo "						<input type=\"text\" name=\"process_revenue\" id=\"process_revenue\" value=\"$process_item[process_revenue]\"/>";?>
-						<label for="name">Process Recovery Time Objective (MTO)</label>
+						<label for="name">Maximun Tolerable Outage (MTO)</label>
 						<span class="description">Right. This question will be useful at the time of preparing your Business Continuity Management (BCM) program. You need to provide a number of days, which this process could be completly stopped before it causes great disruption to the organization. Example: 1, 4, 6 (do not write anything else than a integer number). Default MTO is 360 Days.</span>
 <? echo "						<input type=\"text\" name=\"process_mto\" id=\"process_mto\" value=\"$process_item[process_mto]\"/>";?>
 				</div>
