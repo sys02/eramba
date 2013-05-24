@@ -1,9 +1,0 @@
-bcm_plans_id,bcm_plans_title,bcm_plans_objectives,bcm_plans_lunch_criteria,bcm_plans_sponsor_name,bcm_plans_who_declarers,bcm_plans_status,bcm_plans_metric,bcm_plans_success_criteria,bcm_plans_audit_months,bcm_plans_audit_check,bcm_plans_disabled
-24,Logistics Continuity,Provide alternative ways to deliver products if the main logistic partner fails,The main logistic must confirm delay problems that question the ability to comply with our customer SLO,esteban,CEO,Production,Full run test,Perfect delivery SLO for 2 days after the plan test started.,August,ok,0
-
-bcm_plans_details_id,bcm_plans_details_bcm_plan_id,bcm_plans_details_step,bcm_plans_details_when,bcm_plans_details_who,bcm_plans_details_what,bcm_plans_details_where,bcm_plans_details_how,bcm_plans_details_disabled
-17,24,1,1 hour since the logistic partner confirms issues,CEO,Asks the operations manager to use the alternative logistic partner,Onsite,Telephone,0
-18,24,2,Within 1 hour since the previous step,Operations Manager,Ask the IT departments to allow access to the alternative logistic partner to access our systems,Onsite,Telephone,0
-19,24,3,Just after the IT departments acknowledges they can provide access,Operations Manager,Contacts the logistic partner and asks them to deliver services,Onsite,Telephone,0
-
-

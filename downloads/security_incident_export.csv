@@ -1,2 +1,0 @@
-security_incident_id,security_incident_title,security_incident_description,security_controls,classification,status,open_date,close_date,owner,asset,security_incident_disabled
-1,Stolen Laptop,A laptop was stolen from one of our employees while visiting customers abroad.,,,Closed,2013-01-15,2013-02-18,John.Doo,Employee Laptops,0
