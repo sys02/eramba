@@ -59,7 +59,7 @@ echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_control_name\"><a class=\"asc\">Control Name</th>";
 echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_fa\"># Failed Audits</th>";
-echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_resource\">Hs/Month Resources</th>";
+echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_resource\">Hs/Year Resources</th>";
 echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_opex\">OPEX</th>";
 echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_contracts\">Support Contracts</th>";
 echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_capex\">CAPEX</th>";
