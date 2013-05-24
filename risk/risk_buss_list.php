@@ -243,7 +243,7 @@
 
 
 	<section id="content-wrapper">
-		<h3>Business Risk Analysis</h3>
+		<h3>Business Based - Risk Analysis</h3>
 		<span class=description>Identifying and analysing Business Risks can be usefull if executed in a simple and practical way. For each Business line, identify and analyse risks. You will later have the option to mitigate them by the use of controls or Continuity Plans.</span>
 		<br>
 		<br>

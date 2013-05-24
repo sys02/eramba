@@ -10,12 +10,15 @@ $system_conf['source_email'] = "";
 $system_conf['mail_server'] = "";
 $system_conf['mail_tag'] = "";
 
+# HIGH RISK OPTION, DONT ENABLE UNLESS:
+$system_conf['permit_uploads'] = "";
+
 # you must define this 
 $sytem_conf['ad_dn'] = "";
 
 # you must define this
 $db_conf['db_hostname'] = "localhost";
-$db_conf['db_name'] = "globant_prod_v11";
+$db_conf['db_name'] = "eramba_prod_v11";
 $db_conf['db_username'] = "root";
 $db_conf['db_password'] = "";
 

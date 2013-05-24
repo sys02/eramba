@@ -223,7 +223,7 @@
 
 
 	<section id="content-wrapper">
-		<h3>Risk Analysis</h3>
+		<h3>Asset based - Risk Analysis</h3>
 		<span class=description>Identifying and analysing Risks can be usefull if executed in a simple and practical way. For each asset identify and analyse risks.</span>
 		<br>
 		<br>
