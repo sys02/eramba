@@ -87,8 +87,8 @@ echo "						<textarea id=\"\" name=\"security_services_objective\" class=\"\">$s
 echo "						<textarea class=\"\" id=\"\" name=\"security_services_documentation_url\">$security_services_item[security_services_documentation_url]</textarea>";
 ?>
 						
-						<label for="legalType">Service Metrics</label>
-						<span class="description">You'll be asked to defined two things: how you will measure metrics and what is the criteria used to decide if the sample is representative of a service delivered as expected at previous stages</span>
+						<label for="legalType">Audit Metrics</label>
+						<span class="description">What needs to be measured in order to determine if the service is doing what it should</span>
 <?
 				if (empty($security_services_item[security_services_audit_metric])) { 
 echo "				<textarea class=\"\" id=\"\" name=\"security_services_audit_metric\">Describe the metric</textarea>";
@@ -96,7 +96,11 @@ echo "				<textarea class=\"\" id=\"\" name=\"security_services_audit_metric\">D
 echo "				<textarea class=\"\" id=\"\" name=\"security_services_audit_metric\">$security_services_item[security_services_audit_metric]</textarea>";
 				}
 
-echo "<br><br>";
+?>
+						<label for="legalType">Sucess Criteria</label>
+						<span class="description">What should be the outcome of the metric in order to consider it acceptable?</span>
+
+<?
 
 				if (empty($security_services_item[security_services_audit_metric])) { 
 echo "				<textarea class=\"\" id=\"\" name=\"security_services_audit_success_criteria\">Describe the metric success criteria</textarea>";
