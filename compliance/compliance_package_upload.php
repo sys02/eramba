@@ -16,7 +16,7 @@
 
 	<section id="content-wrapper">
 		<h3>Upload a Complete Compliance Package</h3>
-		<span class="description">You can upload a complete compliance package from your computer using a Comma Separated File (CSV). You need to be carefull on how you setup the columns of your CSV tough! <br><br><b>WARNINGGGGGG!!!!!!:</b> read instructions on how to use this <a href="http://www.eramba.org/?p=616">here</a></span>
+		<span class="description">You can upload a complete compliance package from your computer using a Comma Separated File (CSV). You need to be carefull on how you setup the columns of your CSV tough! <br><br><b>WARNINGGGGGG!!!!!!:</b> read instructions on how to use this <a href="http://www.eramba.org/howto/compliance-management/uploading-compliance-packages/">here</a></span>
 		<div class="tab-wrapper"> 
 			<ul class="tabs">
 				<li class="first active">
