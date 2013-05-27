@@ -25,6 +25,26 @@
 	$system_conf_admin_pwd = $_GET["system_conf_admin_pwd"];
 	$system_users_disabled = $_GET["system_users_disabled"];
 
+	# i need to know who is asking to do what ..
+	$current_logged_user_id = $_SESSION['logged_user_id'];
+
+	# if admin is asking ,then it's all right, he can do whatever .. but! if it's not admin, then that person
+	# can only modify his account
+	if ($action == "update" || $action == "disabled" || $action == "csv") {
+		# this shouldnt happen
+		if (is_numeric($current_logged_user_id)) {
+
+			if ($current_logged_user_id != "1" && $current_logged_user_id != $system_users_id) {
+			#echo "Error: a non admin ($current_logged_user_id)  is trying to do something wiht the account of $system_users_id";	
+			unset($action);
+			}
+
+		} else {
+			#echo "Error: i dont know who is logged in .. this is strange<br>";
+			unset($action);
+		}
+	}
+
 	if (empty($system_users_login) && $action == "edit") { 
 		$action = NULL;
 	}
@@ -148,14 +168,15 @@ echo "					<th>Group</a></th>";
 			<tbody>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
-	if ($show_id) {
-		$system_users_list = list_system_users(" WHERE system_users_disabled = 0 AND system_users_id = $show_id");
-	} else {
-		if ($sort == "system_users_login" OR $sort == "system_users_name") {
-			$system_users_list = list_system_users(" WHERE system_users_disabled = 0 ORDER by $sort");
-		} else {
-			$system_users_list = list_system_users(" WHERE system_users_disabled = 0 ORDER by system_users_name");
-		}
+	#echo "$_SESSION[logged_user_id]";
+
+	$logged_user = $_SESSION[logged_user_id];
+	# i must have a logged user .. if i dont, something is weird and i should stop.
+	# if the logged user is admin, i can see all users
+	if ($logged_user == "1") {
+		$system_users_list = list_system_users(" WHERE system_users_disabled = 0");
+	} elseif (is_numeric($logged_user)) {
+		$system_users_list = list_system_users(" WHERE system_users_disabled = 0 AND system_users_id = $logged_user");
 	}
 
 	foreach($system_users_list as $system_users_item) {
