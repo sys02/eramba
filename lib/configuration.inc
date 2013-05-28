@@ -26,6 +26,6 @@ $db_conf['db_password'] = "";
 $services_conf['system_currency'] = "$";
 
 # set this to True or False 
-$risk_conf['use_eramba_formulas'] = "True";
+$risk_conf['use_eramba_formulas'] = "";
 
 ?>
