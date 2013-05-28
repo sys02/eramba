@@ -23,7 +23,7 @@
 	$action = $_GET["action"];
 	$risk_id= isset($_GET["risk_id"]) ? $_GET["risk_id"] : $_GET["risk_management_id"] ;
 	$asset_id= $_GET["asset_id"];
-	
+
 	$base_url_list = build_base_url($section,"risk_management_list");
 
 	if (is_numeric($risk_id)) {

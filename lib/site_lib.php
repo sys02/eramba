@@ -409,114 +409,106 @@ date_default_timezone_set('America/Los_Angeles');
 
 	$currentDayRel = str_pad($currentDay, 2, "0", STR_PAD_LEFT);
 	$date = "$year-$month-$currentDayRel";
+	$events = array();
 
 
 	foreach($risk_exception as $risk_exception_item) {
 		if (array_search($date, $risk_exception_item)) {
 			$base_url_edit = build_base_url("risk","risk_exception_edit");
-			$warning_risk_exception="<a href=\"$base_url_edit&action=edit&risk_exception_id=$risk_exception_item[risk_exception_id]\">(RE)</a>";
+			$events['warning_risk_exception']="<a href=\"$base_url_edit&action=edit&risk_exception_id=$risk_exception_item[risk_exception_id]\">(RE)</a>";
+
 		}
 	}
 	
 	foreach($risk_asset_review as $risk_asset_review_item) {
 		if (array_search($date, $risk_asset_review_item)) {
 			$base_url_edit = build_base_url("risk","risk_management_edit");
-			$warning_risk_asset_review="<a href=\"$base_url_edit&action=edit&risk_id=$risk_asset_review_item[risk_id]\">(RR)</a>";
+			$events['warning_risk_asset_review']="<a href=\"$base_url_edit&action=edit&risk_id=$risk_asset_review_item[risk_id]\">(RR)</a>";
 		}
 	}
 	
 	foreach($risk_tp_review as $risk_tp_review_item) {
 		if (array_search($date, $risk_tp_review_item)) {
 			$base_url_edit = build_base_url("risk","risk_tp_edit");
-			$warning_risk_tp_review="<a href=\"$base_url_edit&action=edit&risk_id=$risk_tp_review_item[risk_id]\">(RR)</a>";
+			$events['warning_risk_tp_review']="<a href=\"$base_url_edit&action=edit&risk_id=$risk_tp_review_item[risk_id]\">(RR)</a>";
 		}
 	}
 	
 	foreach($risk_buss_review as $risk_buss_review_item) {
 		if (array_search($date, $risk_buss_review_item)) {
 			$base_url_edit = build_base_url("risk","risk_buss_edit");
-			$warning_risk_buss_review="<a href=\"$base_url_edit&action=edit&risk_id=$risk_buss_review_item[risk_id]\">(RR)</a>";
+			$events['warning_risk_buss_review']="<a href=\"$base_url_edit&action=edit&risk_id=$risk_buss_review_item[risk_id]\">(RR)</a>";
 		}
 	}
 
 	foreach($compliance_exception as $compliance_exception_item) {
 		if (array_search($date, $compliance_exception_item)) {
 			$base_url_edit = build_base_url("compliance","compliance_exception_edit");
-			$warning_compliance_exception="<a href=\"$base_url_edit&action=edit&compliance_exception_id=$compliance_exception_item[compliance_exception_id]\">(CE)</a>";
+			$events['warning_compliance_exception']="<a href=\"$base_url_edit&action=edit&compliance_exception_id=$compliance_exception_item[compliance_exception_id]\">(CE)</a>";
 		}
 	}
 	
 	foreach($compliance_finding as $compliance_finding_item) {
 		if (array_search($date, $compliance_finding_item)) {
 			$base_url_edit = build_base_url("compliance","compliance_finding_edit");
-			$warning_compliance_finding="<a href=\"$base_url_edit&action=edit&compliance_finding_id=$compliance_finding_item[compliance_finding_id]\">(CF)</a>";
+			$events['warning_compliance_finding']="<a href=\"$base_url_edit&action=edit&compliance_finding_id=$compliance_finding_item[compliance_finding_id]\">(CF)</a>";
 		}
 	}
 	
 	foreach($compliance_audit as $compliance_audit_item) {
 		if (array_search($date, $compliance_audit_item)) {
 			$base_url_edit = build_base_url("compliance","compliance_audit_edit");
-			$warning_compliance_audit="<a href=\"$base_url_edit&action=edit&compliance_audit_id=$compliance_audit_item[compliance_audit_id]\">(CA)</a>";
+			$events['warning_compliance_audit']="<a href=\"$base_url_edit&action=edit&compliance_audit_id=$compliance_audit_item[compliance_audit_id]\">(CA)</a>";
 		}
 	}
 	
 	foreach($policy_exceptions as $policy_exceptions_item) {
 		if (array_search($date, $policy_exceptions_item)) {
 			$base_url_edit = build_base_url("operations","policy_exceptions_edit");
-			$warning_policy_exceptions="<a href=\"$base_url_edit&action=edit&policy_exceptions_id=$policy_exceptions_item[policy_exceptions_id]\">(PE)</a>";
+			$events['warning_policy_exceptions']="<a href=\"$base_url_edit&action=edit&policy_exceptions_id=$policy_exceptions_item[policy_exceptions_id]\">(PE)</a>";
 		}
 	}
 	
 	foreach($project_improvements as $project_improvements_item) {
 		if (array_search($date, $project_improvements_item)) {
 			$base_url_edit = build_base_url("operations","project_improvements_edit");
-			$warning_project_improvements="<a href=\"$base_url_edit&action=edit&project_improvements_id=$project_improvements_item[project_improvements_id]\">(PI)</a>";
+			$events['warning_project_improvements']="<a href=\"$base_url_edit&action=edit&project_improvements_id=$project_improvements_item[project_improvements_id]\">(PI)</a>";
 		}
 	}
 	
 	foreach($security_incident as $security_incident_item) {
 		if (array_search($date, $security_incident_item)) {
 			$base_url_edit = build_base_url("operations","security_incident_edit");
-			$warning_security_incident="<a href=\"$base_url_edit&action=edit&security_incident_id=$security_incident_item[security_incident_id]\">(SI)</a>";
+			$events['warning_security_incident']="<a href=\"$base_url_edit&action=edit&security_incident_id=$security_incident_item[security_incident_id]\">(SI)</a>";
 		}
 	}
 	
 	foreach($service_contracts as $service_contracts_item) {
 		if (array_search($date, $service_contracts_item)) {
 			$base_url_edit = build_base_url("security_services","service_contracts_edit");
-			$warning_service_contracts="<a href=\"$base_url_edit&action=edit&service_contracts_id=$service_contracts_item[service_contracts_id]\">(SC)</a>";
+			$events['warning_service_contracts']="<a href=\"$base_url_edit&action=edit&service_contracts_id=$service_contracts_item[service_contracts_id]\">(SC)</a>";
 		}
 	}
 	
 	foreach($control_audit_updated as $control_audit_updated_item) {
 		if (array_search($date, $control_audit_updated_item)) {
 			$base_url_edit = build_base_url("security_services","security_catalogue_edit");
-			$warning_service_audit="<a href=\"$base_url_edit&action=edit&security_services_id=$control_audit_updated_item[control_id]\">(SA)</a>";
+			$events['warning_service_audit']="<a href=\"$base_url_edit&action=edit&security_services_id=$control_audit_updated_item[control_id]\">(SA)</a>";
 		}
 	}
 	
 	foreach($control_maintenance_updated as $control_maintenance_updated_item) {
 		if (array_search($date, $control_maintenance_updated_item)) {
 			$base_url_edit = build_base_url("security_services","security_catalogue_edit");
-			$warning_service_maintenance="<a href=\"$base_url_edit&action=edit&security_services_id=$control_maintenance_updated_item[control_id]\">(SM)</a>";
+			$events['warning_service_maintenance']="<a href=\"$base_url_edit&action=edit&security_services_id=$control_maintenance_updated_item[control_id]\">(SM)</a>";
 		}
 	}
-
-	$Calendar .= "<td class='day' rel='$date'>$currentDay $warning_risk_exception $warning_risk_asset_review $warning_risk_tp_review $warning_risk_buss_review $warning_compliance_exception $warning_compliance_audit $warning_compliance_finding $warning_policy_exceptions $warning_project_improvements $warning_security_incident $warning_service_contracts $warning_service_maintenance $warning_service_audit</td>";
-
-	unset($warning_risk_exception);
-	unset($warning_risk_asset_review);
-	unset($warning_risk_tp_review);
-	unset($warning_risk_buss_review);
-	unset($warning_compliance_exception);
-	unset($warning_compliance_finding);
-	unset($warning_compliance_audit);
-	unset($warning_policy_exceptions);
-	unset($warning_project_improvements);
-	unset($warning_security_incident);
-	unset($warning_service_contracts);
-	unset($warning_service_maintenance);
-	unset($warning_service_audit);
+	$hasEvents = count($events);
+	$eventContainer = ($hasEvents)? "<ul class='eventContainer'><li>".join('</li><li>', $events)."</li></ul>" : "";
+	$Calendar .= "<td class='day ".(($hasEvents) ? 'hasEvents' : '')."' rel='$date'>$currentDay $eventContainer</td>";
+	
+	unset($events,$hasEvents);
+	unset($warning_risk_exception, $warning_risk_asset_review, $warning_risk_tp_review, $warning_risk_buss_review, $warning_compliance_exception, $warning_compliance_audit, $warning_compliance_finding, $warning_policy_exceptions, $warning_project_improvements, $warning_security_incident, $warning_service_contracts, $warning_service_maintenance, $warning_service_audit);
 
 	$currentDay++;
 	$dayOfWeek++;
