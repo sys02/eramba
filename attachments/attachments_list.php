@@ -98,7 +98,6 @@
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=attachments_unique_name\">File Name</a></th>";
-echo "					<th>Source</th>";
 echo "					<th><a href=\"$base_url_list&sort=attachments_upload_date\">Upload Date</a></th>";
 ?>
 				</tr>
@@ -148,7 +147,6 @@ echo "						<div class=\"cell-actions\">";
 echo "					<a href=\"$attachment_base_url_list_ref&action=disable&attachments_id=$attachments_item[attachments_id]&attachments_ref_id=$attachments_ref_id&attachments_ref_section=$attachments_ref_section&attachments_ref_subsection=$attachments_ref_subsection&compliance_audit_id=$attachments_ref_id\" class=\"delete-action\">delete</a>";
 echo "						</div>";
 echo "					</td>";
-echo "					<td><a href=\"$base_url_list_ref&show_id=$attachments_ref_id\">Go!</a></td>";
 echo "					<td>$attachments_item[attachments_upload_date]</td>";
 echo "				</tr>";
 	}
