@@ -17,9 +17,9 @@ $system_conf['permit_uploads'] = "";
 $sytem_conf['ad_dn'] = "";
 
 # you must define this
-$db_conf['db_hostname'] = "localhost";
-$db_conf['db_name'] = "eramba_prod_v11";
-$db_conf['db_username'] = "root";
+$db_conf['db_hostname'] = "";
+$db_conf['db_name'] = "";
+$db_conf['db_username'] = "";
 $db_conf['db_password'] = "";
 
 # optional, define your currency.

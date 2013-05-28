@@ -22,6 +22,7 @@
 	$attachments_ref_id= $_POST["attachments_ref_id"];
 	
 	$base_url_list_ref = build_base_url("$attachments_ref_section","$attachments_ref_subsection");
+	$base_url_audit_list = build_base_url("compliance","compliance_audit_list");
 	$attachment_base_url_list_ref = build_base_url("attachments","attachments_list");
 
 	if ($action == "upload") {
@@ -87,12 +88,6 @@
 		<br>
 		<br>
 		<div class="controls-wrapper">
-<?
-echo "			<a href=\"$base_url_edit&action=edit\" class=\"add-btn\">";
-?>
-				<span class="add-icon"></span>
-				Add a new Attachment 
-			</a>
 			
 		</div>
 		<br class="clear"/>
@@ -147,7 +142,7 @@ echo "					<th><a href=\"$base_url_list&sort=attachments_upload_date\">Upload Da
 echo "				<tr class=\"even\">";
 echo "					<td class=\"action-cell\">";
 echo "						<div class=\"cell-label\">";
-echo "							$attachments_item[attachments_original_name]";
+echo "						<a href=\"$base_url_audit_list&download_attachment=$attachments_item[attachments_unique_name]\">$attachments_item[attachments_original_name]</a>";
 echo "						</div>";
 echo "						<div class=\"cell-actions\">";
 echo "					<a href=\"$attachment_base_url_list_ref&action=disable&attachments_id=$attachments_item[attachments_id]&attachments_ref_id=$attachments_ref_id&attachments_ref_section=$attachments_ref_section&attachments_ref_subsection=$attachments_ref_subsection&compliance_audit_id=$attachments_ref_id\" class=\"delete-action\">delete</a>";
@@ -162,6 +157,13 @@ echo "				</tr>";
 ?>
 			</tbody>
 		</table>
+
+	<?
+echo "			<a href=\"$base_url_audit_list\" class=\"cancel-btn\">";
+?>
+				Cancel
+				<span class="select-icon"></span>
+			</a>
 		
 		<br class="clear"/>
 	</section>

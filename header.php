@@ -77,6 +77,40 @@ echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 			$(".chzn-select").chosen({
 				no_results_text: "No results matched",
 				placeholder_text: "Select Some Options..."
+			}).change(function(event, value){
+				var select = $(event.currentTarget),
+					textarea = select.prev('textarea'),
+					textareaVal = textarea.val(),
+					currentValue, addValue, replaceQuery;
+
+				if (value.hasOwnProperty('selected')) {
+					
+					if (value.selected === -1) return;
+
+					currentValue = $('option[value="' + value.selected + '"]', select).text().trim(),
+
+					addValue = ((textareaVal) ? ', ' : '') + currentValue;
+
+					textarea.val(textareaVal + addValue);
+				}
+
+				if (value.hasOwnProperty('deselected')) {
+					if (value.selected === -1) return;
+
+					currentValue = $('option[value="' + value.deselected + '"]', select).text().trim(),
+					
+					replaceQuery = currentValue;
+
+					if (textareaVal.indexOf(currentValue) === 0 && textareaVal.indexOf(currentValue + ', ') !== -1) {
+						replaceQuery = currentValue + ', ';
+					}
+
+					if (textareaVal.indexOf(currentValue) > 0) {
+						replaceQuery = ', ' + currentValue;
+					}
+
+					textarea.val( textareaVal.replace(replaceQuery, ''));
+				}
 			});
 			
 			$(".tab-wrapper > ul li a").click(function(event) {

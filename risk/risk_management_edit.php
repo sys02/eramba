@@ -23,7 +23,7 @@
 	$action = $_GET["action"];
 	$risk_id= isset($_GET["risk_id"]) ? $_GET["risk_id"] : $_GET["risk_management_id"] ;
 	$asset_id= $_GET["asset_id"];
-
+	
 	$base_url_list = build_base_url($section,"risk_management_list");
 
 	if (is_numeric($risk_id)) {
@@ -62,7 +62,7 @@ echo "						<input type=\"text\" class=\"filter-text\" name=\"risk_title\" id=\"
 						<span class="description">Define to which Assets this Risk is applicable</span>
 						<select name="asset_id[]" id="" class="chzn-select" multiple="multiple">
 
-						<option value="-1">Select one or many assets...</option>
+						<option value="-1" disabled="disabled">Select one or many assets...</option>
 <?
 			if ($risk_item[risk_id]) {
 				$pre_selected_asset_list = list_risk_asset_join(" WHERE risk_asset_join_risk_id = \"$risk_item[risk_id]\"");	
@@ -78,12 +78,11 @@ echo "						<input type=\"text\" class=\"filter-text\" name=\"risk_title\" id=\"
 						<label for="name">Threats</label>
 						<span class="description">Describe the applicable threats that apply to the asset we are Risk Analysing. This is a good time to get creative (realistic tough).</span>
 <?
-echo "						<textarea id=\"\" name=\"risk_threat\" class=\"filter-text\">$risk_item[risk_threat]</textarea>";
+echo "						<textarea style=\"margin-bottom: 10px;\" name=\"risk_threat\">$risk_item[risk_threat]</textarea>";
 ?>
-			<br>	
-			<br>	
-			<select name="tiv_threats" id="" class="chzn-select" multiple="multiple">
-			<option value="-1">Select one or many predefined Threats...</option>
+
+			<select name="tiv_threats" class="chzn-select" multiple="multiple">
+			<option value="-1" disabled="disabled">Select one or many predefined Threats...</option>
 <?
 			list_drop_menu_tiv_threats(NULL,"tiv_threats_category");	
 ?>
@@ -94,16 +93,14 @@ echo "						<textarea id=\"\" name=\"risk_threat\" class=\"filter-text\">$risk_i
 						<label for="description">Vulnerabilities</label>
 						<span class="description">For each one of the described threats, identify it's realted vulnerabilities.</span>
 <?
-# echo "						<textarea id=\"\" name=\"risk_vulnerabilities\" class=\"filter-text\">$risk_item[risk_vulnerabilities]</textarea>";
-echo "						<textarea id=\"\" name=\"risk_vulnerabilities\">$risk_item[risk_vulnerabilities]</textarea>";
+echo "						<textarea style=\"margin-bottom: 10px;\" name=\"risk_vulnerabilities\">$risk_item[risk_vulnerabilities]</textarea>";
 ?>
 
-			<br>	
-			<br>	
-			<select name="tiv_vuln" id="" class="chzn-select" multiple="multiple">
-			<option value="-1">Select one or many predefined Vulnerabilities...</option>
+
+			<select name="tiv_vuln" class="chzn-select" multiple="multiple" style="width:100%;">
+			<option value="-1" disabled="disabled">Select one or many predefined Vulnerabilities...</option>
 <?
-			list_drop_menu_tiv_vuln(NULL,"tiv_vuln_category");	
+			list_drop_menu_tiv_vuln(NULL,"tiv_vuln_category");
 ?>
 			</select>
 						<br>
@@ -114,7 +111,7 @@ $risk_classification_types = list_risk_classification_distinct();
 
 foreach($risk_classification_types as $risk_classification_types_item) {
 	echo "<select name=\"risk_classification[]\" class=\"chzn-select\">";
-	echo "<option value=\"-1\">Classification: $risk_classification_types_item[risk_classification_type]</option>";
+	echo "<option value=\"-1\" disabled=\"disabled\">Classification: $risk_classification_types_item[risk_classification_type]</option>";
 
 	$pre_selected_value = pre_selected_risk_classification_values($risk_classification_types_item[risk_classification_type], $risk_item[risk_id]);	
 
@@ -134,7 +131,7 @@ echo "						<input type=\"text\" class=\"filter-text\" name=\"risk_classificatio
 						<label for="legalType">Risk Mitigation Strategy</label>
 						<span class="description">Choose the most suitable mitigation strategy for this Risk</span>
 						<select name="risk_mitigation_strategy_id" id="" class="chzn-select">
-						<option value="-1">Select a Strategy...</option>
+						<option value="-1" disabled="disabled">Select a Strategy...</option>
 <?
 						list_drop_menu_risk_mitigation_strategy($risk_item[risk_mitigation_strategy_id],"risk_mitigation_strategy_id");	
 ?>
@@ -143,7 +140,7 @@ echo "						<input type=\"text\" class=\"filter-text\" name=\"risk_classificatio
 						<label for="legalType">Compensating Controls</label>
 						<span class="description">Choose the most suitable available compensating controls (you can select multiple)</span>
 						<select name="security_services_id[]" id="" class="chzn-select" multiple="multiple">
-						<option value="-1">Select a Compensating Control...</option>
+						<option value="-1" disabled="disabled">Select a Compensating Control...</option>
 <?
 			$pre_selected_security_services_list = list_risk_security_services_join(" WHERE risk_security_services_join_risk_id = \"$risk_item[risk_id]\"");	
 			$pre_selected_items = array();
@@ -163,7 +160,7 @@ echo "						<input type=\"text\" class=\"filter-text\" name=\"risk_residual_scor
 						<label for="legalType">Applicable Risk Exceptions</label>
 						<span class="description">Altough more commonly used when Compensating controls are not feasible and the risk mitigation strategy is one of the accepting, transfer or avoid type Risk Exceptions are usefull management decisions to attach to a risk. It's better than have it addressed than neglected. If you havent choose any compensating control and opted for a Risk Exception instead, your Residual Risk should be the same as your original Risk Score.</span>
 						<select name="risk_exception_id[]" id="" class="chzn-select" multiple="multiple">
-						<option value="-1">Select a Risk Exception...</option>
+						<option value="-1" disabled="disabled">Select a Risk Exception...</option>
 <?
 			$pre_selected_risk_exception_list = list_risk_risk_exception_join(" WHERE risk_risk_exception_join_risk_id = \"$risk_item[risk_id]\"");	
 			$pre_selected_items = array();

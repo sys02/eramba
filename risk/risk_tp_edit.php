@@ -63,8 +63,8 @@ echo "						<input type=\"text\" class=\"filter-text\" name=\"risk_title\" id=\"
 						
 						<label for="legalType">Applicable Third Parties</label>
 						<span class="description">Define to which Third Party this Risk is applicable</span>
-						<select name="tp_id[]" id="" class="chzn-select" multiple="multiple">
-						<option value="-1">Select one or many Third Parties...</option>
+						<select name="tp_id[]" id="" class="chzn-select" multiple="multiple" style="100%;">
+						<option value="-1" disabled="disabled">Select one or many Third Parties...</option>
 <?
 			if ($risk_item[risk_id]) {
 				$pre_selected_tp_list = list_risk_tp_join(" WHERE risk_tp_join_risk_id = \"$risk_item[risk_id]\"");	
@@ -79,8 +79,8 @@ echo "						<input type=\"text\" class=\"filter-text\" name=\"risk_title\" id=\"
 						
 		<label for="legalType">Applicable Assets</label>
 		<span class="description">Define which assets are involved when dealing with this TP</span>
-		<select name="tp_asset_id[]" id="" class="chzn-select" multiple="multiple">
-		<option value="-1">Select one or many Assets...</option>
+		<select name="tp_asset_id[]" id="" class="chzn-select" multiple="multiple" style="100%;">
+		<option value="-1" disabled="disabled">Select one or many Assets...</option>
 <?
 		if ($risk_item[risk_id]) {
 			$pre_selected_asset_list = list_risk_tp_asset_join(" WHERE risk_tp_asset_join_risk_id = \"$risk_item[risk_id]\"");	
@@ -105,12 +105,10 @@ echo "						<textarea id=\"\" class=\"filter-text\" name=\"risk_tp_how\">$risk_i
 						<label for="name">Threats</label>
 						<span class="description">Describe the applicable threats that apply to the asset we are Risk Analysing. This is a good time to get creative (realistic tough).</span>
 <?
-echo "						<textarea id=\"\" class=\"filter-text\" name=\"risk_threat\">$risk_item[risk_threat]</textarea>";
+echo "						<textarea id=\"\" class=\"filter-text\" name=\"risk_threat\" style=\"margin-bottom:10px;\">$risk_item[risk_threat]</textarea>";
 ?>
-			<br>	
-			<br>	
-			<select name="tiv_threats" id="" class="chzn-select" multiple="multiple">
-			<option value="-1">Select one or many predefined Threats...</option>
+			<select name="tiv_threats" id="" class="chzn-select" multiple="multiple" style="width:100%;">
+			<option value="-1" disabled="disabled">Select one or many predefined Threats...</option>
 <?
 			list_drop_menu_tiv_threats(NULL,"tiv_threats_category");	
 ?>
@@ -119,12 +117,10 @@ echo "						<textarea id=\"\" class=\"filter-text\" name=\"risk_threat\">$risk_i
 						<label for="description">Vulnerabilities</label>
 						<span class="description">For each one of the described threats, identify it's realted vulnerabilities.</span>
 <?
-echo "						<textarea id=\"\" class=\"filter-text\" name=\"risk_vulnerabilities\">$risk_item[risk_vulnerabilities]</textarea>";
+echo "						<textarea id=\"\" class=\"filter-text\" name=\"risk_vulnerabilities\" style=\"margin-bottom:10px;\">$risk_item[risk_vulnerabilities]</textarea>";
 ?>
-			<br>	
-			<br>	
-			<select name="tiv_vuln" id="" class="chzn-select" multiple="multiple">
-			<option value="-1">Select one or many predefined Vulnerabilities...</option>
+			<select name="tiv_vuln" id="" class="chzn-select" multiple="multiple" style="width:100%;">
+			<option value="-1" disabled="disabled">Select one or many predefined Vulnerabilities...</option>
 <?
 			list_drop_menu_tiv_vuln(NULL,"tiv_vuln_category");	
 ?>
@@ -156,8 +152,8 @@ echo "						<input type=\"text\" class=\"filter-text\" name=\"risk_classificatio
 
 						<label for="legalType">Risk Mitigation Strategy</label>
 						<span class="description">Choose the most suitable mitigation strategy for this Risk</span>
-						<select name="risk_mitigation_strategy_id" id="" class="chzn-select">
-						<option value="-1">Select a Strategy...</option>
+						<select name="risk_mitigation_strategy_id" id="" class="chzn-select" style="100%;">
+						<option value="-1" disabled="disabled">Select a Strategy...</option>
 <?
 						list_drop_menu_risk_mitigation_strategy($risk_item[risk_mitigation_strategy_id],"risk_mitigation_strategy_id");	
 ?>
@@ -165,8 +161,8 @@ echo "						<input type=\"text\" class=\"filter-text\" name=\"risk_classificatio
 
 						<label for="legalType">Compensating Controls</label>
 						<span class="description">Choose the most suitable available compensating controls (you can select multiple)</span>
-						<select name="security_services_id[]" id="" class="chzn-select" multiple="multiple">
-						<option value="-1">Select a Compensating Control...</option>
+						<select name="security_services_id[]" id="" class="chzn-select" multiple="multiple" style="100%;">
+						<option value="-1" disabled="disabled">Select a Compensating Control...</option>
 <?
 			$pre_selected_security_services_list = list_risk_security_services_join(" WHERE risk_security_services_join_risk_id = \"$risk_item[risk_id]\"");	
 			$pre_selected_items = array();
@@ -185,8 +181,8 @@ echo "						<input type=\"text\" class=\"filter-text\" name=\"risk_residual_scor
 						
 						<label for="legalType">Applicable Risk Exceptions</label>
 						<span class="description">Altough more commonly used when Compensating controls are not feasible and the risk mitigation strategy is one of the accepting, transfer or avoid type Risk Exceptions are usefull management decisions to attach to a risk. It's better than have it addressed than neglected. If you havent choose any compensating control and opted for a Risk Exception instead, your Residual Risk should be the same as your original Risk Score.</span>
-						<select name="risk_exception_id[]" id="" class="chzn-select" multiple="multiple">
-						<option value="-1">Select a Risk Exception...</option>
+						<select name="risk_exception_id[]" id="" class="chzn-select" multiple="multiple" style="100%;">
+						<option value="-1" disabled="disabled">Select a Risk Exception...</option>
 <?
 			$pre_selected_risk_exception_list = list_risk_risk_exception_join(" WHERE risk_risk_exception_join_risk_id = \"$risk_item[risk_id]\"");	
 			$pre_selected_items = array();
@@ -204,9 +200,6 @@ echo "						<input type=\"text\" class=\"filter-text\" name=\"risk_residual_scor
 echo "						<input type=\"text\" class=\"filter-date datepicker\" name=\"risk_periodicity_review\" id=\"\" value=\"$risk_item[risk_periodicity_review]\"/>";
 ?>
 
-
-
-						
 				</div>
 				
 				<div class="tab" id="tab2">

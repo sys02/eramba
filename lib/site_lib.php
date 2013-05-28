@@ -6,6 +6,7 @@ include_once("lib/risk_lib.php");
 include_once("lib/risk_tp_join_lib.php");
 include_once("lib/risk_buss_process_join_lib.php");
 include_once("lib/risk_exception_lib.php");
+include_once("lib/attachments_lib.php");
 
 include_once("lib/compliance_audit_lib.php");
 include_once("lib/compliance_finding_lib.php");
@@ -282,6 +283,39 @@ function download_export( $file_name ) {
 	exit;
 }
 
+function download_attachment( $file_name ) {
+
+	# i need to search the original name of the file
+	$attachment_info = lookup_attachments("attachments_unique_name", $file_name);
+	if (empty($attachment_info[attachments_original_name])) {
+		exit;
+	}
+
+	ignore_user_abort(true);
+
+	$file = 'downloads/uploads/'.$file_name.'';
+
+	header('Content-Description: File Transfer');
+	header('Content-Type: text/csv');
+	header('Content-Disposition: attachment; filename=' . basename( $attachment_info[attachments_original_name]));
+	header('Content-Transfer-Encoding: binary');
+	header('Expires: 0');
+	header('Cache-Control: must-revalidate');
+	header('Pragma: public');
+	header('Content-Length: ' . filesize( $file ));
+	ob_clean();
+	flush();
+	readfile( realpath( $file ) );
+
+	#unlink( $file );
+	
+	if (connection_aborted()) {
+		unlink($f);
+	}
+
+	exit;
+}
+
 function create_Calendar($month,$year) {
 
 date_default_timezone_set('America/Los_Angeles');
@@ -388,7 +422,7 @@ date_default_timezone_set('America/Los_Angeles');
 	
 		// Create the Calendar headers
 		foreach($WeeksDays as $day) {
-			$Calendar .= "<th class='header'>$day</th>";
+			$Calendar .= "<th class='header calendar'>$day</th>";
 		}
 
 	// Create the rest of the Calendar

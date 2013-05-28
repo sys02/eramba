@@ -400,6 +400,10 @@ table.Calendar tbody {
 	background-color: #FFF;
 }
 
+table.Calendar .header {
+	text-align: center;
+}
+
 .main-table tr th {
 	background: -moz-linear-gradient(top,  #ffffff 0%, #e5e5e5 49%, #ffffff 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(49%,#e5e5e5), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
@@ -411,7 +415,7 @@ table.Calendar tbody {
 
 	border-top: medium none;
 	padding: 12px 5px;
-	text-align: center;
+	text-align: left;
 }
 
 .main-table tr th:first-child,
@@ -510,7 +514,7 @@ table.Calendar tbody {
 }
 .main-table tr:first-child td {
     border-top-color: #c7c7c7;
-    text-align: center;
+    text-align: left;
 }
 .main-table tr:last-child td:first-child {
     border-radius: 0 0 0 4px;
