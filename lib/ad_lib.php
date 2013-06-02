@@ -1,22 +1,25 @@
 <?php
 
+include_once('configuration.inc');
+
+
 # http://samjlevy.com/2010/09/php-login-script-using-ldap-verify-group-membership/
 
-function authenticate($user, $password) {
+function ldap_authenticate($user, $password) {
+
+    global $ldap;
+
     // Active Directory server
-    $ldap_host = "server.college.school.edu";
- 
-    // Active Directory DN
-    $ldap_dn = "OU=Departments,DC=college,DC=school,DC=edu";
+    $ldap_host = $ldap[ldap_server];
+    $ldap_dn = $ldap[ldap_dn];
+    $ldap_usr_dom = $ldap[usr_dom];
+
+	#echo "settings: $ldap_host // $ldap_dn // $lda_usr_dom<br>";
  
     // Active Directory user group
     $ldap_user_group = "WebUsers";
- 
     // Active Directory manager group
     $ldap_manager_group = "WebManagers";
- 
-    // Domain, for purposes of constructing $user
-    $ldap_usr_dom = "@college.school.edu";
  
     // connect to active directory
     $ldap = ldap_connect($ldap_host);
@@ -31,14 +34,17 @@ function authenticate($user, $password) {
         $entries = ldap_get_entries($ldap, $result);
         ldap_unbind($ldap);
  
-        // check groups
-        foreach($entries[0]['memberof'] as $grps) {
-            // is manager, break loop
-            if (strpos($grps, $ldap_manager_group)) { $access = 2; break; }
- 
-            // is user
-            if (strpos($grps, $ldap_user_group)) $access = 1;
-        }
+#        // check groups
+#        foreach($entries[0]['memberof'] as $grps) {
+#            // is manager, break loop
+#            if (strpos($grps, $ldap_manager_group)) { $access = 2; break; }
+# 
+#            // is user
+#            if (strpos($grps, $ldap_user_group)) $access = 1;
+#        }
+
+	# forced not to look at groups
+	$access = 1;
  
         if ($access != 0) {
             // establish session variables

@@ -14,19 +14,67 @@
 	include_once("lib/system_dashboard_lib.php");
 	include_once("lib/security_services_audit_lib.php");
 	include_once("lib/bcm_dashboard_lib.php");
+	include_once("lib/configuration.inc");
+	include_once("lib/ad_lib.php");
 
 	$login_error=0;
 
+	# i need to check if the authentication is done trough AD or local
+	global $ldap;
+
+
 	if ( isset($_POST['login-submit']) ) {
+
 		$system_users_login = $_POST['login'];
 		$system_users_password = $_POST['password'];
 
-		if($user_id = authenticate_user_credentials($system_users_login, $system_users_password)) {
-			# echo "good credentials for $user_id";
-			$_SESSION['logged_user_id'] = $user_id; 
+		# i always auth the user admin on the local database
+		if ($system_users_login == "admin") {
 
-			# make a record
-			add_system_records("system","system_authorization_edit",$_SESSION['logged_user_id'],"$user_id","Login","");
+			if ($user_id = authenticate_user_credentials($system_users_login, $system_users_password)) {	
+				# echo "good credentials for $user_id";
+				$_SESSION['logged_user_id'] = $user_id; 
+				# make a record
+				add_system_records("system","system_authorization_edit",$_SESSION['logged_user_id'],"$user_id","Login","");
+			} else {
+				$auth_failed = 1;
+			}
+
+		} else {
+
+			# check if i need to use ldap or not
+			if ($ldap['auth_with_ldap']) {
+	
+				# make sure the username i got is on our list
+				$login_info = lookup_system_users("system_users_login",$system_users_login);
+				# make sure it's not disabled...
+				if ($login_info[system_users_disabled] == "0") {
+				
+					if (ldap_authenticate($system_users_login, $system_users_password)) {
+						# echo "good credentials for $user_id";
+						$_SESSION['logged_user_id'] = $login_info[system_users_id]; 
+						# make a record
+						add_system_records("system","system_authorization_edit",$_SESSION['logged_user_id'],"$user_id","Login","LDAP Auth");
+					} else {
+						$auth_failed = 1;
+					}	
+				}
+	
+			} else { 
+			
+				if ($user_id = authenticate_user_credentials($system_users_login, $system_users_password)) {	
+					# echo "good credentials for $user_id";
+					$_SESSION['logged_user_id'] = $user_id; 
+					# make a record
+					add_system_records("system","system_authorization_edit",$_SESSION['logged_user_id'],"$user_id","Login","Local Auth");
+				} else {
+					$auth_failed = 1;
+				}
+	
+			}
+		}
+
+		if (!$auth_failed) {
 
 			# everytime someone logs in the system, i need to make sure i add all the dashboard statistics
 			security_services_dashboard_data(NULL);
@@ -42,7 +90,9 @@
 			new_year_audit_updates();
 	
 			header('Location: index.php');
+
 		} else {
+
 			# echo "wrong credentials";
 			add_system_records("system","system_authorization","$user_id","$system_users_login","Wrong Login","");
 			$login_error=1;	

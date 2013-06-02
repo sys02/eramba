@@ -11,21 +11,23 @@ $system_conf['mail_server'] = "";
 $system_conf['mail_tag'] = "";
 
 # HIGH RISK OPTION, DONT ENABLE UNLESS:
-$system_conf['permit_uploads'] = "";
+# YOU HAVE PROTECTED DOWNLOADS/UPLOADS/ DIRECTORY
+# IMPORTANT !
+$system_conf['permit_uploads'] = NULL;
 
-# you must define this 
-$sytem_conf['ad_dn'] = "";
-
-# you must define this
-$db_conf['db_hostname'] = "";
-$db_conf['db_name'] = "";
-$db_conf['db_username'] = "";
+# you must define this database parameters
+$db_conf['db_hostname'] = "localhost";
+$db_conf['db_name'] = "globant_prod_v11";
+$db_conf['db_username'] = "root";
 $db_conf['db_password'] = "";
 
 # optional, define your currency.
 $services_conf['system_currency'] = "$";
 
-# set this to True or False 
-$risk_conf['use_eramba_formulas'] = "True";
+# lpdap auth .. change NULL for "True" if you want to use ldap for authentcation
+$ldap['auth_with_ldap'] = "True";
+$ldap['ldap_dn'] = "CN=Users,DC=corp,DC=eramba,DC=org";
+$ldap['usr_dom'] = "@corp.eramba.org";
+$ldap['ldap_server'] = "192.168.1.50";
 
 ?>
