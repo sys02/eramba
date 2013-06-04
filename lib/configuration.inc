@@ -30,4 +30,7 @@ $ldap['ldap_dn'] = "CN=Users,DC=corp,DC=eramba,DC=org";
 $ldap['usr_dom'] = "@corp.eramba.org";
 $ldap['ldap_server'] = "192.168.1.50";
 
+# when should i send emails?
+$mail_enabled_for['risk_exceptions'] = "email@email.com";
+
 ?>

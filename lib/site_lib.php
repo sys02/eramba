@@ -2,6 +2,8 @@
 
 date_default_timezone_set('Europe/Bratislava');
 
+include_once("lib/configuration.inc");
+
 include_once("lib/risk_lib.php");
 include_once("lib/risk_tp_join_lib.php");
 include_once("lib/risk_buss_process_join_lib.php");
@@ -318,6 +320,8 @@ function download_attachment( $file_name ) {
 
 function create_Calendar($month,$year) {
 
+global $mail_enabled_for;
+
 date_default_timezone_set('America/Los_Angeles');
 
 		$this_year = give_me_this_year();
@@ -451,6 +455,9 @@ date_default_timezone_set('America/Los_Angeles');
 			$base_url_edit = build_base_url("risk","risk_exception_edit");
 			$events['warning_risk_exception']="<a href=\"$base_url_edit&action=edit&risk_exception_id=$risk_exception_item[risk_exception_id]\">(RE)</a>";
 
+			# should i send email warnings on risk_exceptions?
+			if (filter_var($mail_enabled_for['risk_exceptions'], FILTER_VALIDATE_EMAIL) && $date == give_me_date()) {
+			}	
 		}
 	}
 	
