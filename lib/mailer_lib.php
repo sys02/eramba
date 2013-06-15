@@ -1,6 +1,6 @@
 <?
 
-require_once('mailer/class.phpmailer.php');
+require_once('class.phpmailer.php');
 require_once('configuration.inc');
 
 
@@ -40,7 +40,9 @@ function calendar_item_mail($destination_email) {
 	$mail->AddAddress($destination_email);
 	$mail->Subject = 'An item in the calendar needs your attention';
 
-	#$mail->MsgHTML(file_get_contents('lib/mailer/calendar_reminder.html'));
+	echo "".dirname(__FILE__)."";
+
+	$mail->MsgHTML(file_get_contents('calendar_reminder.html'),dirname(__FILE__));
 	#$mail->AltBody = 'This is a plain-text message body';
 	
 	//Send the message, check for errors
