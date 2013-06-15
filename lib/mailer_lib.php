@@ -5,17 +5,18 @@ require_once('configuration.inc');
 
 
 function calendar_item_mail($what,$section,$subsection,$item,$destination_email) {
+	
+	global $mail_conf;
 
 	# if no emails want to be sent return quietkly
 	if (empty($mail_conf['send_emails'])) {
-		return  "Configuration asks not to send emails";
+		return;
 	}
 
 	# before sending emails .. did i send emails today?
 	# i need to store this information on the database
 	
 
-	global $mail_conf;
 
 	$mail = new PHPMailer();
 
