@@ -3,6 +3,7 @@
 date_default_timezone_set('Europe/Bratislava');
 
 include_once("lib/configuration.inc");
+include_once("lib/mailer_lib.php");
 
 include_once("lib/risk_lib.php");
 include_once("lib/risk_tp_join_lib.php");
@@ -457,6 +458,7 @@ date_default_timezone_set('America/Los_Angeles');
 
 			# should i send email warnings on risk_exceptions?
 			if (filter_var($mail_enabled_for['risk_exceptions'], FILTER_VALIDATE_EMAIL) && $date == give_me_date()) {
+				calendar_item_mail($mail_enabled_for['risk_exceptions']);
 			}	
 		}
 	}

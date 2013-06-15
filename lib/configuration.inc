@@ -6,10 +6,6 @@ $system_conf['license_number'] = "GPL v2";
 $system_conf['debug'] = 1;
 $system_conf['timezone'] = "America/Los_Angeles";
 
-$system_conf['source_email'] = "";
-$system_conf['mail_server'] = "";
-$system_conf['mail_tag'] = "";
-
 # HIGH RISK OPTION, DONT ENABLE UNLESS:
 # YOU HAVE PROTECTED DOWNLOADS/UPLOADS/ DIRECTORY
 # IMPORTANT !
@@ -30,7 +26,21 @@ $ldap['ldap_dn'] = "CN=Users,DC=corp,DC=eramba,DC=org";
 $ldap['usr_dom'] = "@corp.eramba.org";
 $ldap['ldap_server'] = "192.168.1.50";
 
-# when should i send emails?
+# Mail configuration
+# If you set "smtp_server" with something different to "NULL" he will try to send the email trough this server
+# If you set "smtp_server" to NULL, then he will try to send the email with the local sendmail (should work by default on most linux, unix, mac).
+$mail_conf['smtp_server'] = "jamon";
+$mail_conf['smtp_port'] = "25";
+$mail_conf['smtp_username'] = "";
+$mail_conf['smtp_password'] = "";
+
+# all mails sent should which source email address 
+$mail_conf['mail_source_address'] = "eramba@eramba.org";
+# all mails sent should which source email name and surname 
+$mail_conf['mail_source_name'] = "eramba system";
+
+# the calendar can also send email notifications .. you need to specify 
+# to which email i send emails for each type of calendar event
 $mail_enabled_for['risk_exceptions'] = "email@email.com";
 
 ?>
