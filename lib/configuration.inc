@@ -29,7 +29,7 @@ $ldap['ldap_server'] = "192.168.1.50";
 # Mail configuration
 # If you set "smtp_server" with something different to "NULL" he will try to send the email trough this server
 # If you set "smtp_server" to NULL, then he will try to send the email with the local sendmail (should work by default on most linux, unix, mac).
-$mail_conf['smtp_server'] = "jamon";
+$mail_conf['smtp_server'] = "";
 $mail_conf['smtp_port'] = "25";
 $mail_conf['smtp_username'] = "";
 $mail_conf['smtp_password'] = "";
@@ -41,9 +41,22 @@ $mail_conf['mail_source_name'] = "eramba system";
 
 # the calendar can also send email notifications .. you need to specify 
 # to which email i send emails for each type of calendar event
-$mail_enabled_for['risk_exceptions'] = "email@email.com";
+$mail_enabled_for['risk_exceptions'] = "kisero@gmail.com";
+$mail_enabled_for['risk_asset'] = "kisero@gmail.com";
+$mail_enabled_for['risk_tp'] = "kisero@gmail.com";
+$mail_enabled_for['risk_buss'] = "kisero@gmail.com";
+$mail_enabled_for['compliance_exception'] = "kisero@gmail.com";
+$mail_enabled_for['compliance_finding'] = "kisero@gmail.com";
+$mail_enabled_for['compliance_audit'] = "kisero@gmail.com";
+$mail_enabled_for['policy_exceptions'] = "kisero@gmail.com";
+$mail_enabled_for['project_improvements'] = "kisero@gmail.com";
+$mail_enabled_for['security_incident'] = "kisero@gmail.com";
+$mail_enabled_for['service_contracts'] = "kisero@gmail.com";
+$mail_enabled_for['control_audit'] = "kisero@gmail.com";
+$mail_enabled_for['control_maintenance'] = "kisero@gmail.com";
 
-# define how many days in advance you want t oreceive an email notification about a calendar item
+# define how many days in advance you want to receive an email notification about a calendar item
 $mail_enabled_for['warning_days_advance'] = "3";
 
 ?>
+

@@ -459,10 +459,14 @@ global $mail_enabled_for;
 			$base_url_edit = build_base_url("risk","risk_exception_edit");
 			$events['warning_risk_exception']="<a href=\"$base_url_edit&action=edit&risk_exception_id=$risk_exception_item[risk_exception_id]\">(RE)</a>";
 
-			# should i send email warnings on risk_exceptions?
+			# should i send email warnings 
 			if (filter_var($mail_enabled_for['risk_exceptions'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance'])) {
-				echo "in three days  from today i need to review a risk exception<br>";
-				# calendar_item_mail($mail_enabled_for['risk_exceptions']);
+				# echo "in three days  from today i need to review a risk exception<br>";
+				$mail_status = calendar_item_mail($mail_enabled_for['risk_exceptions'], "Risk Exception");
+				if ($mail_status) {
+					# if you want further debug, just 
+					echo "Error sending emails .. review the conf ($mail_status)";	
+				}
 			}	
 		}
 	}

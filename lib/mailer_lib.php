@@ -4,7 +4,7 @@ require_once('class.phpmailer.php');
 require_once('configuration.inc');
 
 
-function calendar_item_mail($destination_email) {
+function calendar_item_mail($destination_email,$what) {
 
 	global $mail_conf;
 
@@ -40,16 +40,18 @@ function calendar_item_mail($destination_email) {
 	$mail->AddAddress($destination_email);
 	$mail->Subject = 'An item in the calendar needs your attention';
 
-	echo "".dirname(__FILE__)."";
+	# now i update the template with the information i want
+	$message = file_get_contents("lib/mail_templates/calendar_reminder.html");
+	$message = str_replace('%what%', $what, $message);
 
-	$mail->MsgHTML(file_get_contents('calendar_reminder.html'),dirname(__FILE__));
-	#$mail->AltBody = 'This is a plain-text message body';
+	$mail->MsgHTML($message);
+	#$mail->AltBody(strip_tags($message));
 	
 	//Send the message, check for errors
 	if(!$mail->Send()) {
-		echo "Mailer Error: " . $mail->ErrorInfo;
+		return "Mailer Error: " . $mail->ErrorInfo;
 	} else {
-		echo "Message sent!";
+		return;
 	}
 
 }
