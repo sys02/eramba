@@ -27,6 +27,10 @@ $ldap['usr_dom'] = "@corp.eramba.org";
 $ldap['ldap_server'] = "192.168.1.50";
 
 # Mail configuration
+# Do you want to send emails? set this to "true" .. otehrwuse set it to NULL
+$mail_conf['send_emails'] = "true";
+#$mail_conf['send_emails'] = NULL;
+
 # If you set "smtp_server" with something different to "NULL" he will try to send the email trough this server
 # If you set "smtp_server" to NULL, then he will try to send the email with the local sendmail (should work by default on most linux, unix, mac).
 $mail_conf['smtp_server'] = "";

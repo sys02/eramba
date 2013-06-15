@@ -462,7 +462,7 @@ global $mail_enabled_for;
 			# should i send email warnings 
 			if (filter_var($mail_enabled_for['risk_exceptions'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance'])) {
 				# echo "in three days  from today i need to review a risk exception<br>";
-				$mail_status = calendar_item_mail($mail_enabled_for['risk_exceptions'], "Risk Exception");
+				$mail_status = calendar_item_mail("Risk Exception",$section,$subsection,$item_id,$mail_enabled_for['risk_exceptions']);
 				if ($mail_status) {
 					# if you want further debug, just 
 					echo "Error sending emails .. review the conf ($mail_status)";	
