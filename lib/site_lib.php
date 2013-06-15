@@ -1,9 +1,12 @@
 <?
 
-date_default_timezone_set('Europe/Bratislava');
+# date_default_timezone_set('Europe/Bratislava');
 
 include_once("lib/configuration.inc");
 include_once("lib/mailer_lib.php");
+
+global $system_conf;
+date_default_timezone_set($system_conf['timezone']);
 
 include_once("lib/risk_lib.php");
 include_once("lib/risk_tp_join_lib.php");
@@ -39,10 +42,10 @@ function give_me_this_year() {
 	return $date;
 }
 
-function give_me_date() {
+function give_me_date_minus_days($days) {
 	
 	$unix_time = time();	
-	$date = date('Y-m-d', $unix_time); 
+	$date = date('Y-m-d', strtotime("+$days days")); 
 	return $date;
 }
 
@@ -323,10 +326,10 @@ function create_Calendar($month,$year) {
 
 global $mail_enabled_for;
 
-date_default_timezone_set('America/Los_Angeles');
+# date_default_timezone_set('America/Los_Angeles');
 
 		$this_year = give_me_this_year();
-		
+			
 		# RED are risk stuff
 		# - Risk Review Periodicity
 	$risk_asset_review = array();
@@ -457,8 +460,9 @@ date_default_timezone_set('America/Los_Angeles');
 			$events['warning_risk_exception']="<a href=\"$base_url_edit&action=edit&risk_exception_id=$risk_exception_item[risk_exception_id]\">(RE)</a>";
 
 			# should i send email warnings on risk_exceptions?
-			if (filter_var($mail_enabled_for['risk_exceptions'], FILTER_VALIDATE_EMAIL) && $date == give_me_date()) {
-				calendar_item_mail($mail_enabled_for['risk_exceptions']);
+			if (filter_var($mail_enabled_for['risk_exceptions'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance'])) {
+				echo "in three days  from today i need to review a risk exception<br>";
+				# calendar_item_mail($mail_enabled_for['risk_exceptions']);
 			}	
 		}
 	}

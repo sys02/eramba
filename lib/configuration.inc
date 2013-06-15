@@ -43,4 +43,7 @@ $mail_conf['mail_source_name'] = "eramba system";
 # to which email i send emails for each type of calendar event
 $mail_enabled_for['risk_exceptions'] = "email@email.com";
 
+# define how many days in advance you want t oreceive an email notification about a calendar item
+$mail_enabled_for['warning_days_advance'] = "3";
+
 ?>
