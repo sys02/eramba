@@ -45,19 +45,19 @@ $mail_conf['mail_source_name'] = "eramba system";
 
 # the calendar can also send email notifications .. you need to specify 
 # to which email i send emails for each type of calendar event
-$mail_enabled_for['risk_exceptions'] = "kisero@gmail.com";
-$mail_enabled_for['risk_asset'] = "kisero@gmail.com";
-$mail_enabled_for['risk_tp'] = "kisero@gmail.com";
-$mail_enabled_for['risk_buss'] = "kisero@gmail.com";
-$mail_enabled_for['compliance_exception'] = "kisero@gmail.com";
-$mail_enabled_for['compliance_finding'] = "kisero@gmail.com";
-$mail_enabled_for['compliance_audit'] = "kisero@gmail.com";
-$mail_enabled_for['policy_exceptions'] = "kisero@gmail.com";
-$mail_enabled_for['project_improvements'] = "kisero@gmail.com";
-$mail_enabled_for['security_incident'] = "kisero@gmail.com";
-$mail_enabled_for['service_contracts'] = "kisero@gmail.com";
-$mail_enabled_for['control_audit'] = "kisero@gmail.com";
-$mail_enabled_for['control_maintenance'] = "kisero@gmail.com";
+$mail_enabled_for['risk_exception_edit'] = "kisero@gmail.com";
+$mail_enabled_for['risk_management_edit'] = "kisero@gmail.com";
+$mail_enabled_for['risk_tp_edit'] = "kisero@gmail.com";
+$mail_enabled_for['risk_buss_edit'] = "kisero@gmail.com";
+$mail_enabled_for['compliance_exception_edit'] = "kisero@gmail.com";
+$mail_enabled_for['compliance_finding_edit'] = "kisero@gmail.com";
+$mail_enabled_for['compliance_audit_edit'] = "kisero@gmail.com";
+$mail_enabled_for['policy_exceptions_edit'] = "kisero@gmail.com";
+$mail_enabled_for['project_improvements_edit'] = "kisero@gmail.com";
+$mail_enabled_for['security_incident_edit'] = "kisero@gmail.com";
+$mail_enabled_for['service_contracts_edit'] = "kisero@gmail.com";
+$mail_enabled_for['security_services_audit_edit'] = "kisero@gmail.com";
+$mail_enabled_for['security_services_maintenance_edit'] = "kisero@gmail.com";
 
 # define how many days in advance you want to receive an email notification about a calendar item
 $mail_enabled_for['warning_days_advance'] = "3";

@@ -2,6 +2,7 @@
 
 require_once('class.phpmailer.php');
 require_once('configuration.inc');
+require_once('system_records_lib.php');
 
 
 function calendar_item_mail($what,$section,$subsection,$item,$destination_email) {
@@ -16,7 +17,6 @@ function calendar_item_mail($what,$section,$subsection,$item,$destination_email)
 	# before sending emails .. did i send emails today?
 	# i need to store this information on the database
 	
-
 
 	$mail = new PHPMailer();
 
@@ -61,6 +61,8 @@ function calendar_item_mail($what,$section,$subsection,$item,$destination_email)
 	if(!$mail->Send()) {
 		return "Mailer Error: " . $mail->ErrorInfo;
 	} else {
+		# echo "genere record";
+		add_system_records($section,$subsection,$item,"System","Calendar-Mail","$destination_email");
 		return;
 	}
 
