@@ -72,7 +72,7 @@ function update_project_improvements($project_improvements_data, $project_improv
 		project_improvements_deadline=\"$project_improvements_data[project_improvements_deadline]\",
 		project_improvements_status_id=\"$project_improvements_data[project_improvements_status_id]\",
 		project_improvements_plan_budget=\"$project_improvements_data[project_improvements_plan_budget]\",
-		project_improvements_owner_id=\"$project_improvements_data[project_improvements_owner_id]\"
+		project_improvements_owner_id=\"$project_improvements_data[project_improvements_owner_id]\",
 		project_improvements_completion=\"$project_improvements_data[project_improvements_completion]\"
 		WHERE
 		project_improvements_id=\"$project_improvements_id\"

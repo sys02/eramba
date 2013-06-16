@@ -112,6 +112,9 @@ $page_offset = ($page-1)*$page_limit;
 		$cute_name = lookup_system_authorization("system_authorization_subsection_name",$system_records_item['system_records_subsection']); 
 
 		$username = lookup_system_users("system_users_id",$system_records_item['system_records_author']);
+		if (empty($username['system_users_login'])) {
+			$username['system_users_login'] = "System";
+		}
 
 echo "				<tr class=\"even\">";
 echo "					<td>$system_records_item[system_records_date]</td>";
