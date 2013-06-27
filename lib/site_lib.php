@@ -458,9 +458,12 @@ global $mail_enabled_for;
 		if (array_search($date, $risk_exception_item)) {
 			$base_url_edit = build_base_url("risk","risk_exception_edit");
 			$events['warning_risk_exception']="<a href=\"$base_url_edit&action=edit&risk_exception_id=$risk_exception_item[risk_exception_id]\">(RE)</a>";
+			
+			# i need to ensure i didnt send emails already for this thing..
+                        $system_records = list_system_records(" WHERE system_records_date > $date AND system_records_section = \"risk\" AND system_records_subsection = \"risk_exception_edit\" AND system_records_item_id = \"$risk_exception_item[risk_exception_id]\"");	
 
 			# should i send email warnings 
-			if (filter_var($mail_enabled_for['risk_exception_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance'])) {
+			if (filter_var($mail_enabled_for['risk_exception_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance']) && !count($system_records)) {
 				# echo "in three days  from today i need to review a risk exception<br>";
 				$mail_status = calendar_item_mail("Risk Exception","risk","risk_exception_edit",$risk_exception_item[risk_exception_id],$mail_enabled_for['risk_exception_edit']);
 				if ($mail_status) {
@@ -476,8 +479,11 @@ global $mail_enabled_for;
 			$base_url_edit = build_base_url("risk","risk_management_edit");
 			$events['warning_risk_asset_review']="<a href=\"$base_url_edit&action=edit&risk_id=$risk_asset_review_item[risk_id]\">(RR)</a>";
 			
+			# i need to ensure i didnt send emails already for this thing..
+                        $system_records = list_system_records(" WHERE system_records_date > $date AND system_records_section = \"risk\" AND system_records_subsection = \"risk_management_edit\" AND system_records_item_id = \"$risk_asset_review_item[risk_id]\"");	
+			
 			# should i send email warnings 
-			if (filter_var($mail_enabled_for['risk_management_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance'])) {
+			if (filter_var($mail_enabled_for['risk_management_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance']) && !count($system_records)) {
 				# echo "in three days  from today i need to review a risk exception<br>";
 				$mail_status = calendar_item_mail("Asset Based Risk","risk","risk_management_edit",$risk_asset_review_item[risk_id],$mail_enabled_for['risk_management_edit']);
 				if ($mail_status) {
@@ -492,9 +498,12 @@ global $mail_enabled_for;
 		if (array_search($date, $risk_tp_review_item)) {
 			$base_url_edit = build_base_url("risk","risk_tp_edit");
 			$events['warning_risk_tp_review']="<a href=\"$base_url_edit&action=edit&risk_id=$risk_tp_review_item[risk_id]\">(RR)</a>";
+
+			# i need to ensure i didnt send emails already for this thing..
+                        $system_records = list_system_records(" WHERE system_records_date > $date AND system_records_section = \"risk\" AND system_records_subsection = \"risk_tp_edit\" AND system_records_item_id = \"$risk_tp_review_item[risk_id]\"");	
 			
 			# should i send email warnings 
-			if (filter_var($mail_enabled_for['risk_tp_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance'])) {
+			if (filter_var($mail_enabled_for['risk_tp_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance']) && !count($system_records)) {
 				# echo "in three days  from today i need to review a risk exception<br>";
 				$mail_status = calendar_item_mail("Third Party Based Risk","risk","risk_tp_edit",$risk_tp_review_item[risk_id],$mail_enabled_for['risk_tp_edit']);
 				if ($mail_status) {
@@ -510,8 +519,11 @@ global $mail_enabled_for;
 			$base_url_edit = build_base_url("risk","risk_buss_edit");
 			$events['warning_risk_buss_review']="<a href=\"$base_url_edit&action=edit&risk_id=$risk_buss_review_item[risk_id]\">(RR)</a>";
 			
+			# i need to ensure i didnt send emails already for this thing..
+			$system_records = list_system_records(" WHERE system_records_date > $date AND system_records_section = \"risk\" AND system_records_subsection = \"risk_buss_review_item\" AND system_records_item_id = \"$risk_buss_review_item[risk_id]\"");	
+			
 			# should i send email warnings 
-			if (filter_var($mail_enabled_for['risk_buss_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance'])) {
+			if (filter_var($mail_enabled_for['risk_buss_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance']) && !count($system_records)) {
 				# echo "in three days  from today i need to review a risk exception<br>";
 				$mail_status = calendar_item_mail("Business Based Risk","risk","risk_buss_edit",$risk_buss_review_item[risk_id],$mail_enabled_for['risk_buss_edit']);
 				if ($mail_status) {
@@ -527,8 +539,11 @@ global $mail_enabled_for;
 			$base_url_edit = build_base_url("compliance","compliance_exception_edit");
 			$events['warning_compliance_exception']="<a href=\"$base_url_edit&action=edit&compliance_exception_id=$compliance_exception_item[compliance_exception_id]\">(CE)</a>";
 			
+			# i need to ensure i didnt send emails already for this thing..
+			$system_records = list_system_records(" WHERE system_records_date > $date AND system_records_section = \"compliance\" AND system_records_subsection = \"compliance_exception_edit\" AND system_records_item_id = \"$compliance_exception_item[compliance_exception_id]\"");	
+			
 			# should i send email warnings 
-			if (filter_var($mail_enabled_for['compliance_exception_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance'])) {
+			if (filter_var($mail_enabled_for['compliance_exception_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance']) && !count($system_records)) {
 				# echo "in three days  from today i need to review a risk exception<br>";
 				$mail_status = calendar_item_mail("Compliance Exception","compliance","compliance_exception_edit",$compliance_exception_item[compliance_exception_id],$mail_enabled_for['compliance_exception_edit']);
 				if ($mail_status) {
@@ -544,8 +559,11 @@ global $mail_enabled_for;
 			$base_url_edit = build_base_url("compliance","compliance_finding_edit");
 			$events['warning_compliance_finding']="<a href=\"$base_url_edit&action=edit&compliance_finding_id=$compliance_finding_item[compliance_finding_id]\">(CF)</a>";
 			
+			# i need to ensure i didnt send emails already for this thing..
+			$system_records = list_system_records(" WHERE system_records_date > $date AND system_records_section = \"compliance\" AND system_records_subsection = \"compliance_finding_edit\" AND system_records_item_id = \"$compliance_finding_item[compliance_finding_id]\"");	
+			
 			# should i send email warnings 
-			if (filter_var($mail_enabled_for['compliance_finding_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance'])) {
+			if (filter_var($mail_enabled_for['compliance_finding_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance']) && !count($system_records)) {
 				# echo "in three days  from today i need to review a risk exception<br>";
 				$mail_status = calendar_item_mail("Compliance Finding","compliance","compliance_finding_edit",$compliance_finding_item[compliance_finding_id],$mail_enabled_for['compliance_finding_edit']);
 				if ($mail_status) {
@@ -560,9 +578,11 @@ global $mail_enabled_for;
 		if (array_search($date, $compliance_audit_item)) {
 			$base_url_edit = build_base_url("compliance","compliance_audit_edit");
 			$events['warning_compliance_audit']="<a href=\"$base_url_edit&action=edit&compliance_audit_id=$compliance_audit_item[compliance_audit_id]\">(CA)</a>";
+			# i need to ensure i didnt send emails already for this thing..
+			$system_records = list_system_records(" WHERE system_records_date > $date AND system_records_section = \"compliance\" AND system_records_subsection = \"compliance_audit_edit\" AND system_records_item_id = \"$compliance_audit_item[compliance_audit_id]\"");	
 			
 			# should i send email warnings 
-			if (filter_var($mail_enabled_for['compliance_audit_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance'])) {
+			if (filter_var($mail_enabled_for['compliance_audit_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance']) && !count($system_records)) {
 				# echo "in three days  from today i need to review a risk exception<br>";
 				$mail_status = calendar_item_mail("Compliance Audit","compliance","compliance_audit_edit",$compliance_audit_item[compliance_audit_id],$mail_enabled_for['compliance_audit_edit']);
 				if ($mail_status) {
@@ -577,10 +597,13 @@ global $mail_enabled_for;
 		if (array_search($date, $policy_exceptions_item)) {
 			$base_url_edit = build_base_url("operations","policy_exceptions_edit");
 			$events['warning_policy_exceptions']="<a href=\"$base_url_edit&action=edit&policy_exceptions_id=$policy_exceptions_item[policy_exceptions_id]\">(PE)</a>";
-			
+				
+			# i need to ensure i didnt send emails already for this thing..
+			$system_records = list_system_records(" WHERE system_records_date > $date AND system_records_section = \"operations\" AND system_records_subsection = \"policy_exceptions_edit\" AND system_records_item_id = \"$policy_exceptions_item[policy_exceptions_id]\"");	
+
 			# should i send email warnings 
-			if (filter_var($mail_enabled_for['policy_exceptions_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance'])) {
-				# echo "in three days  from today i need to review a risk exception<br>";
+			if (filter_var($mail_enabled_for['policy_exceptions_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance']) && !count($system_records) ) {
+				echo "in three days  from today i need to review a risk exception ($date)<br>";
 				$mail_status = calendar_item_mail("Policy Exception","operations","policy_exceptions_edit",$policy_exceptions_item[policy_exceptions_id],$mail_enabled_for['policy_exceptions_edit']);
 				if ($mail_status) {
 					# if you want further debug, just 
@@ -595,8 +618,11 @@ global $mail_enabled_for;
 			$base_url_edit = build_base_url("operations","project_improvements_edit");
 			$events['warning_project_improvements']="<a href=\"$base_url_edit&action=edit&project_improvements_id=$project_improvements_item[project_improvements_id]\">(PI)</a>";
 			
+			# i need to ensure i didnt send emails already for this thing..
+			$system_records = list_system_records(" WHERE system_records_date > $date AND system_records_section = \"operations\" AND system_records_subsection = \"project_improvements_edit\" AND system_records_item_id = \"$project_improvements_item[project_improvements_id]\"");	
+			
 			# should i send email warnings 
-			if (filter_var($mail_enabled_for['project_improvements_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance'])) {
+			if (filter_var($mail_enabled_for['project_improvements_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance']) && !count($system_records)) {
 				# echo "in three days  from today i need to review a risk exception<br>";
 				$mail_status = calendar_item_mail("Project Improvement","operations","project_improvements_edit",$project_improvements_item[project_improvements_id],$mail_enabled_for['project_improvements_edit']);
 				if ($mail_status) {
@@ -612,8 +638,11 @@ global $mail_enabled_for;
 			$base_url_edit = build_base_url("operations","security_incident_edit");
 			$events['warning_security_incident']="<a href=\"$base_url_edit&action=edit&security_incident_id=$security_incident_item[security_incident_id]\">(SI)</a>";
 			
+			# i need to ensure i didnt send emails already for this thing..
+			$system_records = list_system_records(" WHERE system_records_date > $date AND system_records_section = \"operations\" AND system_records_subsection = \"security_incident_edit\" AND system_records_item_id = \"$security_incident_item[security_incident_id]\"");	
+			
 			# should i send email warnings 
-			if (filter_var($mail_enabled_for['security_incident_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance'])) {
+			if (filter_var($mail_enabled_for['security_incident_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance']) && !count($system_records)) {
 				# echo "in three days  from today i need to review a risk exception<br>";
 				$mail_status = calendar_item_mail("Security Incident","operations","security_incident_edit",$security_incident_item[security_incident_id],$mail_enabled_for['security_incident_edit']);
 				if ($mail_status) {
@@ -629,8 +658,11 @@ global $mail_enabled_for;
 			$base_url_edit = build_base_url("security_services","service_contracts_edit");
 			$events['warning_service_contracts']="<a href=\"$base_url_edit&action=edit&service_contracts_id=$service_contracts_item[service_contracts_id]\">(SC)</a>";
 			
+			# i need to ensure i didnt send emails already for this thing..
+			$system_records = list_system_records(" WHERE system_records_date > $date AND system_records_section = \"security_services\" AND system_records_subsection = \"service_contracts_edit\" AND system_records_item_id = \"$service_contracts_item[service_contracts_id]\"");	
+			
 			# should i send email warnings 
-			if (filter_var($mail_enabled_for['service_contracts_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance'])) {
+			if (filter_var($mail_enabled_for['service_contracts_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance']) && !count($system_records)) {
 				# echo "in three days  from today i need to review a risk exception<br>";
 				$mail_status = calendar_item_mail("Security Contract","security_services","service_contracts_edit",$service_contracts_item[service_contracts_id],$mail_enabled_for['service_contracts_edit']);
 				if ($mail_status) {
@@ -646,8 +678,11 @@ global $mail_enabled_for;
 			$base_url_edit = build_base_url("security_services","security_catalogue_edit");
 			$events['warning_service_audit']="<a href=\"$base_url_edit&action=edit&security_services_id=$control_audit_updated_item[control_id]\">(SA)</a>";
 			
+			# i need to ensure i didnt send emails already for this thing..
+			$system_records = list_system_records(" WHERE system_records_date > $date AND system_records_section = \"security_services\" AND system_records_subsection = \"security_catalogue_edit\" AND system_records_item_id = \"$control_audit_updated_item[control_id]\"");	
+			
 			# should i send email warnings 
-			if (filter_var($mail_enabled_for['security_services_audit_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance'])) {
+			if (filter_var($mail_enabled_for['security_services_audit_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance']) && !count($system_records)) {
 				# echo "in three days  from today i need to review a risk exception<br>";
 				$mail_status = calendar_item_mail("Security Control Audit","security_services","security_services_audit_edit",$control_audit_updated_item[control_id],$mail_enabled_for['security_services_audit_edit']);
 				if ($mail_status) {
@@ -663,8 +698,11 @@ global $mail_enabled_for;
 			$base_url_edit = build_base_url("security_services","security_catalogue_edit");
 			$events['warning_service_maintenance']="<a href=\"$base_url_edit&action=edit&security_services_id=$control_maintenance_updated_item[control_id]\">(SM)</a>";
 			
+			# i need to ensure i didnt send emails already for this thing..
+			$system_records = list_system_records(" WHERE system_records_date > $date AND system_records_section = \"security_services\" AND system_records_subsection = \"security_catalogue_edit\" AND system_records_item_id = \"$control_maintenance_updated_item[control_id]\"");	
+			
 			# should i send email warnings 
-			if (filter_var($mail_enabled_for['security_services_maintenance_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance'])) {
+			if (filter_var($mail_enabled_for['security_services_maintenance_edit'], FILTER_VALIDATE_EMAIL) && $date == give_me_date_minus_days($mail_enabled_for['warning_days_advance']) && !count($system_records)) {
 				# echo "in three days  from today i need to review a risk exception<br>";
 				$mail_status = calendar_item_mail("Security Control Maintenance","security_services","security_services_maintenance_edit",$control_maintenance_updated_item[control_id],$mail_enabled_for['security_services_maintenance_edit']);
 				if ($mail_status) {
