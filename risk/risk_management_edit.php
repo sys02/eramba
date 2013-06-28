@@ -134,6 +134,7 @@ foreach($risk_classification_types as $risk_classification_types_item) {
 		$risk_item[risk_classification_score] = calculate_risk_score($risk_item[risk_id]); 
 	}
 ?>
+
 <?
 echo "						<input type=\"text\" class=\"filter-text\" name=\"risk_classification_score\" id=\"\" value=\"$risk_item[risk_classification_score]\"/>";
 ?>
