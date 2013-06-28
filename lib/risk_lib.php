@@ -428,4 +428,29 @@ function export_risk_tp_csv() {
 	fclose($handler);
 }
 
+function calculate_risk_score($risk_id) {
+
+	$classification_stack = array();
+
+	# i nede to know what classification this risk has
+	$risk_classification_list = list_risk_classification_join(" WHERE risk_classification_join_risk_id = \"$risk_id\"");
+	if ( count($risk_classification_list) ) {
+		foreach ($risk_classification_list as $risk_classification_list) {
+			# echo "meti:$risk_classification_list[risk_classification_join_risk_classification_id] .. <br>";
+			array_push($classification_stack, $risk_classification_list[risk_classification_join_risk_classification_id]); 
+		}
+	}
+
+	# now i need to lookup the value for this classifications...
+	$total_score = 0;
+	if ( count($classification_stack) ) {
+		foreach ($classification_stack as $classification_stack_item) {
+			$classification_info = lookup_risk_classification("risk_classification_id", $classification_stack_item);
+			$total_score = $total_score + $classification_info[risk_classification_value];
+		}
+	}
+
+	return $total_score;
+}
+
 ?>

@@ -123,6 +123,13 @@ function list_risk_classification($arguments) {
 	return $results;
 }
 
+function list_risk_classification_join($arguments) {
+	# MUST EDIT
+	$sql = "SELECT * FROM risk_classification_join".$arguments;
+	$results = runQuery($sql);
+	return $results;
+}
+
 function add_risk_classification($risk_classification_data) {
 	$sql = "INSERT INTO
 		risk_classification_tbl

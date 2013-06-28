@@ -62,5 +62,8 @@ $mail_enabled_for['security_services_maintenance_edit'] = "kisero@gmail.com";
 # define how many days in advance you want to receive an email notification about a calendar item
 $mail_enabled_for['warning_days_advance'] = "3";
 
+# automatic risk score calculation?
+$risk_conf['automatic_calculator_risk_score'] = "True";
+
 ?>
 
