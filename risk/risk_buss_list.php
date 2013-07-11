@@ -467,6 +467,48 @@ echo "			</table>";
 echo "					</div>";
 echo "<br>";
 
+echo "					<div class=\"rounded\">";
+echo "						<table class=\"sub-table\">";
+echo "							<tr>";
+echo "								<th><center>Last Records</th>";
+echo "								<th><center>What</th>";
+echo "								<th><center>By Whom</th>";
+echo "								<th><center>Notes</th>";
+echo "							</tr>";
+	
+$system_records_list = list_system_records(" WHERE system_records_section = \"risk\" AND system_records_subsection = \"risk_buss_edit\" AND system_records_item_id =\"$risk_data[risk_id]\" ORDER by system_records_date LIMIT 5");
+
+if ( count($system_records_list) ) {
+
+foreach($system_records_list as $system_records_item) {
+echo "							<tr>";
+echo "								<td class=\"center\">$system_records_item[system_records_date]</td>";
+echo "								<td class=\"center\">$system_records_item[system_records_action]</td>";
+		$username = lookup_system_users("system_users_id",$system_records_item['system_records_author']);
+		if (empty($username['system_users_login'])) {
+			$username['system_users_login'] = "System";
+		}
+echo "								<td class=\"center\">$username[system_users_login]</td>";
+echo "								<td class=\"center\">$system_records_item[system_records_notes]</td>";
+echo "							</tr>";
+}
+
+echo "							</tr>";
+echo "						</table>";
+echo "					</div>";
+echo "<br>";
+echo "<br>";
+
+} else {
+
+echo "							</tr>";
+echo "						</table>";
+echo "					</div>";
+echo "<br>";
+echo "<br>";
+
+}
+
 ### INJERTO ENDS
 echo "				</div>";
 echo "			</li>";
