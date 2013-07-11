@@ -537,7 +537,7 @@ echo "								<th><center>By Whom</th>";
 echo "								<th><center>Notes</th>";
 echo "							</tr>";
 	
-$system_records_list = list_system_records(" WHERE system_records_section = \"risk\" AND system_records_subsection = \"risk_tp_edit\" AND system_records_item_id =\"$risk_data[risk_id]\" ORDER by system_records_date LIMIT 5");
+$system_records_list = list_system_records(" WHERE system_records_section = \"risk\" AND system_records_subsection = \"risk_tp_edit\" AND system_records_item_id =\"$risk_data[risk_id]\" ORDER by system_records_date LIMIT 5 ");
 
 if ( count($system_records_list) ) {
 

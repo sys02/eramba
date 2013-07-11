@@ -17,6 +17,8 @@
 	
 	$base_url_edit_finding = build_base_url($section,"compliance_finding_edit");
 	$base_url_list_finding = build_base_url($section,"compliance_finding_list");
+	
+	$base_url_edit_compliance = build_base_url($section,"compliance_audit_management_edit");
 
 	$base_url_edit_attachments = build_base_url("attachments","attachments_edit");
 	$base_url_list_attachments = build_base_url("attachments","attachments_list");
@@ -37,6 +39,18 @@
 	$compliance_finding_disabled = $_GET["compliance_finding_disabled"];
 	$compliance_finding_package_item_id = $_GET["compliance_finding_package_item_id"];
 	 
+	# actions in regards to the status of the audit
+	if ( $action == "re-open_audit" ) {
+		update_compliance_audit_status($compliance_audit_id, "0");
+		add_system_records("compliance","compliance_audit_edit","$compliance_audit_id",$_SESSION['logged_user_id'],"Update","Status changed to: Re-Open");
+	} elseif ($action == "start_audit") {
+		update_compliance_audit_status($compliance_audit_id, "1");
+		add_system_records("compliance","compliance_audit_edit","$compliance_audit_id",$_SESSION['logged_user_id'],"Update","Status changed to: Started");
+	} elseif ($action == "close_audit") {
+		update_compliance_audit_status($compliance_audit_id, "2");
+		add_system_records("compliance","compliance_audit_edit","$compliance_audit_id",$_SESSION['logged_user_id'],"Update","Status changed to: Closed");
+	}
+
 	# actions for compliance findings stuff ..
 	if ($action == "edit_compliance_finding" & is_numeric($compliance_finding_id)) {
 		$compliance_finding_update = array(
@@ -120,6 +134,7 @@ echo "			<a href=\"$base_url_edit&action=edit\" class=\"add-btn\">";
 echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=compliance_audit_title\">Audit Title</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=compliance_audit_title\">Audit Date</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=compliance_audit_date\">Compliance Package</a></th>";
+echo "					<th><center><a href=\"$base_url&sort=compliance_audit_expiration\">Audit Progress</a></th>";
 echo "					<th><center><a href=\"$base_url&sort=compliance_audit_expiration\">Audit Findings</a></th>";
 ?>
 				</tr>
@@ -158,25 +173,57 @@ echo "					<a href=\"$base_url_list&action=disable&compliance_audit_id=$complian
 echo "						&nbsp;|&nbsp;";
 echo "					<a href=\"?section=system&subsection=system_records_list&system_records_lookup_section=compliance&system_records_lookup_subsection=compliance_audit_edit&system_records_lookup_item_id=$compliance_audit_item[compliance_audit_id]\" class=\"edit-action delete-action\">records</a>";
 echo "					<a href=\"?action=edit&section=operations&subsection=project_improvements_edit&ciso_pmo_lookup_section=compliance&ciso_pmo_lookup_subsection=compliance_audit_edit&ciso_pmo_lookup_item_id=$compliance_audit_item[compliance_audit_id]\" class=\"delete-action\">improve</a>";
+
+# here set the option to start or to close an audit
+# if status = 0 -> audit not started (i should display "start audit")
+# if status = 1 -> audit started (i should display "close audit")
+# if status = 2 -> audit closed (i should display "??")
+if ( $compliance_audit_item[compliance_audit_status]  == "0") {
+
+	echo "<a href=\"?action=start_audit&section=compliance&subsection=compliance_audit_list&compliance_audit_id=$compliance_audit_item[compliance_audit_id]\" class=\"delete-action\">| start audit</a>";
+
+} elseif ($compliance_audit_item[compliance_audit_status]  == "1") {
+	
+	echo "<a href=\"?action=close_audit&section=compliance&subsection=compliance_audit_list&compliance_audit_id=$compliance_audit_item[compliance_audit_id]\" class=\"delete-action\">| close audit</a>";
+
+} elseif ($compliance_audit_item[compliance_audit_status]  == "2") {
+	
+	echo "<a href=\"?action=re-open_audit&section=compliance&subsection=compliance_audit_list&compliance_audit_id=$compliance_audit_item[compliance_audit_id]\" class=\"delete-action\">| re-open closed audit</a>";
+
+}
+
 echo "						</div>";
 echo "					</td>";
 echo "					<td>$compliance_audit_item[compliance_audit_date]</td>";
 
 	$compliance_package_name = lookup_tp("tp_id",$compliance_audit_item[compliance_audit_package_id]); 
 
+
 echo "					<td>$compliance_package_name[tp_name]</td>";
-echo "							<td class=\"action-cell\">
 
-								<div class=\"cell-label\">
-			";
-
-		$count = list_compliance_finding(" WHERE compliance_finding_disabled = \"0\" AND compliance_audit_id = \"$compliance_audit_item[compliance_audit_id]\" ");	
-		echo count($count). " Items";
-
+if ( $compliance_audit_item[compliance_audit_status]  == "1" ) {
+echo "	<td class=\"action-cell\"> % Missing 
+	<div class=\"cell-label\">
+	";
+echo "	</div>";
 echo "
-								</div>
+<div class=\"cell-actions\">
+<a href=\"$base_url_edit_compliance\" class=\"delete-action\">Audit!</a> 
+	</td>";
+} else {
+	echo "<td>% Incomplete</td>";
+}
 
-								<div class=\"cell-actions\">
+echo "	<td class=\"action-cell\"> 
+	<div class=\"cell-label\">
+	";
+
+	$count = list_compliance_finding(" WHERE compliance_finding_disabled = \"0\" AND compliance_audit_id = \"$compliance_audit_item[compliance_audit_id]\" ");	
+	echo count($count). " Items";
+
+echo "	</div>";
+echo "
+<div class=\"cell-actions\">
 <a href=\"$base_url_edit_finding&compliance_audit_id=$compliance_audit_item[compliance_audit_id]\" class=\"edit-action\">add finding</a> 
 <a href=\"$base_url_list_finding&compliance_audit_id=$compliance_audit_item[compliance_audit_id]\" class=\"edit-action\">view all finding</a>
 <a href=\"$base_url_edit_attachments&attachments_ref_section=compliance&attachments_ref_subsection=compliance_audit_list&attachments_ref_id=$compliance_audit_item[compliance_audit_id]\" class=\"edit-action\">add attachment</a>

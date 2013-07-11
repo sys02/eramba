@@ -28,6 +28,17 @@ function add_compliance_audit($compliance_audit_data) {
 	
 }
 
+function update_compliance_audit_status($id, $value) {
+	$sql = "UPDATE compliance_audit_tbl
+		SET
+		compliance_audit_status=\"$value\"
+		WHERE
+		compliance_audit_id=\"$id\"
+		";	
+	$result = runUpdateQuery($sql);
+	return $result;
+}
+
 function update_compliance_audit($compliance_audit_data, $compliance_audit_id) {
 	$sql = "UPDATE compliance_audit_tbl
 		SET
