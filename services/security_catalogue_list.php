@@ -362,6 +362,11 @@ echo "								<th><center>Maintenance</th>";
 echo "								<th><center>Periodicity</th>";
 echo "								<th><center>Last Result</th>";
 echo "							</tr>";
+
+# display this section if i have maintenance items ... otherwise not!
+$maintenance_months_list = list_security_services_catalogue_maintenance_calendar_join(" WHERE security_service_catalogue_id = \"$security_services_item[security_services_id]\"");	
+if ( count($maintenance_months_list) ) { 
+
 echo "							<tr>";
 echo "								<td class=\"center\">";
 
@@ -371,7 +376,6 @@ echo "</td>";
 
 echo "								<td class=\"center\">";
 
-$maintenance_months_list = list_security_services_catalogue_maintenance_calendar_join(" WHERE security_service_catalogue_id = \"$security_services_item[security_services_id]\"");	
 
 foreach($maintenance_months_list as $maintenance_months_item) {
 	$month_name = lookup_security_services_audit_calendar("security_services_audit_calendar_id",$maintenance_months_item[security_services_maintenance_calendar_id]); 
@@ -393,6 +397,16 @@ echo "						</table>";
 echo "					</div>";
 echo "<br>";
 echo "<br>";
+
+} else {
+
+echo "							</tr>";
+echo "						</table>";
+echo "					</div>";
+echo "<br>";
+echo "<br>";
+
+}
 
 echo "					<div class=\"rounded\">";
 echo "						<table class=\"sub-table\">";
