@@ -208,7 +208,7 @@ echo "	<td class=\"action-cell\"> % Missing
 echo "	</div>";
 echo "
 <div class=\"cell-actions\">
-<a href=\"$base_url_edit_compliance\" class=\"delete-action\">Audit!</a> 
+<a href=\"$base_url_edit_compliance&tp_id=$compliance_audit_item[compliance_audit_package_id]&audit_id=$compliance_audit_item[compliance_audit_id]\" class=\"delete-action\">Audit!</a> 
 	</td>";
 } else {
 	echo "<td>% Incomplete</td>";

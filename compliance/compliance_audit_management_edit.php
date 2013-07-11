@@ -54,28 +54,28 @@
 		}
 		}
 
-#	} elseif ($action == "update") {
-#		$compliance_management_update = array(
-#			'compliance_management_item_id' => $compliance_management_item_id,
-#			'compliance_management_response_id' => $compliance_management_response_id,
-#			'compliance_management_status_id' => $compliance_management_status_id,
-#			'compliance_management_exception_id' => $compliance_management_exception_id
-#		);	
-#		$compliance_management_id = add_compliance_management($compliance_management_update);
-#		add_system_records("compliance","compliance_management_edit","$compliance_management_id",$_SESSION['logged_user_id'],"Insert","");
-#		
-#		# remove all security services for this compliance management item and then add the ones i just got.
-#		delete_compliance_item_security_services_join($compliance_management_item_id);
-#
-#		if (count($compliance_security_services_join_security_services_id)>0) {
-#		foreach($compliance_security_services_join_security_services_id as $security_service_id) {
-#			if ($security_service_id > 0) {
-#			add_compliance_item_security_services_join($compliance_management_item_id, $security_service_id);
-#			}
-#		}
-#		}
-#	}
-#
+	} elseif ($action == "update") {
+		$compliance_management_update = array(
+			'compliance_management_item_id' => $compliance_management_item_id,
+			'compliance_management_response_id' => $compliance_management_response_id,
+			'compliance_management_status_id' => $compliance_management_status_id,
+			'compliance_management_exception_id' => $compliance_management_exception_id
+		);	
+		$compliance_management_id = add_compliance_management($compliance_management_update);
+		add_system_records("compliance","compliance_management_edit","$compliance_management_id",$_SESSION['logged_user_id'],"Insert","");
+		
+		# remove all security services for this compliance management item and then add the ones i just got.
+		delete_compliance_item_security_services_join($compliance_management_item_id);
+
+		if (count($compliance_security_services_join_security_services_id)>0) {
+		foreach($compliance_security_services_join_security_services_id as $security_service_id) {
+			if ($security_service_id > 0) {
+			add_compliance_item_security_services_join($compliance_management_item_id, $security_service_id);
+			}
+		}
+		}
+	}
+
 #	if ($action == "csv") {
 #		export_compliance_management_csv($tp_id);
 #		add_system_records("compliance","compliance_management_edit","$tp_id",$_SESSION['logged_user_id'],"Export","");
@@ -93,25 +93,6 @@
 	<?
 		echo "<h3>Compliance Management: $tp_item[tp_name]</h3>";
 	?>
-		<div class="controls-wrapper">
-			
-			<div class="actions-wraper">
-				<a href="#" class="actions-btn">
-					Actions
-					<span class="select-icon"></span>
-				</a>
-				<ul class="action-submenu">
-<?
-# -------- TEMPLATE! YOU MUST ADJUST THIS ------------
-if ($action == "csv") {
-echo "					<li><a href=\"downloads/compliance_management_export.csv\">Dowload</a></li>";
-} else { 
-echo "					<li><a href=\"$base_url_list&action=csv&tp_id=$tp_id\">Export</a></li>";
-}
-?>
-				</ul>
-			</div>
-		</div>
 		<br class="clear"/>
 
 <?
@@ -133,10 +114,9 @@ echo "			<thead>\n";
 echo "				<tr>\n";
 echo "					<th>Item Name & Id</th>\n";
 echo "					<th>Item Description</th>\n";
-echo "					<th>Response</th>\n";
-echo "					<th>Compensating Controls</th>\n";
-echo "					<th>Compliance Exception</th>\n";
-echo "					<th><center>Regulator Status</center></th>\n";
+echo "					<th>Audit Questionnaire</th>\n";
+echo "					<th>Auditor Name</th>\n";
+echo "					<th>Audit Feedback</th>\n";
 echo "				</tr>\n";
 echo "			</thead>\n";
 echo "			<tbody>\n";
@@ -145,8 +125,6 @@ echo "			<tbody>\n";
 	
 		# load the ocmpliance_management_item data
 		$compliance_management_item = lookup_compliance_management("compliance_management_item_id", $compliance_package_item_item[compliance_package_item_id]);
-		$lookup_response_id = lookup_compliance_response_strategy("compliance_response_strategy_id",$compliance_management_item[compliance_management_response_id]);
-		$lookup_status_id = lookup_compliance_status("compliance_status_id",$compliance_management_item[compliance_management_status_id]);
 		$applicable_security_services = array();
 		$applicable_security_services = list_compliance_item_security_services_join(" WHERE compliance_security_services_join_compliance_id = \"$compliance_package_item_item[compliance_package_item_id]\"");	
 
@@ -155,37 +133,12 @@ echo "		<td class=\"action-cell\">\n";
 echo "			<div class=\"cell-label\">\n";
 echo "			$compliance_package_item_item[compliance_package_item_original_id] - $compliance_package_item_item[compliance_package_item_name]";
 echo "			</div>\n";
-echo "			<div class=\"cell-actions\">\n";
-echo "			<a href=\"$base_url_edit&action=edit&tp_id=$tp_id&compliance_package_item=$compliance_package_item_item[compliance_package_item_id]\" class=\"edit-action\">edit</a>\n";
-echo "			&nbsp;|&nbsp;\n";
-echo "			<a href=\"?section=system&subsection=system_records_list&system_records_lookup_section=compliance&system_records_lookup_subsection=compliance_management_edit&system_records_lookup_item_id=$compliance_package_item_item[compliance_package_item_id]\" class=\"delete-action\">records</a>\n";
-echo "			&nbsp;|&nbsp;\n";
-echo "			<a href=\"?section=operations&subsection=project_improvements_edit&system_records_lookup_section=compliance&system_records_lookup_subsection=compliance_management_edit&system_records_lookup_item_id=$compliance_package_item_item[compliance_package_item_id]\" class=\"delete-action\">improve</a>\n";
-echo "			</div>\n";
 echo "		</td>\n";
 echo "			<td>$compliance_package_item_item[compliance_package_item_description]</td>\n";
-echo "			<td>$lookup_response_id[compliance_response_strategy_name]</td>\n";
 echo "			<td>\n";
-			foreach($applicable_security_services as $service_item) {
-				$security_services_details = lookup_security_services("security_services_id",$service_item[compliance_security_services_join_security_services_id]);	
-				if ( security_service_check($service_item[compliance_security_services_join_security_services_id]) ) {
-					$warning = "(Audit Issues)";
-				}
-
-				$tmp = lookup_security_services("security_services_id",$service_item[compliance_security_services_join_security_services_id]);
-				if ($tmp[security_services_status] != "4") {  
-					$warning = "(Not in Production)";
-				}
-				unset($tmp);
-			
-				echo "- <a href=\"$security_services_url&sort=$security_services_details[security_services_id]\">$security_services_details[security_services_name] $warning<br></a>\n";
-				unset($warning);
-
-			}
 echo "   </td>\n";
-			$exception_item = lookup_compliance_exception("compliance_exception_id",$compliance_management_item[compliance_management_exception_id]);
-echo "			<td><a href=\"$compliance_exception_url&sort=$compliance_management_item[compliance_management_exception_id]\">$exception_item[compliance_exception_title]</a></td>\n";
-echo "			<td>$lookup_status_id[compliance_status_name]</td>\n";
+echo "			<td><input type=\"text\" name=\"compliance_audit_mgt_auditor_name\"></td>\n";
+echo "			<td><textarea name=\"compliance_audit_mgt_feedback\">Describe the evidence reviewed, the auditee inputs, Etc.</textarea></td>\n";
 echo "		</tr>\n";
 
 		}
