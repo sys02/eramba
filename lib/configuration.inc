@@ -66,4 +66,3 @@ $mail_enabled_for['warning_days_advance'] = "3";
 $risk_conf['automatic_calculator_risk_score'] = "True";
 
 ?>
-

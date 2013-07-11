@@ -56,6 +56,13 @@ function give_me_date_time() {
 	return $datetime;
 }
 
+function give_me_date() {
+	
+	$unix_time = time();	
+	$datetime = date('Y-m-d', $unix_time); 
+	return $datetime;
+}
+
 function check_valid_date($date) {
 	$split_date = explode("-"  , $date);
 	#echo "DATE: $split_date[1] - $split_date[2] - $split_date[0]";

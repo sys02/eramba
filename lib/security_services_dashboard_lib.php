@@ -1,5 +1,6 @@
 <?
 	
+	include_once("lib/site_lib.php");
 	include_once("lib/security_services_lib.php");
 	include_once("lib/service_contracts_lib.php");
 	include_once("lib/security_services_status_lib.php");
@@ -79,7 +80,7 @@ function security_services_dashboard_data($force) {
 		}	
 	}	
 
-	$date=give_me_date();
+	$date= give_me_date();
 	$total = $proposed + $design + $transition + $production;
 
 	if (empty($service_audit_errors)) {
