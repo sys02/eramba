@@ -13,4 +13,5 @@ CREATE  TABLE `compliance_audit_management_tbl` (
   `compliance_audit_management_feedback` TEXT NULL ,
   PRIMARY KEY (`compliance_audit_management_id`) );
 
+ALTER TABLE `compliance_audit_management_tbl` ADD COLUMN `compliance_audit_management_audit_id` INT NULL  AFTER `compliance_audit_management_id` ;
 

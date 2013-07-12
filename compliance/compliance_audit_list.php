@@ -15,6 +15,17 @@
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
 	$tp_id = $_GET["tp_id"];
+
+	# compliance managemnet audit sends me stuff on POST, not GET .. so..
+	if (empty($action) ) {
+		$action = $_POST[action];
+	}
+	if (empty($tp_id) ) {
+		$tp_id = $_POST[tp_id];
+	}
+	if (empty($audit_id) ) {
+		$audit_id = $_POST[audit_id];
+	}
 	
 	$base_url_list = build_base_url($section,"compliance_audit_list");
 	$base_url_edit = build_base_url($section,"compliance_audit_edit");
@@ -56,9 +67,10 @@
 	}
 
 	if ($action == "update_compliance_audit_management") {
-		
+
 		# i must search all compliance_item_packages for this tp_id and then make sure i can read and store the information
 		if ( is_numeric($tp_id) ) {
+
 			$compliance_package = list_compliance_package(" WHERE compliance_package_tp_id = \"$tp_id\"");	
 			if (count($compliance_package)>0) {
 
@@ -72,28 +84,30 @@
 
 				# $compliance_package_item[compliance_package_item_id] -> That's the key i'm searching on the array $_GET ...
 				# I ONLY STORE IN THE DATABASE AUDIT INFORMATION FOR THOSE ITEMS THAT I ACCUTALLY GET AUDIT INFORMATION
-				if (!empty($_GET[$tmp_auditor]) && !empty($_GET[$tmp_feedback]) ) {
+				if (!empty($_POST[$tmp_auditor]) && !empty($_POST[$tmp_feedback]) ) {
 
 					# if i have any entry with this id on the table compliance_audit_management_tbl
 					# i destroy it and i update it with what i just got
 
-					$tmp = lookup_compliance_audit_management("compliance_audit_management_comp_item_id",$item[compliance_package_item_id]);
+					#$tmp = lookup_compliance_audit_management("compliance_audit_management_comp_item_id",$item[compliance_package_item_id]);
+					$tmp = lookup_compliance_audit_management_for_specific_audit($audit_id,$item[compliance_package_item_id]);
 
 					if (!empty($tmp[compliance_audit_management_comp_item_id])) {
 
-						# echo "i have something iwth this id, in eed to delete or update better<br>";
+						# echo "i have something iwth this id, in eed to update better<br>";
 						$audit = array(
-							'compliance_audit_management_audit_name' => $_GET[$tmp_auditor],
-							'compliance_audit_management_feedback' => $_GET[$tmp_feedback]
+							'compliance_audit_management_audit_name' => $_POST[$tmp_auditor],
+							'compliance_audit_management_feedback' => $_POST[$tmp_feedback]
 						);	
-						update_compliance_audit_management($audit, $item[compliance_package_item_id]);
+						update_compliance_audit_management($audit, $item[compliance_package_item_id],$audit_id);
 						add_system_records("compliance","compliance_audit_list",$item[compliance_package_item_id],$_SESSION['logged_user_id'],"Update","");
 					} else {
 						# echo "i DONT have something iwth this id, in INSERT<br>";
 						$audit = array(
+							'compliance_audit_management_audit_id' => $audit_id,
 							'compliance_audit_management_comp_item_id' => $item[compliance_package_item_id],
-							'compliance_audit_management_audit_name' => $_GET[$tmp_auditor],
-							'compliance_audit_management_feedback' => $_GET[$tmp_feedback]
+							'compliance_audit_management_audit_name' => $_POST[$tmp_auditor],
+							'compliance_audit_management_feedback' => $_POST[$tmp_feedback]
 						);	
 						$audit_insert_id = add_compliance_audit_management($audit);
 						add_system_records("compliance","compliance_audit_list",$audit_insert_id,$_SESSION['logged_user_id'],"Insert","");
@@ -101,9 +115,9 @@
 					}
 			
 				} else {
-					# IF I GET INCOMPLETE AUDITOR OR FEEDBACK FOR ONE ITEM
+					# IF I POST INCOMPLETE AUDITOR OR FEEDBACK FOR ONE ITEM
 					# THEN I NEED TO DELETE DE ENTIRE DATA FOR THAT ITEM WITH A DELETE
-					delete_compliance_audit_management($item[compliance_package_item_id]);
+					delete_compliance_audit_management($item[compliance_package_item_id],$audit_id);
 					add_system_records("compliance","compliance_audit_list",$item[compliance_package_item_id],$_SESSION['logged_user_id'],"DELETE","");
 
 				}
@@ -240,6 +254,15 @@ echo "				<tr class=\"even\">";
 echo "					<td class=\"action-cell\">";
 echo "						<div class=\"cell-label\">";
 echo "							$compliance_audit_item[compliance_audit_title]";
+
+if ( $compliance_audit_item[compliance_audit_status]  == "0") {
+	$msg = "Not Initiated";
+} elseif ($compliance_audit_item[compliance_audit_status]  == "1") {
+	$msg = "Initiated";
+} elseif ($compliance_audit_item[compliance_audit_status]  == "2") {
+	$msg = "Closed";
+}
+						echo " - ($msg)";
 echo "						</div>";
 echo "						<div class=\"cell-actions\">";
 echo "					<a href=\"$base_url_edit&action=edit&compliance_audit_id=$compliance_audit_item[compliance_audit_id]\" class=\"edit-action\">edit</a> ";
@@ -273,11 +296,14 @@ echo "					<td>$compliance_audit_item[compliance_audit_date]</td>";
 
 	$compliance_package_name = lookup_tp("tp_id",$compliance_audit_item[compliance_audit_package_id]); 
 
+	$counter_items = array();
+	$counter_items = compliance_items_on_tp($compliance_audit_item[compliance_audit_package_id],$compliance_audit_item[compliance_audit_id]);
+	$missing_math = round(($counter_items[1]*100)/$counter_items[0],1);
 
-echo "					<td>$compliance_package_name[tp_name]</td>";
+echo "<td>$compliance_package_name[tp_name]</td>";
 
 if ( $compliance_audit_item[compliance_audit_status]  == "1" ) {
-echo "	<td class=\"action-cell\"> % Missing 
+echo "	<td class=\"action-cell\"> $missing_math % Complete
 	<div class=\"cell-label\">
 	";
 echo "	</div>";
@@ -286,7 +312,7 @@ echo "
 <a href=\"$base_url_edit_compliance&tp_id=$compliance_audit_item[compliance_audit_package_id]&audit_id=$compliance_audit_item[compliance_audit_id]\" class=\"delete-action\">Audit!</a> 
 	</td>";
 } else {
-	echo "<td>% Incomplete</td>";
+	echo "<td>$missing_math % Complete</td>";
 }
 
 echo "	<td class=\"action-cell\"> 
@@ -297,6 +323,7 @@ echo "	<td class=\"action-cell\">
 	echo count($count). " Items";
 
 echo "	</div>";
+
 echo "
 <div class=\"cell-actions\">
 <a href=\"$base_url_edit_finding&compliance_audit_id=$compliance_audit_item[compliance_audit_id]\" class=\"edit-action\">add finding</a> 

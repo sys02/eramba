@@ -17,7 +17,7 @@ function list_compliance_package($arguments) {
 
 function list_compliance_package_unique() {
 	# MUST EDIT
-	$sql = "SELECT distinct compliance_package_tp_id FROM compliance_package_tbl";
+	$sql = "SELECT distinct compliance_package_tp_id FROM compliance_package_tbl where compliance_package_disabled = \"0\"";
 	$results = runQuery($sql);
 	return $results;
 }

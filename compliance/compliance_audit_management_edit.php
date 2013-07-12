@@ -18,6 +18,7 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
+	$audit_id = $_GET["audit_id"];
 	
 	$base_url_list  = build_base_url($section,"compliance_audit_list");
 	
@@ -88,7 +89,7 @@ echo "					<li><a href=\"$base_url_list&action=csv&tp_id=$tp_id\">Export</a></li
 		<br class="clear"/>
 
 <?
-echo "	<form name=\"compliance_exception_edit\" method=\"GET\" action=\"$base_url_list\">";
+echo "	<form name=\"compliance_exception_edit\" method=\"POST\" action=\"$base_url_list\">";
 	$compliance_package_list = list_compliance_package(" WHERE compliance_package_tp_id = \"$tp_id\" AND compliance_package_disabled = \"0\"");
 	
 	foreach($compliance_package_list as $compliance_package_item) {
@@ -117,9 +118,7 @@ echo "			<tbody>\n";
 		foreach($compliance_package_item_list as $compliance_package_item_item) {
 	
 		# load the ocmpliance_management_item data
-		$compliance_management_item = lookup_compliance_management("compliance_management_item_id", $compliance_package_item_item[compliance_package_item_id]);
-		$lookup_status_id = lookup_compliance_status("compliance_status_id",$compliance_management_item[compliance_management_status_id]);
-		$compliance_audit_management_information = lookup_compliance_audit_management("compliance_audit_management_comp_item_id",$compliance_package_item_item[compliance_package_item_id]); 
+		$compliance_management_item = lookup_compliance_audit_management_for_specific_audit($audit_id, $compliance_package_item_item[compliance_package_item_id]);
 
 echo "	<tr class=\"even\">\n";
 echo "		<td class=\"action-cell\">\n";
@@ -129,8 +128,8 @@ echo "			</div>\n";
 echo "		</td>\n";
 echo "			<td>$compliance_package_item_item[compliance_package_item_description]</td>\n";
 echo "			<td>Auditor FAQ</td>\n";
-echo "	<td> <input type=\"text\" maxlength=\"100\" name=\"auditor_name_pack_item_id:$compliance_package_item_item[compliance_package_item_id]\" value=\"$compliance_audit_management_information[compliance_audit_management_audit_name]\"</td>\n";
-echo "			<td><textarea name=\"feedback_pack_item_id:$compliance_package_item_item[compliance_package_item_id]\" rows=\"4\" cols=\"50\">$compliance_audit_management_information[compliance_audit_management_feedback]</textarea></td>\n";
+echo "	<td> <input type=\"text\" maxlength=\"100\" name=\"auditor_name_pack_item_id:$compliance_package_item_item[compliance_package_item_id]\" value=\"$compliance_management_item[compliance_audit_management_audit_name]\"</td>\n";
+echo "			<td><textarea name=\"feedback_pack_item_id:$compliance_package_item_item[compliance_package_item_id]\" rows=\"4\" cols=\"50\">$compliance_management_item[compliance_audit_management_feedback]</textarea></td>\n";
 echo "		</tr>\n";
 
 		}
@@ -148,7 +147,8 @@ echo "		</tr>\n";
 				    <INPUT type="hidden" name="action" value="update_compliance_audit_management">
 				    <INPUT type="hidden" name="section" value="compliance">
 				    <INPUT type="hidden" name="subsection" value="compliance_audit_list">
-				<? echo    "<INPUT type=\"hidden\" name=\"tp_id\" value=\"$tp_id\">"; ?>
+	<? echo    "<INPUT type=\"hidden\" name=\"tp_id\" value=\"$tp_id\">"; ?>
+	<? echo    "<INPUT type=\"hidden\" name=\"audit_id\" value=\"$audit_id\">"; ?>
 
 			<a>
 			    <INPUT type="submit" value="Save" class="add-btn"> 

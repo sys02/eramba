@@ -20,6 +20,9 @@ function add_compliance_audit($compliance_audit_data) {
 		\"$compliance_audit_data[compliance_audit_title]\",
 		\"$compliance_audit_data[compliance_audit_date]\",
 		\"$compliance_audit_data[compliance_audit_package_id]\",
+		\"\",
+		\"\",
+		\"\",
 		\"0\"
 		)
 		";	

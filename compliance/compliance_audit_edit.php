@@ -44,11 +44,17 @@ echo "					<form name=\"compliance_audit_edit\" method=\"GET\" action=\"$base_ur
 						<select id="applicable" name="compliance_audit_package_id" class="chzn-select">
 <?
 		$compliance_package_provider_name_list = list_compliance_package_unique();
+
 		foreach($compliance_package_provider_name_list as $compliance_package_provider_name_item) {
+	
 			$provider_id = lookup_tp("tp_id",$compliance_package_provider_name_item[compliance_package_tp_id]);
+
+			if ($compliance_audit_item[compliance_audit_package_id] == $compliance_package_provider_name_item[compliance_package_tp_id]) {
+			echo "<option value=\"$provider_id[tp_id]\" selected=\"selected\">$provider_id[tp_name]</option>\n";
+			} else { 
 			echo "<option value=\"$provider_id[tp_id]\">$provider_id[tp_name]</option>\n";
+			}
 		}
-			echo "<option value=\"-1\">Not Applicable</option>\n";
 ?>
 						</select>
 

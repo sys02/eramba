@@ -6,6 +6,7 @@
 include_once("mysql_lib.php");
 include_once("compliance_item_security_service_join_lib.php");
 
+
 function compliance_rate_strategy_mitigate($third_party_id) {
 
 	$counter=0;
