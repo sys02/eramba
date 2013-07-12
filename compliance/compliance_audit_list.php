@@ -1,9 +1,12 @@
 <?
 	include_once("lib/compliance_audit_lib.php");
 	include_once("lib/compliance_finding_lib.php");
+	include_once("lib/compliance_package_lib.php");
+	include_once("lib/compliance_package_item_lib.php");
 	include_once("lib/site_lib.php");
 	include_once("lib/system_records_lib.php");
 	include_once("lib/tp_lib.php");
+	include_once("lib/compliance_audit_management_lib.php");
 
 	# general variables - YOU SHOULDNT NEED TO CHANGE THIS
 	$show_id = isset($_GET["show_id"]) ? $_GET["show_id"] : null;
@@ -11,6 +14,7 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
+	$tp_id = $_GET["tp_id"];
 	
 	$base_url_list = build_base_url($section,"compliance_audit_list");
 	$base_url_edit = build_base_url($section,"compliance_audit_edit");
@@ -49,6 +53,77 @@
 	} elseif ($action == "close_audit") {
 		update_compliance_audit_status($compliance_audit_id, "2");
 		add_system_records("compliance","compliance_audit_edit","$compliance_audit_id",$_SESSION['logged_user_id'],"Update","Status changed to: Closed");
+	}
+
+	if ($action == "update_compliance_audit_management") {
+		
+		# i must search all compliance_item_packages for this tp_id and then make sure i can read and store the information
+		if ( is_numeric($tp_id) ) {
+			$compliance_package = list_compliance_package(" WHERE compliance_package_tp_id = \"$tp_id\"");	
+			if (count($compliance_package)>0) {
+
+				foreach($compliance_package as $compliance_package_item) {
+					$compliance_package_item_item = list_compliance_package_item(" WHERE compliance_package_id = \"$compliance_package_item[compliance_package_id]\" ");	
+
+				foreach($compliance_package_item_item as $item) {
+
+				$tmp_auditor="auditor_name_pack_item_id:".$item[compliance_package_item_id]."";
+				$tmp_feedback="feedback_pack_item_id:".$item[compliance_package_item_id]."";
+
+				# $compliance_package_item[compliance_package_item_id] -> That's the key i'm searching on the array $_GET ...
+				# I ONLY STORE IN THE DATABASE AUDIT INFORMATION FOR THOSE ITEMS THAT I ACCUTALLY GET AUDIT INFORMATION
+				if (!empty($_GET[$tmp_auditor]) && !empty($_GET[$tmp_feedback]) ) {
+
+					# if i have any entry with this id on the table compliance_audit_management_tbl
+					# i destroy it and i update it with what i just got
+
+					$tmp = lookup_compliance_audit_management("compliance_audit_management_comp_item_id",$item[compliance_package_item_id]);
+
+					if (!empty($tmp[compliance_audit_management_comp_item_id])) {
+
+						# echo "i have something iwth this id, in eed to delete or update better<br>";
+						$audit = array(
+							'compliance_audit_management_audit_name' => $_GET[$tmp_auditor],
+							'compliance_audit_management_feedback' => $_GET[$tmp_feedback]
+						);	
+						update_compliance_audit_management($audit, $item[compliance_package_item_id]);
+						add_system_records("compliance","compliance_audit_list",$item[compliance_package_item_id],$_SESSION['logged_user_id'],"Update","");
+					} else {
+						# echo "i DONT have something iwth this id, in INSERT<br>";
+						$audit = array(
+							'compliance_audit_management_comp_item_id' => $item[compliance_package_item_id],
+							'compliance_audit_management_audit_name' => $_GET[$tmp_auditor],
+							'compliance_audit_management_feedback' => $_GET[$tmp_feedback]
+						);	
+						$audit_insert_id = add_compliance_audit_management($audit);
+						add_system_records("compliance","compliance_audit_list",$audit_insert_id,$_SESSION['logged_user_id'],"Insert","");
+						
+					}
+			
+				} else {
+					# IF I GET INCOMPLETE AUDITOR OR FEEDBACK FOR ONE ITEM
+					# THEN I NEED TO DELETE DE ENTIRE DATA FOR THAT ITEM WITH A DELETE
+					delete_compliance_audit_management($item[compliance_package_item_id]);
+					add_system_records("compliance","compliance_audit_list",$item[compliance_package_item_id],$_SESSION['logged_user_id'],"DELETE","");
+
+				}
+
+				unset($tmp_auditor);
+				unset($tmp_feedback);
+
+				}
+
+				}
+			}
+		}
+	
+#		$tmp = "auditor_name_pack_item_id:".$compliance_package_item_id."";
+#
+#		if (array_key_exists("auditor_name_pack_item_id:".$compliance_package_item_id."", $_GET) ) {
+#			echo $_GET["auditor_name_pack_item_id:".$compliance_package_item_id.""];
+#		} else {
+#			echo "fuck<br>";
+#		}
 	}
 
 	# actions for compliance findings stuff ..
