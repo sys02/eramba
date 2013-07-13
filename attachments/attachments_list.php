@@ -98,7 +98,6 @@
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=attachments_unique_name\">File Name</a></th>";
-echo "					<th>Source</th>";
 echo "					<th><a href=\"$base_url_list&sort=attachments_upload_date\">Upload Date</a></th>";
 ?>
 				</tr>
@@ -142,13 +141,13 @@ echo "					<th><a href=\"$base_url_list&sort=attachments_upload_date\">Upload Da
 echo "				<tr class=\"even\">";
 echo "					<td class=\"action-cell\">";
 echo "						<div class=\"cell-label\">";
-echo "						<a href=\"$base_url_audit_list&download_attachment=$attachments_item[attachments_unique_name]\">$attachments_item[attachments_original_name]</a>";
+echo "						$attachments_item[attachments_original_name]";
 echo "						</div>";
 echo "						<div class=\"cell-actions\">";
-echo "					<a href=\"$attachment_base_url_list_ref&action=disable&attachments_id=$attachments_item[attachments_id]&attachments_ref_id=$attachments_ref_id&attachments_ref_section=$attachments_ref_section&attachments_ref_subsection=$attachments_ref_subsection&compliance_audit_id=$attachments_ref_id\" class=\"delete-action\">delete</a>";
+echo "	<a href=\"$attachment_base_url_list_ref&action=disable&attachments_id=$attachments_item[attachments_id]&attachments_ref_id=$attachments_ref_id&attachments_ref_section=$attachments_ref_section&attachments_ref_subsection=$attachments_ref_subsection&compliance_audit_id=$attachments_ref_id\" class=\"delete-action\">delete</a>";
+echo "	<a href=\"$base_url_audit_list&download_attachment=$attachments_item[attachments_unique_name]\" class=\"delete-action\">| download</a>";
 echo "						</div>";
 echo "					</td>";
-echo "					<td><a href=\"$base_url_list_ref&show_id=$attachments_ref_id\">Go!</a></td>";
 echo "					<td>$attachments_item[attachments_upload_date]</td>";
 echo "				</tr>";
 	}
