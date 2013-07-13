@@ -15,3 +15,5 @@ CREATE  TABLE `compliance_audit_management_tbl` (
 
 ALTER TABLE `compliance_audit_management_tbl` ADD COLUMN `compliance_audit_management_audit_id` INT NULL  AFTER `compliance_audit_management_id` ;
 
+ALTER TABLE `compliance_package_item_tbl` ADD COLUMN `compliance_package_item_auditor_faq` TEXT NULL  AFTER `compliance_package_item_description` ;
+

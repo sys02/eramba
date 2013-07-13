@@ -22,6 +22,7 @@ function add_compliance_package_item($compliance_package_item_data) {
 		\"$compliance_package_item_data[compliance_package_item_original_id]\",
 		\"$compliance_package_item_data[compliance_package_item_name]\",
 		\"$compliance_package_item_data[compliance_package_item_description]\",
+		\"$compliance_package_item_data[compliance_package_item_auditor_faq]\",
 		\"0\"
 		)
 		";	
@@ -35,7 +36,8 @@ function update_compliance_package_item($compliance_package_item_data, $complian
 		SET
 		compliance_package_item_original_id=\"$compliance_package_item_data[compliance_package_item_original_id]\",
 		compliance_package_item_name=\"$compliance_package_item_data[compliance_package_item_name]\",
-		compliance_package_item_description=\"$compliance_package_item_data[compliance_package_item_description]\"
+		compliance_package_item_description=\"$compliance_package_item_data[compliance_package_item_description]\",
+		compliance_package_item_auditor_faq=\"$compliance_package_item_data[compliance_package_item_auditor_faq]\"
 		WHERE
 		compliance_package_item_id=\"$compliance_package_item_id\"
 		";	

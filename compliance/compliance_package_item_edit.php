@@ -56,6 +56,9 @@ echo "					<form name=\"compliance_package_edit\" method=\"GET\" action=\"$base_
 						<label for="description">Description</label>
 						<span class="description"></span>
 <? echo "						<textarea class=\"\" name=\"compliance_package_item_description\">$compliance_package_item_item[compliance_package_item_description]</textarea>";?>
+						<label for="description">Auditor FAQ</label>
+						<span class="description"></span>
+<? echo "						<textarea class=\"\" name=\"compliance_package_item_auditor_faq\">$compliance_package_item_item[compliance_package_item_auditor_faq]</textarea>";?>
 				</div>
 				
 			</div>

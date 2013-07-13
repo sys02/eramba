@@ -40,8 +40,8 @@
 	$compliance_package_item_original_id = $_GET["compliance_package_item_original_id"];
 	$compliance_package_item_name = $_GET["compliance_package_item_name"];
 	$compliance_package_item_description = $_GET["compliance_package_item_description"];
+	$compliance_package_item_auditor_faq = $_GET["compliance_package_item_auditor_faq"];
 	
-
 	# i need to make sure i have a tp_id where to asociate whatever compliance package i'm been trown
 	if ($action == "upload_compliance_package") {	
 		if ($tp_id) {
@@ -92,7 +92,8 @@
 			'compliance_package_id' => $compliance_package_id,
 			'compliance_package_item_original_id' => $compliance_package_item_original_id,
 			'compliance_package_item_name' => $compliance_package_item_name,
-			'compliance_package_item_description' => $compliance_package_item_description
+			'compliance_package_item_description' => $compliance_package_item_description,
+			'compliance_package_item_auditor_faq' => $compliance_package_item_auditor_faq
 		);	
 		$compliance_package_item_id = update_compliance_package_item($compliance_package_update, $compliance_package_item_id);
 		add_system_records("organization","compliance_package_item","$compliance_package_item_id",$_SESSION['logged_user_id'],"Update","");
@@ -101,7 +102,8 @@
 			'compliance_package_id' => $compliance_package_id,
 			'compliance_package_item_original_id' => $compliance_package_item_original_id,
 			'compliance_package_item_name' => $compliance_package_item_name,
-			'compliance_package_item_description' => $compliance_package_item_description
+			'compliance_package_item_description' => $compliance_package_item_description,
+			'compliance_package_item_auditor_faq' => $compliance_package_item_auditor_faq
 		);	
 		$compliance_package_item_id = add_compliance_package_item($compliance_package_update);
 		add_system_records("organization","compliance_package_item","$compliance_package_item_id",$_SESSION['logged_user_id'],"Insert","");
@@ -228,6 +230,7 @@ echo "							<tr>";
 echo "								<th><center>Item ID</th>";
 echo "								<th>Item name</th>";
 echo "								<th>Item description</th>";
+echo "								<th>Auditor FAQ</th>";
 echo "							</tr>";
 
 			foreach($compliance_package_item_list as $compliance_package_item_item) {
@@ -245,6 +248,7 @@ echo "	<a href=\"$base_url_list&action=disable_compliance_package_item&complianc
 echo "									</div>";
 echo "								</td>";
 echo "								<td>$compliance_package_item_item[compliance_package_item_description]</td>";
+echo "								<td>$compliance_package_item_item[compliance_package_item_auditor_faq]</td>";
 echo "							</tr>";
 			}
 

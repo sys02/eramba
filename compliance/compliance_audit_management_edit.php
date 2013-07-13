@@ -127,7 +127,7 @@ echo "			$compliance_package_item_item[compliance_package_item_original_id] - $c
 echo "			</div>\n";
 echo "		</td>\n";
 echo "			<td>$compliance_package_item_item[compliance_package_item_description]</td>\n";
-echo "			<td>Auditor FAQ</td>\n";
+echo "			<td>$compliance_package_item_item[compliance_package_item_auditor_faq]</td>\n";
 echo "	<td> <input type=\"text\" maxlength=\"100\" name=\"auditor_name_pack_item_id:$compliance_package_item_item[compliance_package_item_id]\" value=\"$compliance_management_item[compliance_audit_management_audit_name]\"</td>\n";
 echo "			<td><textarea name=\"feedback_pack_item_id:$compliance_package_item_item[compliance_package_item_id]\" rows=\"4\" cols=\"50\">$compliance_management_item[compliance_audit_management_feedback]</textarea></td>\n";
 echo "		</tr>\n";
