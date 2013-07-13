@@ -25,6 +25,11 @@
 	$base_url_audit_list = build_base_url("compliance","compliance_audit_list");
 	$attachment_base_url_list_ref = build_base_url("attachments","attachments_list");
 
+	global $system_conf;
+	if ($action == "upload" && empty($system_conf['permit_uploads']) ) {
+		$action = NULL;
+	}
+
 	if ($action == "upload") {
 
 
@@ -119,7 +124,7 @@ echo "					<th><a href=\"$base_url_list&sort=attachments_upload_date\">Upload Da
 			if ($sort == "attachments_unique_name" OR $sort == "attachments_upload_date") {
 				$attachments_list = list_attachments(" WHERE attachments_disabled = 0 ORDER by $sort");
 			} else {
-				$attachments_list = list_attachments(" WHERE attachments_disabled = 0");
+				$attachments_list = list_attachments(" WHERE attachments_disabled = 1000");
 			}
 		}
 	}

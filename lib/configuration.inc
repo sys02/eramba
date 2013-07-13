@@ -9,7 +9,8 @@ $system_conf['timezone'] = "America/Los_Angeles";
 # HIGH RISK OPTION, DONT ENABLE UNLESS:
 # YOU HAVE PROTECTED DOWNLOADS/UPLOADS/ DIRECTORY
 # IMPORTANT !
-$system_conf['permit_uploads'] = NULL;
+ $system_conf['permit_uploads'] = "True";
+# $system_conf['permit_uploads'] = NULL;
 
 # you must define this database parameters
 $db_conf['db_hostname'] = "localhost";

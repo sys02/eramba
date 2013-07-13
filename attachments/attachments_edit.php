@@ -3,6 +3,9 @@
 	include_once("lib/site_lib.php");
 	include_once("lib/attachments_lib.php");
 	include_once("lib/system_records_lib.php");
+	include_once("lib/configuration.inc");
+
+	global $system_conf;
 
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
@@ -12,8 +15,6 @@
 	$attachments_ref_section = $_GET["attachments_ref_section"];
 	$attachments_ref_subsection = $_GET["attachments_ref_subsection"];
 	$attachments_ref_id= $_GET["attachments_ref_id"];
-
-	
 
 	$base_url_list  = build_base_url($section,"attachments_list");
 
@@ -36,9 +37,13 @@
 echo "					<form name=\"compliance_package_edit\" method=\"POST\" action=\"$base_url_list\" enctype=\"multipart/form-data\">";
 ?>
 						<label for="description">Upload File</label>
-						<span class="description">Select a File to Attach</span>
-<? 
-	echo "<input type=\"file\" name=\"file\"><br>";
+<?
+	if (empty($system_conf['permit_uploads'])) {
+		echo "<span class=\"description\">WARNING: File uploads are DISABLED on your configuration file. You need to edit the configuration file lib/configuratio.inc and enable \"permit_uploads\"</span>";
+	} else {
+		echo "<span class=\"description\">Select a File to Attach</span>";
+	}
+		echo "<input type=\"file\" name=\"file\"><br>";
 ?>
 				</div>
 				
