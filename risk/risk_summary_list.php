@@ -24,8 +24,8 @@
 ?>
 
 	<section id="content-wrapper">
-		<h3>Security Services Reporting</h3>
-		<span class="description">This aims to provide input information for analysing security controls</span>
+		<h3>Risk Summary</h3>
+		<span class="description">This aims to provide input information for analysing Risk practices</span>
 		<div class="tab-wrapper"> 
 		<br> 	
 
@@ -40,7 +40,7 @@
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
-echo '<li><a href="' . $base_url_list . '&download_export=security_services_analysis_export">Download</a></li>';
+echo '<li><a href="' . $base_url_list . '&download_export=risk_summary_list">Download</a></li>';
 } else { 
 echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 }
@@ -57,19 +57,15 @@ echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 
 
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
-echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_control_name\"><a class=\"asc\">Control Name</th>";
-echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_fa\"># Failed Audits</th>";
-echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_resource\">Days/Year Resources</th>";
-echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_opex\">OPEX</th>";
-echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_contracts\">Support Contracts</th>";
-echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_capex\">CAPEX</th>";
-echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_classification_name\">Classification</th>";
-echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_risk_asset\"># Asset Risk Mitigations</th>";
-echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_tp_risk\"># TP Risk Mitigations</th>";
-echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_risk_score\"># Risk Score</th>";
-echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_data_flows\"># Data Flows Mitigations</th>";
-echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_compliance\"># Compliance Mitigations</th>";
-echo "					<th><a href=\"$base_url_list&sort=security_services_analysis_mit_total\"># Total Mitigations</th>";
+echo "					<th><a href=\"$base_url_list&sort=risk_summary_name\"><a class=\"asc\">Risk Name</th>";
+echo "					<th><a href=\"$base_url_list&sort=risk_summary_type\">Type</th>";
+echo "					<th><a href=\"$base_url_list&sort=risk_summary_risk_counter\"># Asociated Risks</th>";
+echo "					<th><a href=\"$base_url_list&sort=risk_summary_score\">Risk Score</th>";
+echo "					<th><a href=\"$base_url_list&sort=risk_summary_residual\">Residual Risk Score</th>";
+echo "					<th><a href=\"$base_url_list&sort=risk_summary_opex\">Asociated OPEX</th>";
+echo "					<th><a href=\"$base_url_list&sort=risk_summary_capex\">Asociated CAPEX</th>";
+echo "					<th><a href=\"$base_url_list&sort=risk_summary_resources\">Asociated Resources (Days/Year)</th>";
+echo "					<th><a href=\"$base_url_list&sort=risk_summary_incident_counter\">Asociated Incidents</th>";
 ?>
 				</tr>
 			</thead>
@@ -90,18 +86,15 @@ foreach($data as $data_item) {
 
 echo "				<tr class=\"even\">";
 echo "					<td><a href=\"$base_url_services&sort=$data_item[security_services_analysis_control_id]\">$data_item[security_services_analysis_control_name]</a></td>";
-echo "					<td>$data_item[security_services_analysis_fa]</td>";
-echo "					<td>$data_item[security_services_analysis_resource] Days/Year</td>";
-echo "					<td>$data_item[security_services_analysis_opex] $services_conf[system_currency]</td>";
-echo "					<td>$data_item[security_services_analysis_contracts] $services_conf[system_currency]</td>";
-echo "					<td>$data_item[security_services_analysis_capex] $services_conf[system_currency]</td>";
-echo "					<td>$data_item[security_services_analysis_classification_name]</td>";
-echo "					<td>$data_item[security_services_analysis_risk_asset]</td>";
-echo "					<td>$data_item[security_services_analysis_tp_risk]</td>";
-echo "					<td>$data_item[security_services_analysis_risk_score]</td>";
-echo "					<td>$data_item[security_services_analysis_data_flows]</td>";
-echo "					<td>$data_item[security_services_analysis_compliance]</td>";
-echo "					<td>$data_item[security_services_analysis_mit_total]</td>";
+echo "					<td>$data_item[risk_summary_name]</td>";
+echo "					<td>$data_item[risk_summary_type]</td>";
+echo "					<td>$data_item[risk_summary_risk_counter]</td>";
+echo "					<td>$data_item[risk_summary_score]</td>";
+echo "					<td>$data_item[risk_summary_residual]</td>";
+echo "					<td>$data_item[risk_summary_opex] $services_conf[system_currency]</td>";
+echo "					<td>$data_item[risk_summary_capex] $services_conf[system_currency]</td>";
+echo "					<td>$data_item[risk_summary_resources]</td>";
+echo "					<td>$data_item[risk_summary_incident_counter]</td>";
 echo "				</tr>";
 
 }

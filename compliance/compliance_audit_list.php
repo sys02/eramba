@@ -200,8 +200,8 @@
 ?>
 
 	<section id="content-wrapper">
-		<h3>Audit Calendar</h3>
-		<span class=date>Keeping tidy a calendar of Audits is helpful for prepation and planning. In this section you can keep track all audit findings (non-compliances) in order to work on their mitigation plans.</span>
+		<h3>Audit Management</h3>
+		<span class=date>Keep your audits tidy and well documented. </span>
 		<br>
 		<br>
 		<div class="controls-wrapper">

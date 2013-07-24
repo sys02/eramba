@@ -17,3 +17,21 @@ ALTER TABLE `compliance_audit_management_tbl` ADD COLUMN `compliance_audit_manag
 
 ALTER TABLE `compliance_package_item_tbl` ADD COLUMN `compliance_package_item_auditor_faq` TEXT NULL  AFTER `compliance_package_item_description` ;
 
+INSERT INTO `system_authorization_tbl` (`system_authorization_order`, `system_authorization_action_type`, `system_authorization_section_name`, `system_authorization_section_cute_name`, `system_authorization_subsection_name`, `system_authorization_subsection_cute_name`, `system_authorization_subsection_submenu`, `system_authorization_target_url`, `system_authorization_disabled`) VALUES (8, 'w', 'system', 'System Management', 'system_workflows', 'System Workflows', 1, 'system/workflows_select.php', 0);
+
+INSERT INTO `system_authorization_tbl` (`system_authorization_order`, `system_authorization_action_type`, `system_authorization_section_name`, `system_authorization_section_cute_name`, `system_authorization_subsection_name`, `system_authorization_subsection_cute_name`, `system_authorization_subsection_submenu`, `system_authorization_target_url`, `system_authorization_disabled`) VALUES (3, 'r', 'risk', 'Risk Management', 'risk_summary_list', 'Risk Summary', 1, 'risk/risk_summary_list.php', `0`);
+
+CREATE  TABLE `risk_summary_tbl` (
+  `risk_summary_id` INT NOT NULL AUTO_INCREMENT ,
+  `risk_summary_type` VARCHAR(45) NULL ,
+  `risk_summary_name` VARCHAR(100) NULL ,
+  `risk_summary_risk_counter` INT NULL ,
+  `risk_summary_opex` INT NULL ,
+  `risk_summary_capex` INT NULL ,
+  `risk_summary_resources` DECIMAL(10,2) NULL ,
+  `risk_summary_score` INT NULL ,
+  `risk_summary_residual` INT NULL ,
+  `risk_summary_incident_counter` INT NULL ,
+  `risk_summary_disabled` INT NULL DEFAULT 1 ,
+  PRIMARY KEY (`risk_summary_id`) );
+
