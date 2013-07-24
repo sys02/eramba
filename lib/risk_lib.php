@@ -8,8 +8,11 @@ include_once("risk_classification_lib.php");
 include_once("risk_tp_asset_join_lib.php");
 include_once("asset_lib.php");
 include_once("security_incident_service_lib.php");
+include_once("risk_summary_lib.php");
 
 function build_risk_summary() {
+
+	delete_risk_summary();
 
 	# for every asset ...
 	$asset_list = list_asset(" WHERE asset_disabled = \"0\"");
@@ -58,15 +61,30 @@ function build_risk_summary() {
 			}
 		}
 
-		echo "information para asset: $asset_item[asset_name]<br>";
-		echo "riesgos asociados: $tmp_risk_summary_risk_counter<br>";
-		echo "score: $tmp_risk_score<br>";
-		echo "residual: $tmp_risk_residual<br>";
-		echo "opex: $tmp_risk_summary_opex<br>";
-		echo "capex: $tmp_risk_summary_capex<br>";
-		echo "resou: $tmp_risk_summary_resources<br>";
-		echo "incident: $tmp_risk_summary_incident_counter<br>";
-		echo "<br>";	
+#		echo "information para asset: $asset_item[asset_name]<br>";
+#		echo "riesgos asociados: $tmp_risk_summary_risk_counter<br>";
+#		echo "score: $tmp_risk_score<br>";
+#		echo "residual: $tmp_risk_residual<br>";
+#		echo "opex: $tmp_risk_summary_opex<br>";
+#		echo "capex: $tmp_risk_summary_capex<br>";
+#		echo "resou: $tmp_risk_summary_resources<br>";
+#		echo "incident: $tmp_risk_summary_incident_counter<br>";
+#		echo "<br>";	
+
+		$risk_summary = array(
+			'risk_summary_type' => "Asset",
+			'risk_summary_name' => $asset_item[asset_name],
+			'risk_summary_risk_counter' => $tmp_risk_summary_risk_counter,
+			'risk_summary_opex' => $tmp_risk_summary_opex, 
+			'risk_summary_capex' => $tmp_risk_summary_capex,
+			'risk_summary_resources' => $tmp_risk_summary_resources,
+			'risk_summary_score' => $tmp_risk_score,
+			'risk_summary_residual' => $tmp_risk_residual,
+			'risk_summary_incident_counter' => $tmp_risk_summary_incident_counter
+		);	
+
+		add_risk_summary($risk_summary);
+
 	}
 	
 }

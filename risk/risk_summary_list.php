@@ -12,13 +12,12 @@
 	$action = $_GET["action"];
 	$sort = $_GET["sort"];
 
-	$base_url_list = build_base_url($section,"security_services_analysis_list");
-	$base_url_services = build_base_url("security_services","security_catalogue_list");
+	$base_url_list = build_base_url($section,"risk_summary_list");
 
 	build_risk_summary();
 
 	if ($action == "csv") {
-		export_security_services_analysis_csv();
+		export_risk_summary_csv();
 		add_system_records("security_services","security_services_analysis_list","",$_SESSION['logged_user_id'],"Export","");
 	}
 ?>
@@ -75,17 +74,16 @@ echo "					<th><a href=\"$base_url_list&sort=risk_summary_incident_counter\">Aso
 
 echo "			<tbody>";
 		
-		if ($sort == "security_services_analysis_control_name" OR $sort == "security_services_analysis_fa" OR $sort == "security_services_analysis_opex" OR $sort == "security_services_analysis_contracts" OR $sort == "security_services_analysis_capex" OR $sort == "security_services_analysis_classification_name" OR $sort == "security_services_analysis_risk_asset" OR $sort == "security_services_analysis_tp_risk" OR $sort == "security_services_analysis_data_flows" OR $sort == "security_services_analysis_compliance" OR $sort == "security_services_analysis_mit_total" OR $sort == "security_services_analysis_risk_score" OR $sort=="security_services_analysis_resource") {
+		if ($sort == "risk_summary_type" OR $sort == "risk_summary_name" OR $sort == "risk_summary_risk_counter" OR $sort == "risk_summary_opex" OR $sort == "risk_summary_capex" OR $sort == "risk_summary_resources" OR $sort == "risk_summary_score" OR $sort == "risk_summary_residual" OR $sort == "risk_summary_incident_counter") {
 
-			$data = list_security_services_analysis(" WHERE security_services_analysis_disabled = 0 ORDER by $sort");
+			$data = list_risk_summary(" WHERE risk_summary_disabled = 0 ORDER by $sort DESC");
 		} else {
-			$data = list_security_services_analysis(" WHERE security_services_analysis_disabled = 0 ORDER by security_services_analysis_control_name");
+			$data = list_risk_summary(" WHERE risk_summary_disabled = 0 ORDER by risk_summary_type");
 		}
 
 foreach($data as $data_item) {
 
 echo "				<tr class=\"even\">";
-echo "					<td><a href=\"$base_url_services&sort=$data_item[security_services_analysis_control_id]\">$data_item[security_services_analysis_control_name]</a></td>";
 echo "					<td>$data_item[risk_summary_name]</td>";
 echo "					<td>$data_item[risk_summary_type]</td>";
 echo "					<td>$data_item[risk_summary_risk_counter]</td>";
