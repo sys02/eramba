@@ -15,7 +15,7 @@
 	$base_url_list = build_base_url($section,"security_services_analysis_list");
 	$base_url_services = build_base_url("security_services","security_catalogue_list");
 
-	build_security_services_analysis();
+	build_risk_summary();
 
 	if ($action == "csv") {
 		export_security_services_analysis_csv();
