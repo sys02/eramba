@@ -9,6 +9,7 @@ include_once("risk_tp_asset_join_lib.php");
 include_once("asset_lib.php");
 include_once("security_incident_service_lib.php");
 include_once("risk_summary_lib.php");
+include_once("tp_lib.php");
 
 function build_risk_summary() {
 
@@ -16,6 +17,8 @@ function build_risk_summary() {
 
 	# for every asset ...
 	$asset_list = list_asset(" WHERE asset_disabled = \"0\"");
+	$tp_list = list_tp(" WHERE tp_disabled = \"0\"");
+
 	foreach($asset_list as $asset_item) {
 		
 		# i get all the risks for this given asset
@@ -59,17 +62,6 @@ function build_risk_summary() {
 
 				}
 			}
-		}
-
-#		echo "information para asset: $asset_item[asset_name]<br>";
-#		echo "riesgos asociados: $tmp_risk_summary_risk_counter<br>";
-#		echo "score: $tmp_risk_score<br>";
-#		echo "residual: $tmp_risk_residual<br>";
-#		echo "opex: $tmp_risk_summary_opex<br>";
-#		echo "capex: $tmp_risk_summary_capex<br>";
-#		echo "resou: $tmp_risk_summary_resources<br>";
-#		echo "incident: $tmp_risk_summary_incident_counter<br>";
-#		echo "<br>";	
 
 		$risk_summary = array(
 			'risk_summary_type' => "Asset",
@@ -84,6 +76,73 @@ function build_risk_summary() {
 		);	
 
 		add_risk_summary($risk_summary);
+
+		}
+
+
+	}
+
+	# now almost the same thing, but for TPs
+	foreach($tp_list as $tp_item) {
+		
+		# i get all the risks for this given asset
+		$risk_list = list_risk_tp_join(" WHERE risk_tp_join_tp_id = \"$tp_item[tp_id]\"");		
+
+		$tmp_risk_summary_risk_counter = count($risk_list);
+
+		if ( count($risk_list) > 0 ) {
+
+			$tmp_risk_summary_opex = 0; 
+			$tmp_risk_summary_capex = 0;
+			$tmp_risk_summary_resources = 0;
+			$tmp_risk_summary_incident_counter = 0;
+
+			$tmp_risk_score = 0;
+			$tmp_risk_residual = 0;
+
+			foreach($risk_list as $risk_item) {
+
+				$risk_information = lookup_risk("risk_id",$risk_item[risk_tp_join_risk_id]);
+
+				if ($risk_information[risk_disabled] == "0") {
+
+				$tmp_risk_score = $tmp_risk_score + $risk_information[risk_classification_score]; 
+				$tmp_risk_residual = $tmp_risk_residual + $risk_information[risk_residual_score]; 
+	
+				$security_services_for_this_risk_list = list_risk_security_services_join(" WHERE risk_security_services_join_risk_id = \"$risk_item[risk_tp_join_risk_id]\""); 
+				# now i pick up the information of each of this services
+				foreach ($security_services_for_this_risk_list as $security_services_for_this_risk_list_item) {
+
+					$service_information = lookup_security_services("security_services_id",$security_services_for_this_risk_list_item[risk_security_services_join_security_services_id]);
+
+					$incidents_for_this_services = list_security_incident_service_join(" WHERE security_incident_service_service_id = \"$service_information[security_services_id]\"");
+
+					$tmp_risk_summary_opex = $tmp_risk_summary_opex + $service_information[security_services_cost_opex]; 
+					$tmp_risk_summary_capex = $tmp_risk_summary_capex + $service_information[security_services_cost_capex];
+					$tmp_risk_summary_resources = $tmp_risk_summary_resources + $service_information[security_services_cost_operational_resource]; 
+					$tmp_risk_summary_incident_counter = count($incidents_for_this_services);
+
+				}	
+
+				}
+			}
+
+		$risk_summary = array(
+			'risk_summary_type' => "TP",
+			'risk_summary_name' => $tp_item[tp_name],
+			'risk_summary_risk_counter' => $tmp_risk_summary_risk_counter,
+			'risk_summary_opex' => $tmp_risk_summary_opex, 
+			'risk_summary_capex' => $tmp_risk_summary_capex,
+			'risk_summary_resources' => $tmp_risk_summary_resources,
+			'risk_summary_score' => $tmp_risk_score,
+			'risk_summary_residual' => $tmp_risk_residual,
+			'risk_summary_incident_counter' => $tmp_risk_summary_incident_counter
+		);	
+
+		add_risk_summary($risk_summary);
+
+		}
+
 
 	}
 	
