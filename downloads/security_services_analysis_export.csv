@@ -1,0 +1,66 @@
+security_services_analysis_id,security_services_analysis_control_name,security_services_analysis_control_id,security_services_analysis_fa,security_services_analysis_opex,security_services_analysis_contracts,security_services_analysis_capex,security_services_analysis_classification_name,security_services_analysis_risk_score,security_services_analysis_risk_asset,security_services_analysis_tp_risk,security_services_analysis_data_flows,security_services_analysis_compliance,security_services_analysis_mit_total,security_services_analysis_resource
+9271,Corporate Antivirus,557,0,0,36000,0,Critical,52,9,0,1,2,12,7.00
+9272,Regular Vulnerability Scanning  External,558,0,0,0,0,,12,2,0,0,5,7,24.00
+9273,Regular Vulnerability Scanning - Internal,559,0,0,1200,0,,29,6,0,0,5,11,18.00
+9274,CCTV - Laminar,560,0,0,0,40000,,7,2,0,0,0,2,14.00
+9275,CCTV - Office #2,561,0,0,0,70000,,7,2,0,0,0,2,14.00
+9276,CCTV - Office #1,562,0,0,0,70000,,7,2,0,0,0,2,14.00
+9277,Laptop Encryption PolicyY,563,0,0,0,0,Critical,18,3,0,1,0,4,3.00
+9278,User Administrator reviews of network devices,564,0,0,0,0,,3,1,0,0,1,2,2.00
+9279,PBX DOS Log Detector,565,0,0,0,0,,6,1,0,0,0,1,2.00
+9280,Email Group Review,566,0,0,0,0,,0,0,0,0,1,1,0.00
+9281,General Data Access Criteria Matrix,567,0,0,0,0,,0,0,0,1,3,4,3.00
+9282,Fire Detection Systems - Office #2,568,0,0,0,0,,7,2,0,0,1,3,10.00
+9283,Fire Detection Systems - Office #1,569,0,0,0,0,,7,2,0,0,1,3,10.00
+9284,Security Awareness Trainings,570,0,0,0,0,Critical,27,7,0,0,2,9,7.00
+9285,Share Drives & AD Groups Reviews,571,0,0,0,0,Critical,3,1,0,0,1,2,2.00
+9286,Google Apps Mobile Phone Policy,572,0,0,0,0,Critical,6,1,0,0,0,1,1.00
+9287,Wifi WPA2 Encryption,573,0,0,0,0,,7,2,0,0,0,2,1.00
+9288,Astaro VPN SSL,574,0,0,0,0,,0,0,0,0,1,1,0.00
+9289,Secure Disposal of Data and Equipment,575,0,0,0,0,,6,1,0,0,2,3,2.00
+9290,Laptops and Desktops Windows Standard Image,576,0,0,0,0,Critical,12,2,0,1,0,3,3.00
+9291,Laptops and Desktops Mac-OS Standard Configuration,577,0,0,0,0,,6,1,0,1,0,2,3.00
+9292,Motion Alarms - Office #2,578,0,0,0,0,,4,1,0,0,1,2,10.00
+9293,Motion Alarms - Office #1,579,0,0,0,0,,4,1,0,0,1,2,10.00
+9294,Customer #5 - AD Reviews,580,0,0,0,0,Critical,0,0,0,0,1,1,8.00
+9295,Customer #5 - Physical Controls,581,0,0,21600,4000,Critical,0,0,0,0,1,1,8.00
+9296,Company AD GPO,582,0,0,0,0,Critical,56,10,0,1,4,15,2.00
+9297,Log Book - Office #1,583,0,0,0,0,,4,1,0,0,1,2,1.00
+9298,Log Book - Office #2,584,0,0,0,0,,4,1,0,0,1,2,1.00
+9299,Company AD - DNA Periodic User Reviews,589,0,0,0,0,Critical,63,12,0,0,3,15,20.00
+9300,Company Systems Backup Policy,590,0,0,0,0,Critical,83,16,0,1,1,18,4.00
+9301,Physical Access Controls - Office #1,592,0,0,0,0,,9,3,0,0,1,4,8.00
+9302,Physical Access Controls - Office #2,593,0,0,0,0,,9,3,0,0,1,4,8.00
+9303,Review of Rogue Wifi APs,594,0,0,0,0,,0,0,0,0,0,0,1.00
+9304,Company-Employee NDA Agreements,599,0,0,0,0,,0,0,0,0,0,0,1.00
+9305,Customer-Company Employee NDA Agreements,600,0,0,0,0,,0,0,0,0,2,2,1.00
+9306,Screening Checks - Physical Aptitude,601,0,0,0,0,,0,0,0,0,0,0,0.50
+9307,Clear Desk Policy,603,0,0,0,0,,0,0,0,0,0,0,1.00
+9308,Paper Shreders,604,0,0,0,0,,0,0,0,0,1,1,0.50
+9309,UPS Systems / Diesel Generator - Office #2,605,0,0,0,0,,12,3,0,0,1,4,0.50
+9310,UPS Systems / Diesel Generator - Office #1,606,0,0,0,0,,10,2,0,0,1,3,0.50
+9311,Network Firewalls,608,0,0,0,0,Critical,12,2,0,0,6,8,1.50
+9312,Envision SIEM,609,0,0,7000,15000,Critical,28,6,0,0,5,11,21.00
+9313,Company Time Server,610,0,0,0,0,,0,0,0,0,1,1,0.50
+9314,Centralised Logging,611,0,0,0,0,,0,0,0,0,0,0,0.00
+9315,Business Continuity Plans,612,0,0,0,0,Critical,0,0,0,0,5,5,4.00
+9316,Manned Guards - Office #2,613,0,0,235000,0,,1508,2,0,0,4,6,6.50
+9317,Manned Guards - Office #1,614,0,1000000,235000,1000000,,1508,2,0,0,4,6,6.50
+9318,Security at the SDLC,615,0,0,0,0,,0,0,0,1,5,6,0.00
+9319,Standard Linux Servers Configuration,616,0,0,0,0,,0,0,0,0,0,0,1.50
+9320,Standard Windows Servers Configuration,617,0,0,0,0,,0,0,0,0,0,0,1.50
+9321,Standard Switches Routers Configuration,618,0,0,0,0,,3,1,0,0,0,1,1.50
+9322,System Patching,620,0,0,0,0,,58,10,0,1,0,11,4.00
+9323,employee Assets Lifecycle,624,0,0,0,0,Critical,0,0,0,0,6,6,8.00
+9324,SAP Systems Management,625,0,0,0,0,,9,2,0,0,1,3,5.00
+9325,Publishing Applications and Data Assets,626,0,0,0,0,,48,8,0,0,3,11,2.00
+9326,Google Apps Administrator User Reviews,628,0,0,0,0,Critical,9,2,0,0,2,4,0.50
+9327,Change managment,629,0,0,0,0,,39,7,0,0,5,12,1.50
+9328,IDS,630,0,0,0,0,,0,0,0,0,0,0,0.00
+9329,Security Policies,631,0,0,0,0,,0,0,0,0,48,48,9.00
+9330,Customer #3 Network Controls,632,0,0,0,0,,0,0,0,0,1,1,2.00
+9331,Customer #1 - Network Controls,636,0,1000,0,0,,0,0,0,0,1,1,1.00
+9332,Customer #1 - Physical Controls,637,0,0,0,6000,,0,0,0,0,2,2,4.00
+9333,Customer #1 - Systems Controls,638,0,0,0,0,,0,0,0,0,2,2,3.00
+9334,Customer #6 - HR Controls,639,0,0,0,0,,0,0,0,0,2,2,0.50
+9335,Service Name: UPS Systems / Diesel Generator - Laminar,641,0,0,0,0,Critical,4,1,0,0,0,1,0.50

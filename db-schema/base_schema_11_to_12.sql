@@ -35,3 +35,7 @@ CREATE  TABLE `risk_summary_tbl` (
   `risk_summary_disabled` INT NULL DEFAULT 1 ,
   PRIMARY KEY (`risk_summary_id`) );
 
+UPDATE `system_authorization_tbl` SET `system_authorization_subsection_cute_name`='Security Services Summary' WHERE `system_authorization_id`='103';
+
+INSERT INTO `system_authorization_tbl` (`system_authorization_order`, `system_authorization_action_type`, `system_authorization_section_name`, `system_authorization_section_cute_name`, `system_authorization_subsection_name`, `system_authorization_subsection_cute_name`, `system_authorization_subsection_submenu`, `system_authorization_target_url`, `system_authorization_disabled`) VALUES (7, 'r', 'operations', 'Security Operations', 'project_improvements_summary_list', 'Project Summary', 1, 'operations/project_summary_list.php', 0);
+
