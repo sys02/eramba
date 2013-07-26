@@ -10,7 +10,7 @@ function build_project_improvements_summary() {
 
 	delete_project_improvements_summary();
 
-	$project_list = list_project_improvements(" WHERE project_improvements_disabled = \"0\" ");
+	$project_list = list_project_improvements(" WHERE project_improvements_disabled = \"0\" AND project_improvements_status_id = \"1\" OR project_improvements_status_id = \"2\" ");
 
 	foreach($project_list as $project_item) {
 
