@@ -39,3 +39,15 @@ UPDATE `system_authorization_tbl` SET `system_authorization_subsection_cute_name
 
 INSERT INTO `system_authorization_tbl` (`system_authorization_order`, `system_authorization_action_type`, `system_authorization_section_name`, `system_authorization_section_cute_name`, `system_authorization_subsection_name`, `system_authorization_subsection_cute_name`, `system_authorization_subsection_submenu`, `system_authorization_target_url`, `system_authorization_disabled`) VALUES (7, 'r', 'operations', 'Security Operations', 'project_improvements_summary_list', 'Project Summary', 1, 'operations/project_summary_list.php', 0);
 
+CREATE  TABLE `project_improvements_summary_tbl` (
+  `project_improvements_id` INT NOT NULL AUTO_INCREMENT ,
+  `project_improvements_name` VARCHAR(100) NULL ,
+  `project_improvements_completion` INT NULL ,
+  `project_improvements_owner` VARCHAR(100) NULL ,
+  `project_improvements_planned_end` DATE NULL ,
+  `project_improvements_current_bud` INT NULL ,
+  `project_improvements_planned_bud` INT NULL ,
+  `project_improvements_velocity` INT NULL ,
+  `project_improvements_disabled` INT NULL DEFAULT 1 ,
+  PRIMARY KEY (`project_improvements_id`) );
+

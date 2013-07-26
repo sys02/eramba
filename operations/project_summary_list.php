@@ -1,7 +1,7 @@
 <?
 
 	include_once("lib/site_lib.php");
-	include_once("lib/security_services_analysis_lib.php");
+	include_once("lib/project_improvements_summary_lib.php");
 	include_once("lib/configuration.inc");
 	include_once("lib/system_records_lib.php");
 
@@ -14,7 +14,7 @@
 
 	$base_url_list = build_base_url($section,"risk_summary_list");
 
-	# build_risk_summary();
+	build_project_improvements_summary();
 
 	if ($action == "csv") {
 		export_risk_summary_csv();
@@ -56,13 +56,13 @@ echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 
 
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
-echo "					<th><a href=\"$base_url_list&sort=risk_summary_name\"><a class=\"asc\">Project Name</th>";
-echo "					<th><a href=\"$base_url_list&sort=risk_summary_type\">Completion</th>";
-echo "					<th><a href=\"$base_url_list&sort=risk_summary_risk_counter\">Velocity</th>";
-echo "					<th><a href=\"$base_url_list&sort=risk_summary_score\">Planned End</th>";
-echo "					<th><a href=\"$base_url_list&sort=risk_summary_residual\">Current Expenditure</th>";
-echo "					<th><a href=\"$base_url_list&sort=risk_summary_opex\">Budget</th>";
-echo "					<th><a href=\"$base_url_list&sort=risk_summary_incident_counter\">Owner</th>";
+echo "					<th><a href=\"$base_url_list&sort=project_improvements_name\"><a class=\"asc\">Project Name</th>";
+echo "					<th><a href=\"$base_url_list&sort=project_improvements_completion\">Completion</th>";
+echo "					<th><a href=\"$base_url_list&sort=project_improvements_velocity\">Velocity</th>";
+echo "					<th><a href=\"$base_url_list&sort=project_improvements_planned_end\">Planned End</th>";
+echo "					<th><a href=\"$base_url_list&sort=project_improvements_planned_bud\">Budget</th>";
+echo "					<th><a href=\"$base_url_list&sort=project_improvements_current_bud\">Actual Expenditure</th>";
+echo "					<th><a href=\"$base_url_list&sort=project_improvements_owner\">Owner</th>";
 ?>
 				</tr>
 			</thead>
@@ -72,23 +72,23 @@ echo "					<th><a href=\"$base_url_list&sort=risk_summary_incident_counter\">Own
 
 echo "			<tbody>";
 		
-		if ($sort == "risk_summary_type" OR $sort == "risk_summary_name" OR $sort == "risk_summary_risk_counter" OR $sort == "risk_summary_opex" OR $sort == "risk_summary_capex" OR $sort == "risk_summary_resources" OR $sort == "risk_summary_score" OR $sort == "risk_summary_residual" OR $sort == "risk_summary_incident_counter") {
+		if ($sort == "project_improvements_name" OR $sort == "project_improvements_completion" OR $sort == "project_improvements_velocity" OR $sort == "project_improvements_planned_end" OR $sort == "project_improvements_current_bud" OR $sort == "project_improvements_planned_bud" OR $sort == "project_improvements_owner") {
 
-			$data = list_risk_summary(" WHERE risk_summary_disabled = 0 ORDER by $sort DESC");
+			$data = list_project_improvements_summary(" WHERE project_improvements_disabled = 0 ORDER by $sort DESC");
 		} else {
-			$data = list_risk_summary(" WHERE risk_summary_disabled = 0 ORDER by risk_summary_type");
+			$data = list_project_improvements_summary(" WHERE project_improvements_disabled = 0 ORDER by project_improvements_name");
 		}
 
 foreach($data as $data_item) {
 
 echo "				<tr class=\"even\">";
-echo "					<td>$data_item[risk_summary_name]</td>";
-echo "					<td>$data_item[risk_summary_type]</td>";
-echo "					<td>$data_item[risk_summary_risk_counter]</td>";
-echo "					<td>$data_item[risk_summary_score]</td>";
-echo "					<td>$data_item[risk_summary_residual]</td>";
-echo "					<td>$data_item[risk_summary_opex] $services_conf[system_currency]</td>";
-echo "					<td>$data_item[risk_summary_capex] $services_conf[system_currency]</td>";
+echo "					<td>$data_item[project_improvements_name]</td>";
+echo "					<td>$data_item[project_improvements_completion]%</td>";
+echo "					<td>$data_item[project_improvements_velocity]</td>";
+echo "					<td>$data_item[project_improvements_planned_end]</td>";
+echo "					<td>$data_item[project_improvements_planned_bud] $services_conf[system_currency]</td>";
+echo "					<td>$data_item[project_improvements_current_bud] $services_conf[system_currency]</td>";
+echo "					<td>$data_item[project_improvements_owner]</td>";
 echo "				</tr>";
 
 }
