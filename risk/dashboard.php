@@ -8,9 +8,47 @@ $risk_chart_data = list_dashboard_chart("risk_dashboard_tbl");
 	<section id="content-wrapper">
 		<div id="widgets-area-wrap">
 			<div id="main-area">
+			
+			<div class="widget">
+					<div class="widget-header">Total Vs. Residual Score</div>
+					<div class="widget-content">
+						<script type="text/javascript">
+	var window_width = $(window).width() - 100;
+      function drawVisualization() {
+        // Create and populate the data table.
+        var data = google.visualization.arrayToDataTable([
+          ['Risk Item', 'Total Score', 'Residual'],
+
+	<?
+		$risk_summary = list_risk_summary(" WHERE risk_summary_disabled = \"0\"");
+		foreach($risk_summary as $risk_summary_item) {
+			echo "['$risk_summary_item[risk_summary_name]', $risk_summary_item[risk_summary_score], $risk_summary_item[risk_summary_residual]],\n";
+		}
+	?>
+          ['2008',  4,    4]
+        ]);
+      
+        // Create and draw the visualization.
+        new google.visualization.BarChart(document.getElementById('visualization199')).
+            draw(data,
+                 {
+	width: window_width, height: 900,
+	fontSize: 11
+	}
+            );
+      }
+      
+
+      google.setOnLoadCallback(drawVisualization);
+
+
+						</script>
+							<div id="visualization199" style="height: 800px;"></div>
+							<p></p>
+					</div>
+				</div>
 				
 			<div class="widget">
-
 					<div class="widget-header">Number of Risks per Type</div>
 					<div class="widget-content">
 

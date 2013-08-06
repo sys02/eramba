@@ -236,7 +236,7 @@ echo "			<a href=\"$base_url_edit&action=edit\" class=\"add-btn\">";
 			
 			<div class="actions-wraper">
 				<a href="#" class="actions-btn">
-					Actions
+					Project Type	
 					<span class="select-icon"></span>
 				</a>
 				<ul class="action-submenu">

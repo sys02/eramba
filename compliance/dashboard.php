@@ -8,6 +8,7 @@ $compliance_chart_data = list_dashboard_chart("compliance_dashboard_tbl");
 		<div id="widgets-area-wrap">
 			<div id="main-area">
 				<div class="widget">
+
 					<div class="widget-header">Number of compliance items, compliance items without mitigation controls and items with failed mitigation controls</div>
 					<div class="widget-content">
 
