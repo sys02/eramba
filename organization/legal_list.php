@@ -18,6 +18,7 @@
 	$legal_name = filter_input(INPUT_GET,"legal_name",FILTER_SANITIZE_STRING);
 	$legal_description = filter_input(INPUT_GET,"legal_description",FILTER_SANITIZE_STRING);
 	$legal_disabled = filter_input(INPUT_GET,"legal_disabled",FILTER_SANITIZE_NUMBER_INT);
+
 	 
 	#actions .. edit, update or disable - YOU MUST ADJUST THIS!
 	if ($action == "update" & is_numeric($legal_id)) {
@@ -27,7 +28,10 @@
 		);	
 		update_legal($legal_update,$legal_id);
 		add_system_records("organization","legal_edit","$legal_id",$_SESSION['logged_user_id'],"Update","");
-	} elseif ($action == "update") {
+	}
+
+
+	if ($action == "update") {
 		$legal_update = array(
 			'legal_name' => $legal_name,
 			'legal_description' => $legal_description
