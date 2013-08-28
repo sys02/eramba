@@ -46,7 +46,7 @@ echo "					<form name=\"system_group_role_edit\" method=\"GET\" action=\"$base_u
 					
 						<label for="name">Login Name</label>
 						<span class="description">Set the login name for this user. It must be the same login name utilized by the authenticator!</span>
-<? echo "						<input type=\"text\" class=\"filter-text\" name=\"system_users_login\" id=\"system_users_login\" value=\"$item[system_users_login]\"/>";?>
+<? echo "						<input type=\"text\" class=\"\" name=\"system_users_login\" id=\"system_users_login\" value=\"$item[system_users_login]\"/>";?>
 						<label for="name">Password</label>
 						<span class="description">Set a Password for this user!</span>
 <? echo "						<input type=\"password\" class=\"\" name=\"system_conf_admin_pwd\" id=\"system_conf_admin_pwd\" value=\"untouched\"/>";?>

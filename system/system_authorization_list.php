@@ -28,6 +28,14 @@
 	# i need to know who is asking to do what ..
 	$current_logged_user_id = $_SESSION['logged_user_id'];
 
+	# make sure that if the want to update, the username is valid
+	if ($action == "update") {
+		if ( clean_login_username($system_users_login) ) {
+			site_error("<b>Not a good login name!</b> Your login must have letters, numbers and if you wish any of the following characters: . - _");
+			unset($action);
+		}
+	}
+
 	# if admin is asking ,then it's all right, he can do whatever .. but! if it's not admin, then that person
 	# can only modify his account
 	if ($action == "update" || $action == "disabled" || $action == "csv") {
@@ -36,6 +44,7 @@
 
 			if ($current_logged_user_id != "1" && $current_logged_user_id != $system_users_id) {
 			#echo "Error: a non admin ($current_logged_user_id)  is trying to do something wiht the account of $system_users_id";	
+			site_error("<b>Not enough priviledges</b> If you want to create a new login, you must be logged as \"admin\"");
 			unset($action);
 			}
 
@@ -50,10 +59,16 @@
 	}
 	
 	# dont change the password unless its nececesyry
+	# and if you want to change it, make sure it's compliant with our policies (site_lib.php)
+	if ($action == "update") {
 	if ($system_conf_admin_pwd == "untouched") {
 		$pwd=0;
-	} else {
+	} elseif ( ! clean_login_password($system_conf_admin_pwd) ) { 
 		$pwd=1;
+	} else {
+		site_error("<b>Not a good password!</b> Your password must have letters, numbers and if you wish any of the following characters: !@#$^&()[]{}");
+		unset($action);
+	}
 	}
 
 	# if they want to do something with "admin", ensure they dont try to assign a role
