@@ -51,3 +51,5 @@ CREATE  TABLE `project_improvements_summary_tbl` (
   `project_improvements_disabled` INT NULL DEFAULT 1 ,
   PRIMARY KEY (`project_improvements_id`) );
 
+ALTER SCHEMA `globant_prod_v11`  DEFAULT COLLATE utf8_unicode_ci ;
+

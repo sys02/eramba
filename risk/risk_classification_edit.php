@@ -15,6 +15,8 @@
 		$risk_classification_item = lookup_risk_classification("risk_classification_id",$risk_classification_id);
 	}
 
+	echo "	<script type=\"text/javascript\" src=\"js/disable_elements.js\"></script>";
+
 ?>
 
 

@@ -743,5 +743,67 @@ global $mail_enabled_for;
 
 	}
 
+function site_warning($msg) {
+	if (empty($msg)) {
+		$msg = "There's some error on what you just did...";
+	}
+
+	echo "<div class=\"warning\">$msg</div>";
+}
+
+function site_error($msg) {
+	if (empty($msg)) {
+		$msg = "There's some error on what you just did...";
+	}
+
+	echo "<div class=\"error\">$msg</div>";
+}
+
+# this functions are used to clean characters from the login and password fields
+# they return something if the password or username is not compliant
+function clean_login_username($login) {
+
+	if (!$login) {
+		return 1;
+	}
+	
+	if(preg_match("/^[a-zA-Z0-9 - _ \.]+$/", $login) == TRUE){
+		# echo "ok ($login)";
+		return;
+	} else {
+		# echo "ugly login ($login)";
+		return 1;
+	}
+
+} 
+
+function clean_login_password($password) {
+		
+	if (!$password) {
+		return 1;
+	}
+
+	if(preg_match("/^[a-zA-Z0-9 ! @ # $ ^ & ( ) \[ \] { }]+$/", $password) == TRUE){
+		# echo "ok password ($password)";
+		return;
+	} else {
+		# echo "ugly password ($password)";
+		return 1;
+	}
+}
+
+# this functions receive a value and sanatize whatever it comes
+function sec_sanatize_text($value) {
+
+}
+
+function sec_sanatize_intenger($value) {
+
+}
+
+function sec_sanatize_float($value) {
+
+}
+
 
 ?>

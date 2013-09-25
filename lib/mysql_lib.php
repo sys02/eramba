@@ -29,6 +29,8 @@ function runSmallQuery($query) {
 	
 	if (!$query) { return; } 
 	
+	$result = mysql_query("SET NAMES 'utf8'");
+	$result = mysql_query("SET CHARACTER SET utf8");
 	$result = mysql_query($query);
 	if (!$result) {
 		if ($system_conf['debug']) {
@@ -56,6 +58,8 @@ function runSmallQuery($query) {
 function runQuery($query) {
 	global $system_conf;
 
+	$result = mysql_query("SET NAMES 'utf8'");
+	$result = mysql_query("SET CHARACTER SET utf8");
 	$result = mysql_query($query);
 	if (!$result) {
 		if ($system_conf['debug']) {
@@ -81,6 +85,8 @@ function runQueryNonAssoc($query) {
 
 	if (!$query) { return; } 
 	
+	$result = mysql_query("SET NAMES 'utf8'");
+	$result = mysql_query("SET CHARACTER SET utf8");
 	$result = mysql_query($query);
 	if (!$result) {
 		if ($system_conf['debug']) {
@@ -107,6 +113,8 @@ function runUpdateQuery($query) {
 	
 	if (!$query) { return; } 
 	
+	$result = mysql_query("SET NAMES 'utf8'");
+	$result = mysql_query("SET CHARACTER SET utf8");
 	$result = mysql_query($query);
 	if (!$result) {
 		if ($system_conf['debug']) {

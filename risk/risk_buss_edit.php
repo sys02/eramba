@@ -100,7 +100,7 @@ echo "	<textarea id=\"\" class=\"filter-text\" name=\"risk_vulnerabilities\">$ri
 $risk_classification_types = list_risk_classification_distinct();
 
 foreach($risk_classification_types as $risk_classification_types_item) {
-	echo "<select name=\"risk_classification[]\" class=\"chzn-select\">";
+	echo "<select data-selector='$risk_classification_types_item[risk_classification_type]' name=\"risk_classification[]\" class=\"chzn-select\">";
 	echo "<option value=\"-1\">Classification: $risk_classification_types_item[risk_classification_type]</option>";
 
 	$pre_selected_value = pre_selected_risk_classification_values($risk_classification_types_item[risk_classification_type], $risk_item[risk_id]);	
@@ -126,7 +126,7 @@ foreach($risk_classification_types as $risk_classification_types_item) {
 ?>
 
 <?
-echo "						<input type=\"text\" class=\"filter-text\" name=\"risk_classification_score\" id=\"\" value=\"$risk_item[risk_classification_score]\"/>";
+echo "						<input type=\"text\" class=\"filter-text\" name=\"risk_classification_score\" id=\"risk_score_total\" value=\"$risk_item[risk_classification_score]\"/>";
 ?>
 
 						<label for="legalType">Risk Mitigation Strategy</label>

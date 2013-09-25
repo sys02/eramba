@@ -44,7 +44,7 @@
 
 			# check if i need to use ldap or not
 			if ($ldap['auth_with_ldap']) {
-	
+
 				# make sure the username i got is on our list
 				$login_info = lookup_system_users("system_users_login",$system_users_login);
 				# make sure it's not disabled...

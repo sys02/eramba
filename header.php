@@ -26,6 +26,7 @@ echo "	<script type=\"text/javascript\" src=\"js/accordion.js\"></script>";
 echo "	<script type=\"text/javascript\" src=\"js/input-filters.js\"></script>";
 echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/normalize.css\" />";
 echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/styles.css\" />";
+echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/warning.css\" />";
 echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 ?>
@@ -43,7 +44,7 @@ echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 		});
 	</script>
 	
-	<title>eramba security manager</title>
+	<title>eramba: open-source security governance</title>
 	
 	<script>
 	$(document).ready(function(){
@@ -131,8 +132,15 @@ echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 		}); 
 
 	</script>
+
+<script type="text/javascript">
+    window.history.forward();
+    function noBack() { window.history.forward(); }
+</script>
+
 </head>
-<body>
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+
 	<section id="header-wrapper">
 		<div id="header-inner">
 			<a href="/" id="logo">

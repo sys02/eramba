@@ -102,6 +102,13 @@
 		}
 
 	} elseif ($action == "update") {
+
+		#i should check here that there is not a system_users_login already with the same name
+		$tmp = list_system_users(" WHERE system_users_login = \"$system_users_login\" AND system_users_disabled = \"0\"");
+		if (count($tmp) > 0) {
+			site_error("<b>Not a good login name!</b> There is an existing username with that login. Choose something different!");
+		} else {
+
 		$system_users_update = array(
 			'system_users_name' => $system_users_name,
 			'system_users_surname' => $system_users_surname,
@@ -120,6 +127,7 @@
 			'system_conf_pwd' => $system_conf_admin_pwd
 		);	
 		add_system_conf_pwd($system_conf_pwd);
+		}
 		}
 	}
 

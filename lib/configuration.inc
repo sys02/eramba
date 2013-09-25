@@ -22,7 +22,7 @@ $db_conf['db_password'] = "";
 $services_conf['system_currency'] = "$";
 
 # lpdap auth .. change NULL for "True" if you want to use ldap for authentcation
-$ldap['auth_with_ldap'] = "True";
+$ldap['auth_with_ldap'] = NULL;
 $ldap['ldap_dn'] = "CN=Users,DC=corp,DC=eramba,DC=org";
 $ldap['usr_dom'] = "@corp.eramba.org";
 $ldap['ldap_server'] = "192.168.1.50";

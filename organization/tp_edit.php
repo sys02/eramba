@@ -37,7 +37,7 @@ echo "					<form name=\"tp_edit\" method=\"GET\" action=\"$base_url\">";
 ?>
 						<label for="name">Name</label>
 						<span class="description">Name the third party. Examples: Provider X, Customers, PCI-DSS, etc. </span>
-<? echo "						<input type=\"text\" class=\"filter-text\" name=\"tp_name\" id=\"tp_name\" value=\"$tp_item[tp_name]\"/>";?>
+<? echo "						<input type=\"text\" name=\"tp_name\" id=\"tp_name\" value=\"$tp_item[tp_name]\"/>";?>
 						
 						<label for="description">Description</label>
 						<span class="description">Describe yor relationship with this third party.</span>
